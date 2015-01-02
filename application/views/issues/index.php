@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                             <?php foreach($issues as $issue): ?>
-                            <tr>
+                            <tr class="issue">
                                 <td><a href="/issues/view/<?php echo $issue->id; ?>"><?php echo $issue->getKey(); ?></a></td>
                                 <td><?php echo $issue->project->name; ?></td>
                                 <td><span class="label label-default"><?php echo $issue->status->name; ?></span></td>
@@ -69,7 +69,7 @@
 <script>
 $(function() {
     $('table').dataTable();
-    $('table').on('click', 'tbody > tr', function() {
+    $('table').on('click', 'tbody > tr.issue', function() {
         window.location = $(this).find('td:first-child > a').attr('href');
     });
 });
