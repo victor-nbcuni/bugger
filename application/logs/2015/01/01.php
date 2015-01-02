@@ -1,0 +1,66 @@
+<?php defined('SYSPATH') OR die('No direct script access.'); ?>
+
+2015-01-01 21:31:00 --- EMERGENCY: Session_Exception [ 1 ]: Error reading session data. ~ SYSPATH/classes/Kohana/Session.php [ 324 ] in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Session.php:125
+2015-01-01 21:31:00 --- DEBUG: #0 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Session.php(125): Kohana_Session->read(NULL)
+#1 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Session.php(54): Kohana_Session->__construct(NULL, NULL)
+#2 /Users/VictorLantigua/Development/bugtracker/modules/auth/classes/Kohana/Auth.php(58): Kohana_Session::instance('native')
+#3 /Users/VictorLantigua/Development/bugtracker/modules/auth/classes/Kohana/Auth.php(37): Kohana_Auth->__construct(Object(Config_Group))
+#4 /Users/VictorLantigua/Development/bugtracker/application/classes/Controller/Base.php(13): Kohana_Auth::instance()
+#5 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Controller.php(69): Controller_Base->before()
+#6 [internal function]: Kohana_Controller->execute()
+#7 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Issues))
+#8 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 /Users/VictorLantigua/Development/bugtracker/index.php(118): Kohana_Request->execute()
+#11 {main} in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Session.php:125
+2015-01-01 21:53:36 --- EMERGENCY: View_Exception [ 0 ]: The requested view users/dashboard could not be found ~ SYSPATH/classes/Kohana/View.php [ 257 ] in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 21:53:36 --- DEBUG: #0 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(137): Kohana_View->set_filename('users/dashboard')
+#1 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(30): Kohana_View->__construct('users/dashboard', NULL)
+#2 /Users/VictorLantigua/Development/bugtracker/application/classes/Controller/Dashboard.php(7): Kohana_View::factory('users/dashboard')
+#3 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Controller.php(84): Controller_Dashboard->action_index()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Dashboard))
+#6 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#8 /Users/VictorLantigua/Development/bugtracker/index.php(118): Kohana_Request->execute()
+#9 {main} in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 21:53:40 --- EMERGENCY: View_Exception [ 0 ]: The requested view users/dashboard could not be found ~ SYSPATH/classes/Kohana/View.php [ 257 ] in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 21:53:40 --- DEBUG: #0 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(137): Kohana_View->set_filename('users/dashboard')
+#1 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(30): Kohana_View->__construct('users/dashboard', NULL)
+#2 /Users/VictorLantigua/Development/bugtracker/application/classes/Controller/Dashboard.php(7): Kohana_View::factory('users/dashboard')
+#3 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Controller.php(84): Controller_Dashboard->action_index()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Dashboard))
+#6 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#8 /Users/VictorLantigua/Development/bugtracker/index.php(118): Kohana_Request->execute()
+#9 {main} in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 21:53:53 --- EMERGENCY: View_Exception [ 0 ]: The requested view users/dashboard could not be found ~ SYSPATH/classes/Kohana/View.php [ 257 ] in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 21:53:53 --- DEBUG: #0 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(137): Kohana_View->set_filename('users/dashboard')
+#1 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php(30): Kohana_View->__construct('users/dashboard', NULL)
+#2 /Users/VictorLantigua/Development/bugtracker/application/classes/Controller/Dashboard.php(7): Kohana_View::factory('users/dashboard')
+#3 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Controller.php(84): Controller_Dashboard->action_index()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Dashboard))
+#6 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#8 /Users/VictorLantigua/Development/bugtracker/index.php(118): Kohana_Request->execute()
+#9 {main} in /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/View.php:137
+2015-01-01 22:14:22 --- EMERGENCY: Database_Exception [ 1049 ]: SQLSTATE[42000] [1049] Unknown database 'gremlinbt' ~ MODPATH/database/classes/Kohana/Database/PDO.php [ 59 ] in /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/PDO.php:242
+2015-01-01 22:14:22 --- DEBUG: #0 /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/PDO.php(242): Kohana_Database_PDO->connect()
+#1 /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database.php(478): Kohana_Database_PDO->escape('vic.lantigua@nb...')
+#2 /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/Query/Builder.php(116): Kohana_Database->quote('vic.lantigua@nb...')
+#3 /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/Query/Builder/Select.php(372): Kohana_Database_Query_Builder->_compile_conditions(Object(Database_PDO), Array)
+#4 /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/Query.php(234): Kohana_Database_Query_Builder_Select->compile(Object(Database_PDO))
+#5 /Users/VictorLantigua/Development/bugtracker/modules/orm/classes/Kohana/ORM.php(1072): Kohana_Database_Query->execute(Object(Database_PDO))
+#6 /Users/VictorLantigua/Development/bugtracker/modules/orm/classes/Kohana/ORM.php(979): Kohana_ORM->_load_result(false)
+#7 /Users/VictorLantigua/Development/bugtracker/modules/orm/classes/Kohana/Auth/ORM.php(80): Kohana_ORM->find()
+#8 /Users/VictorLantigua/Development/bugtracker/modules/auth/classes/Kohana/Auth.php(92): Kohana_Auth_ORM->_login('vic.lantigua@nb...', 'pass', false)
+#9 /Users/VictorLantigua/Development/bugtracker/application/classes/Controller/Users.php(8): Kohana_Auth->login('vic.lantigua@nb...', 'pass')
+#10 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Controller.php(84): Controller_Users->action_login()
+#11 [internal function]: Kohana_Controller->execute()
+#12 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Users))
+#13 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#14 /Users/VictorLantigua/Development/bugtracker/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#15 /Users/VictorLantigua/Development/bugtracker/index.php(118): Kohana_Request->execute()
+#16 {main} in /Users/VictorLantigua/Development/bugtracker/modules/database/classes/Kohana/Database/PDO.php:242

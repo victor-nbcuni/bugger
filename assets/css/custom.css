@@ -1,0 +1,29 @@
+.required  {
+    color: red;
+    font-size:  24px;
+}
+
+.alert {
+    color: white;
+    border: none;
+}
+
+.alert-danger {
+    background-color: #d9534f;
+}
+
+.alert-warning {
+    background-color: #F0AD56;
+}
+
+.alert-success {
+    background-color: #5cb85c;
+}
+
+.tableClickable tr {
+  cursor: pointer;
+}
+
+.btn-app {
+  font-size: 14px!important;
+}
