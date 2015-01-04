@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-xs-12">
             <a href="/users/add" class="btn btn-app">
-                <i class="fa fa-plus"></i> Create New User
+                <i class="fa fa-plus"></i> Add New
             </a>
         </div>
     </div>
@@ -29,7 +29,7 @@
                                 <th>Email</th>
                                 <th>Department</th>
                                 <th>Roles</th>
-                                <th>Actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,7 @@
                                     <?php endforeach; ?>
                                 </td>
                                 <td>
-                                    <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-default">Edit</a>
+                                    <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

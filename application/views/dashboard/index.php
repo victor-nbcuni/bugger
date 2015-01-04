@@ -4,3 +4,7 @@
         <small>Control panel</small>
     </h1>
 </section>
+
+<section class="content">
+  <h3>Coming soon...</h3>
+</section>

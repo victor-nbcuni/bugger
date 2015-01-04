@@ -9,7 +9,7 @@
    <div class="row">
         <div class="col-xs-12">
             <a href="<?php echo $config['base_url']; ?>/add" class="btn btn-app">
-                <i class="fa fa-plus"></i> Create New <?php echo $config['model']['title']; ?>
+                <i class="fa fa-plus"></i> Add New
             </a>
         </div>
     </div>
@@ -28,28 +28,20 @@
                                 <?php if ($config['model']['name'] == 'Role'): ?>
                                     <th>Description</th>
                                 <?php endif; ?>
-                                <th>Actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($rows as $row): ?>
+                            <?php foreach($records as $record): ?>
                             <tr>
-                                <td><?php echo $row->id; ?></td>
-                                <td><?php echo $row->name; ?></td>
+                                <td><?php echo $record->id; ?></td>
+                                <td><?php echo $record->name; ?></td>
                                 <?php if ($config['model']['name'] == 'Role'): ?>
-                                    <td><?php echo $row->description; ?></td>
+                                    <td><?php echo $record->description; ?></td>
                                 <?php endif; ?>
                                 <td>
-                                    <div class="btn-group">
-                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $row->id; ?>" class="btn btn-default">Edit</a>
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a class="btn-delete" href="#" data-href="<?php echo $config['base_url']; ?>/delete/<?php echo $row->id; ?>">Delete</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                    <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-remove"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -64,10 +56,11 @@
 <script>
     $(function() {
         $('table').dataTable();
-        $('.btn-delete').click(function() {
+        $('.btn-remove').click(function() {
+            event.preventDefault();
             var self = $(this);
-            if (confirm("Are you sure you want to delete this <?php echo $config['model']['title']; ?>?")) {
-                window.location = self.attr('data-href');
+            if (confirm("Are you sure you want to delete this record?")) {
+                window.location = self.attr('href');
             }
         });
     });

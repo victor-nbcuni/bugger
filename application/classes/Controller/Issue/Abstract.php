@@ -13,23 +13,23 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
 
     public function action_index()
     {
-        $rows = ORM::factory($this->_config['model']['name'])->find_all();
+        $records = ORM::factory($this->_config['model']['name'])->find_all();
         $this->template->content = View::factory('issue_abstract/index')
-            ->set('rows', $rows)
+            ->set('records', $records)
             ->set('config', $this->_config);
     }
 
     public function action_add()
     {
-        $model = ORM::factory($this->_config['model']['name']);
+        $record = ORM::factory($this->_config['model']['name']);
 
         if ($post = $this->request->post()) {
-            $model->values($post)->save();
+            $record->values($post)->save();
             $this->redirect($this->_config['base_url']);
         }
 
         $this->template->content = View::factory('issue_abstract/form')
-            ->set('model', $model)
+            ->set('record', $record)
             ->set('config', $this->_config);
     }
 
@@ -37,18 +37,18 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
     {
         $id = $this->request->param('id');
 
-        $model = ORM::factory($this->_config['model']['name'], $id);
+        $record = ORM::factory($this->_config['model']['name'], $id);
 
-        if ( ! $model->loaded()) 
+        if ( ! $record->loaded()) 
             $this->redirect($this->_config['base_url']);
         
         if ($post = $this->request->post()) {
-            $model->values($post)->save();
+            $record->values($post)->save();
             $this->redirect($this->_config['base_url']);
         }
 
         $this->template->content = View::factory('issue_abstract/form')
-            ->set('model', $model)
+            ->set('record', $record)
             ->set('config', $this->_config);
     }
 
@@ -56,10 +56,10 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
     {
         $id = $this->request->param('id');
 
-        $model = ORM::factory($this->_config['model']['title'], $id);
+        $record = ORM::factory($this->_config['model']['title'], $id);
 
-        if ($model->loaded()) {
-            $model->delete();
+        if ($record->loaded()) {
+            $record->delete();
         }
 
         $this->redirect($this->_config['base_url']);

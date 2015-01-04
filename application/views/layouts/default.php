@@ -9,6 +9,7 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/chosen.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/custom.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -44,6 +45,7 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                        <li style="font-weight:bold;background-color:#00c0ef;"><a href="/issues/add"><i class="fa fa-plus"></i> Report Issue</a></li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

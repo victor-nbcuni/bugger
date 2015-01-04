@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-xs-12">
             <a href="/issues/add" class="btn btn-app">
-                <i class="fa fa-plus"></i> Report New Issue
+                <i class="fa fa-plus"></i> Add New
             </a>
         </div>
     </div>
@@ -32,6 +32,7 @@
                                 <th>Assignee</th>
                                 <th>Summary</th>
                                 <th>Created</th>
+                                <th>Updated</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,7 @@
                                 <td><?php echo $issue->department->name; ?></td>
                                 <td><?php echo Text::limit_chars($issue->summary, 20, '...'); ?></td>
                                 <td><?php echo $issue->created_at; ?></td>
+                                <td><?php echo $issue->updated_at; ?></td>
                                     <?php /*<div class="btn-group">
                                         <a href="/issues/edit/<?php echo $issue->id; ?>" class="btn btn-default">Edit</a>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

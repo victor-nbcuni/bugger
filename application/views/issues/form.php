@@ -1,14 +1,13 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Issue <br><small>' . $issue->getKey() . '</small>' : 'Create Issue'); ?>
-        <small>Report a new Issue</small>
+        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Issue <br><small>' . $issue->getKey() . '</small>' : 'Add New Issue'); ?>
     </h1>
 </section>
 
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-primary">
+            <div class="boxbox-primary">
                 <form action="<?php echo ($issue->id ? '/issues/edit/' . $issue->id : '/issues/add'); ?>" method="post" role="form">
                     <input type="hidden" name="issue[reporter_user_id]" value="<?php echo Auth::instance()->get_user()->id; ?>">
                     <div class="box-body">
@@ -77,7 +76,7 @@
                     </div>
                         
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary"><?php echo ($issue->id ? 'Update' : 'Create'); ?></button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                         <a href="/issues">Cancel</a>
                     </div>
                 </form>
