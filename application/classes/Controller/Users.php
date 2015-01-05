@@ -9,7 +9,7 @@ class Controller_Users extends Controller_Base {
                 return $this->redirect('issues');
             }
             else {
-                $this->session->flashError('Sorry, invalid username or password.');
+                $this->session->flashError('Sorry, unrecognized username or password.');
             }
         }
 
