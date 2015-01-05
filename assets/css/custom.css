@@ -28,6 +28,9 @@
   font-size: 14px!important;
 }
 
+/** 
+ * Style datatable pages dropdown 
+ */
 .dataTables_wrapper select {
   width: 100%;
   height: 34px;
