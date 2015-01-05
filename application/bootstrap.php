@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 define('APP_VERSION', '1.0');
-define('APP_NAME', 'Gremlin');
+define('APP_NAME', 'Bugger');
 
 // -- Environment setup --------------------------------------------------------
 

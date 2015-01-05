@@ -6,7 +6,7 @@ return array
     (
         'type'       => 'pdo',
         'connection' => array(
-            'dsn'        => 'mysql:host=localhost;dbname=gremlinbt',
+            'dsn'        => 'mysql:host=localhost;dbname=bugger',
             'username'   => 'root',
             'password'   => 'root',
             'persistent' => FALSE

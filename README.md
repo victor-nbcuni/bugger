@@ -1,4 +1,4 @@
-Gremlin Bug Tracker
+Bugger
 ==========
 
 **Admin Login**: admin / pass

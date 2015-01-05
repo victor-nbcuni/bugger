@@ -13,8 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `gremlinbt`
 --
-CREATE DATABASE IF NOT EXISTS `gremlinbt` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `gremlinbt`;
+CREATE DATABASE IF NOT EXISTS `bugger` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bugger`;
 
 -- --------------------------------------------------------
 
