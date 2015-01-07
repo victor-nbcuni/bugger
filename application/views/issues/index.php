@@ -8,7 +8,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/issues/add" class="btn btn-app">
+            <a href="/issues/new" class="btn btn-app">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>
@@ -37,14 +37,14 @@
                         </thead>
                         <tbody>
                             <?php foreach($issues as $issue): ?>
-                            <tr class="issue">
+                            <tr class="record">
                                 <td><a href="/issues/view/<?php echo $issue->id; ?>"><?php echo $issue->getKey(); ?></a></td>
                                 <td><?php echo $issue->project->name; ?></td>
                                 <td><span class="label label-default"><?php echo $issue->status->name; ?></span></td>
                                 <td><span class="label label-default"><?php echo $issue->type->name; ?></span></td>
                                 <td><span class="label label-default"><?php echo $issue->priority->name; ?></span></td>
                                 <td><?php echo $issue->reporter->name; ?></td>
-                                <td><?php echo $issue->department->name; ?></td>
+                                <td><?php echo $issue->assigned_department->name; ?></td>
                                 <td><?php echo Text::limit_chars($issue->summary, 20, '...'); ?></td>
                                 <td><?php echo $issue->created_at; ?></td>
                                 <td><?php echo $issue->updated_at; ?></td>
@@ -71,7 +71,7 @@
 <script>
 $(function() {
     $('table').dataTable();
-    $('table').on('click', 'tbody > tr.issue', function() {
+    $('table').on('click', 'tbody > tr.record', function() {
         window.location = $(this).find('td:first-child > a').attr('href');
     });
 });

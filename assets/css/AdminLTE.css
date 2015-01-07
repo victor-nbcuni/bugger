@@ -2082,6 +2082,7 @@ Component: timeline
     Component: alert
 ------------------------
 */
+/*
 .alert {
   padding-left: 30px;
   margin-left: 15px;
@@ -2102,6 +2103,7 @@ Component: timeline
   background: inherit;
   border: inherit;
 }
+*/
 /*
     Component: Navs
 */

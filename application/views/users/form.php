@@ -1,22 +1,20 @@
 <section class="content-header">
     <h1>
         <?php echo ($user->id ? 'Edit User' : 'Add New User'); ?>
+        <?php if ($user->id): ?>
+            <small><a href="/users/new">Add New</a></small>
+        <?php endif; ?>
     </h1>
 </section>
 
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <?php include Kohana::find_file('views', 'shared/flash_message'); ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
             <div class="boxbox-primary">
-                <form action="<?php echo ($user->id ? '/users/edit/' . $user->id : '/users/add'); ?>" method="post" role="form">
+                <form action="<?php echo ($user->id ? '/users/edit/' . $user->id : '/users/new'); ?>" method="post" role="form">
                     <div class="box-body">
                         <div class="form-group">
-                            <label>Roles <span class="required">*</span></label>
+                            <label>Roles <span class="required-field">*</span></label>
                             <?php
                                 if ($user->id) {
                                     $roles = $user->roles->find_all();
@@ -36,23 +34,23 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Name <span class="required">*</span></label>
+                            <label>Name <span class="required-field">*</span></label>
                             <input type="text" maxlength="30" name="user[name]" class="form-control" placeholder="Name" value="<?php echo $user->name; ?>" required>
                         </div>
                         <div class="form-group">
-                            <label>SSO <span class="required">*</span></label>
+                            <label>SSO <span class="required-field">*</span></label>
                             <input type="text" maxlength="32" name="user[username]" class="form-control" placeholder="SSO" value="<?php echo $user->username; ?>" required>
                         </div>
                         <div class="form-group">
-                            <label>Email <span class="required">*</span></label>
+                            <label>Email <span class="required-field">*</span></label>
                             <input type="email" maxlength="254" name="user[email]" class="form-control" placeholder="Email Address" value="<?php echo $user->email; ?>" required>
                         </div>
                         <div class="form-group">
-                            <label>Password <span class="required"><?php echo ($user->id ? '' : '*'); ?></span></label>
+                            <label>Password <span class="required-field"><?php echo ($user->id ? '' : '*'); ?></span></label>
                             <input type="password" maxlength="64" name="user[password]" class="form-control" placeholder="Password" value="" <?php echo ($user->id ? '' : 'required'); ?>>
                         </div>
                         <div class="form-group">
-                            <label>Department <span class="required">*</span></label>
+                            <label>Department <span class="required-field">*</span></label>
                             <select name="user[department_id]" class="form-control" required>
                                 <option value="">&mdash; Choose Department&mdash;</option>
                                 <?php foreach (ORM::factory('Department')->find_all() as $department): ?>
@@ -70,8 +68,6 @@
         </div>
     </div>
 </section>
-
-
 
 <script type="text/javascript">
 $(function() {

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Dashboard extends Controller_Base {
+class Controller_Dashboard extends Controller_Abstract_Member {
 
     public function action_index()
     {

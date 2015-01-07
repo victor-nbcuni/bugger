@@ -1,9 +1,17 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-/**
-* Set the routes. Each route must have a minimum of a name, a URI and a set of
-* defaults for the URI.
-*/
+Route::set('login', 'login')
+    ->defaults(array(
+        'controller' => 'Sessions',
+        'action'     => 'login',
+    ));
+
+Route::set('logout', 'logout')
+    ->defaults(array(
+        'controller' => 'Sessions',
+        'action'     => 'logout',
+    ));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(
         'controller' => 'Issues',

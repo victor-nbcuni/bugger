@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Controller_Issue_Abstract extends Controller_Base {
+abstract class Controller_Issue_Abstract extends Controller_Abstract_Admin {
 
     protected $_config = array(
         'base_url' => '',
         'model' => array(
-            'name'          => '', 
-            'title'         => '', 
-            'title_plural'  => ''
+            'name' => NULL, 
+            'title' => NULL, 
+            'title_plural' => NULL
         )
     );
 
@@ -19,12 +19,13 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
             ->set('config', $this->_config);
     }
 
-    public function action_add()
+    public function action_new()
     {
         $record = ORM::factory($this->_config['model']['name']);
 
         if ($post = $this->request->post()) {
             $record->values($post)->save();
+            $this->session->flashSuccess('generic.create_ok');
             $this->redirect($this->_config['base_url']);
         }
 
@@ -39,11 +40,14 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
 
         $record = ORM::factory($this->_config['model']['name'], $id);
 
-        if ( ! $record->loaded()) 
+        if ( ! $record->loaded()) {
+            $this->session->flashError('generic.read_fail');
             $this->redirect($this->_config['base_url']);
+        }
         
         if ($post = $this->request->post()) {
             $record->values($post)->save();
+            $this->session->flashSuccess('generic.update_ok');
             $this->redirect($this->_config['base_url']);
         }
 
@@ -56,10 +60,11 @@ abstract class Controller_Issue_Abstract extends Controller_Base {
     {
         $id = $this->request->param('id');
 
-        $record = ORM::factory($this->_config['model']['title'], $id);
+        $record = ORM::factory($this->_config['model']['name'], $id);
 
         if ($record->loaded()) {
             $record->delete();
+            $this->session->flashSuccess('generic.delete_ok');
         }
 
         $this->redirect($this->_config['base_url']);

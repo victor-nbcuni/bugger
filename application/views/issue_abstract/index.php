@@ -8,7 +8,7 @@
 <section class="content">
    <div class="row">
         <div class="col-xs-12">
-            <a href="<?php echo $config['base_url']; ?>/add" class="btn btn-app">
+            <a href="<?php echo $config['base_url']; ?>/new" class="btn btn-app">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>

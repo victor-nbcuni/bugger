@@ -72,9 +72,11 @@
     <body>
         <div id="login-box">
             <div class="header"><?php echo APP_NAME; ?></div>
-            <?php include Kohana::find_file('views', 'shared/flash_message'); ?>
+            <?php if ($error = Session::instance()->getFlash()): ?>
+                <div class="alert alert-danger" role="alert"><i class="fa fa-times-circle"></i> <?php echo $error['message']; ?></div>
+            <?php endif; ?>
 
-            <form action="/users/login" method="post">
+            <form action="/login" method="post">
                 <div class="body">
                     <div class="form-group">
                         <i class="fa fa-user"></i>

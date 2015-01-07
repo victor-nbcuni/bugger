@@ -3,7 +3,7 @@
 
 <section class="content-header">
     <h1>
-        <i class="fa fa-bug"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
+        <i class="fa fa-envelope"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
         <small><?php echo $issue->getKey(); ?></small>
     </h1>
 </section>
@@ -14,15 +14,11 @@
             <h4 class="page-header">Details</h4>
 
             <div class="row" style="margin-bottom: 6px;">
-                <div class="col-xs-2 text-muted">Type:</div> <div class="col-xs-2"><span id="type_id"><?php echo $issue->type->name; ?></span></div><div class="col-xs-2 text-muted">Status:</div> <div class="col-xs-2"><span class="label label-primary" id="status_id"><?php echo $issue->status->name; ?></span></div>
+                <div class="col-xs-2 text-muted">Requester:</div> <div class="col-xs-2"><?php echo $issue->reporter->name; ?></div> <div class="col-xs-2 text-muted">Status:</div> <div class="col-xs-2"><span class="label label-primary" id="status_id"><?php echo $issue->status->name; ?></span></div>
             </div>
 
             <div class="row" style="margin-bottom: 6px;">
-                <div class="col-xs-2 text-muted">Project:</div> <div class="col-xs-2"><?php echo $issue->project->name; ?></div> <div class="col-xs-2 text-muted">Priority:</div> <div class="col-xs-2"><span id="priority_id"><?php echo $issue->priority->name; ?></span></div>
-            </div>
-
-            <div class="row" style="margin-bottom: 6px;">
-                <div class="col-xs-2 text-muted">Reporter:</div> <div class="col-xs-2"><?php echo $issue->reporter->name; ?></div> <div class="col-xs-2 text-muted">Assignee:</div> <div class="col-xs-2"><span id="assigned_department_id"><?php echo $issue->assigned_department->name; ?></span></div>
+                <div class="col-xs-2 text-muted">Priority:</div> <div class="col-xs-2"><span id="priority_id"><?php echo $issue->priority->name; ?></span></div> 
             </div>
 
             <div class="row">
@@ -72,7 +68,7 @@
                                     echo View::factory('issue_comments/view')->set('comment', $comment); 
                             }
                             else {
-                                echo 'There are no comments yet on this issue.';
+                                echo 'There are no comments yet...';
                             }
                         ?>
                     </div>
@@ -95,7 +91,6 @@ $(function() {
         departments: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Department'); ?>",
         issue_priorities: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Priority'); ?>",
         issue_statuses: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Status'); ?>",
-        issue_types: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Type'); ?>",
     }
 
     EditableFields.init(issueId, dataSources);

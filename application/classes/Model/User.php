@@ -3,10 +3,6 @@
 class Model_User extends Model_Auth_User {
     protected $_table_name = 'users';
 
-    protected $_belongs_to = array(
-        'department' => array('model' => 'Department', 'foreign_key' => 'department_id')
-    );
-
     protected $_table_columns = array(
         'id' => NULL,
         'department_id' => NULL,
@@ -16,6 +12,10 @@ class Model_User extends Model_Auth_User {
         'name' => NULL,
         'logins' => NULL,
         'last_login' => NULL
+    );
+
+    protected $_belongs_to = array(
+        'department' => array('model' => 'Department', 'foreign_key' => 'department_id')
     );
 
     /**

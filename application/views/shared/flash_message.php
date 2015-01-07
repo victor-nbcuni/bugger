@@ -1,17 +1,12 @@
-<?php 
-if ($flash = Session::instance()->getFlash()):
-    if ($flash['type'] == 'warning') {
-        $alert_css_cls = 'warning';
-        $icon_css_cls = 'fa-exclamation-circle';
-    } 
-    elseif ($flash['type'] == 'success') {
-        $alert_css_cls = 'success';
-        $icon_css_cls = 'fa-check-circle';
-    } 
-    else {
-        $alert_css_cls = 'danger';
-        $icon_css_cls = 'fa-times-circle';
-    }
-?>
-    <div class="alert alert-<?php echo $alert_css_cls; ?>" role="alert"><i class="fa <?php echo $icon_css_cls; ?>"></i> <?php echo $flash['message']; ?></div>
-<?php endif; ?>
+<div style="display: none;" class="flash-message alert alert-<?php echo $style['theme']; ?>" role="alert"><i class="fa <?php echo $style['icon']; ?>"></i> <?php echo $message; ?></div>
+<script>
+$(function() {
+    $('.flash-message').fadeIn(0, function() {
+        var self = $(this);
+        setTimeout(function() {
+          self.fadeOut(3000);
+        }, 0);
+        
+    });
+});
+</script>

@@ -1,12 +1,21 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Helper_View_Issues_View {
-    public static function getEditableSelectSource($model_name) {
+   /**
+    * Creates and returns a new model. 
+    * Model name must be passed with its' original casing, e.g.
+    * 
+    *
+    * @param   string  $model  Model name
+    * @return  json string
+    */
+    public static function getEditableSelectSource($model) {
         $json = array();
 
-        $rows = ORM::factory($model_name)->find_all();
-        foreach($rows as $row) {
-          $json[] = $row->id . ': \'' . $row->name . '\'';
+        $records = ORM::factory($model)->find_all();
+
+        foreach($records as $record) {
+          $json[] = $record->id . ': \'' . $record->name . '\'';
         }
 
         return '{' . implode(', ', $json) . '}';

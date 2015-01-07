@@ -4,7 +4,7 @@
     </a>
     <div class="media-body">
         <h4 class="media-heading"><?php echo $comment->user->name; ?></h4>
-        <div class="comment-text" data-pk="<?php echo $comment->id; ?>"><?php echo $comment->comment; ?></div>
+        <div class="<?php echo ($comment->user_id == Auth::instance()->get_user()->id) ? 'editable-comment' : ''; ?>" data-pk="<?php echo $comment->id; ?>"><?php echo $comment->comment; ?></div>
         <p><small class="text-muted">Posted on <?php echo $comment->created_at; ?></small></p>
     </div>
 </div>

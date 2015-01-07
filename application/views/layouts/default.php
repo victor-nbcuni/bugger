@@ -10,7 +10,7 @@
         <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/chosen.min.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,14 +24,14 @@
         <script src="/assets/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="/assets/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
         <script src="/assets/js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="/assets/js/chosen.jquery.min.js"></script>
+        <script src="/assets/js/plugins/chosen.jquery.min.js"></script>
     </head>
     <body class="skin-blue">
 
-        <!-- header logo: style can be found in header.less -->
+        <?php echo $session->getFlashHtml(); ?>
+
         <header class="header">
             <a href="/dashboard" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 <?php echo APP_NAME . ' v' . APP_VERSION; ?>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
@@ -45,29 +45,64 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        <li style="font-weight:bold;background-color:#00c0ef;"><a style="color:white;" href="/issues/add"><i class="fa fa-plus"></i> New Issue</a></li>
-                        <!-- User Account: style can be found in dropdown.less -->
+                        <li style="font-weight:bold;background-color:#00c0ef;" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-plus"></i> New <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/issues/new">Issue</a></li>
+                                <li><a href="/requests/new">Request</a></li>
+                            </ul>
+                        </li>
+                        <!--
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 4 messages</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="../img/avatar3.png" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+          
+                    
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li style="font-weight:bold;background-color:#00c0ef;"><a style="color:white;" href="/issues/new"><i class="fa fa-plus"></i> New Issue</a></li>
+                        -->
+
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span><?php echo $auth_user->name; ?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="/assets/img/avatar6.png" class="img-circle" alt="User Image" />
                                     <p>
                                         <?php echo $auth_user->name; ?>
                                     </p>
                                 </li>
-                     
-                                <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="/users/logout" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -94,6 +129,12 @@
                             </a>
                         </li>
                         <?php if ($auth->logged_in('admin')): ?>
+                            <li class="<?php if ('Requests' == $request->controller()) echo 'active'; ?>">
+                                <a href="/requests">
+                                    <i class="fa fa-envelope"></i> <span>Requests</span>
+                                    <small class="badge pull-right bg-green">3</small>
+                                </a>
+                            </li>
                             <li class="treeview active">
                                 <a href="#">
                                     <i class="fa fa-cog"></i> <span>Administration</span>

@@ -1,4 +1,4 @@
-.required  {
+.required-field  {
     color: red;
     font-size:  24px;
 }
@@ -47,4 +47,14 @@
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+.flash-message {
+  position: absolute;
+  height: 50px;
+  z-index: 10000;
+  width: 100%;
+  border-radius: 0px;
+  font-size: 18px;
 }

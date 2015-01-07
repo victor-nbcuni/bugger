@@ -5,9 +5,9 @@ class Controller_Projects extends Controller_Issue_Abstract {
     protected $_config = array(
         'base_url' => '/projects',
         'model' => array(
-            'name'          => 'Project', 
-            'title'         => 'Project', 
-            'title_plural'  => 'Projects'
+            'name' => 'Project', 
+            'title' => 'Project', 
+            'title_plural' => 'Projects'
         )
     );
 }
