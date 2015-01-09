@@ -17,7 +17,8 @@ class Model_Issue_Comment extends Model_Abstract {
     );
 
     protected $_belongs_to = array(
-        'user' => array('model' => 'User', 'foreign_key' => 'user_id')
+        'user' => array('model' => 'User', 'foreign_key' => 'user_id'),
+        'issue' => array('model' => 'Issue', 'foreign_key' => 'issue_id')
     );
 
     public function niceDate()

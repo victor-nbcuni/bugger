@@ -1,6 +1,3 @@
-<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-
 <section class="content-header">
     <h1>
         <i class="fa fa-bug"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
@@ -68,8 +65,9 @@
                         <?php 
                             $comments = $issue->comments->order_by('created_at', 'DESC')->offset(0)->limit(5)->find_all();
                             if (count($comments)) {
-                                foreach($comments as $comment)
+                                foreach($comments as $comment) {
                                     echo View::factory('issue_comments/view')->set('comment', $comment); 
+                                }
                             }
                             else {
                                 echo 'There are no comments yet on this issue.';

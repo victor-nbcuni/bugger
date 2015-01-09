@@ -27,7 +27,7 @@
                                     $role_ids = array(1, 3);
                                 }
                             ?>
-                            <select name="roles[]" id="roles-select" class="form-control" data-placeholder="Select User Roles" multiple required>
+                            <select name="roles[]" id="role-select" class="form-control" data-placeholder="Select User Roles" multiple required>
                                 <?php foreach (ORM::factory('Role')->find_all() as $role): ?>
                                     <option value="<?php echo $role->id; ?>" <?php echo (in_array($role->id, $role_ids) ? 'selected' : ''); ?>><?php echo $role->name; ?></option>
                                 <?php endforeach; ?>
@@ -71,7 +71,7 @@
 
 <script type="text/javascript">
 $(function() {
-    $('#roles-select').chosen(); 
+    $('#role-select').chosen(); 
 });
 </script>
 

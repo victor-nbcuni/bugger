@@ -34,21 +34,21 @@
                         </thead>
                         <tbody>
                             <?php foreach($users as $user): ?>
-                            <tr>
-                                <td><?php echo $user->id; ?></td>
-                                <td><?php echo $user->name; ?></td>
-                                <td><?php echo $user->username; ?></td>
-                                <td><?php echo $user->email; ?></td>
-                                <td><?php echo $user->department->name; ?></td>
-                                <td>
-                                    <?php foreach ($user->roles->find_all() as $role): ?>
-                                        <span class="label label-default"><?php echo $role->name; ?></span>
-                                    <?php endforeach; ?>
-                                </td>
-                                <td>
-                                    <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $user->id; ?></td>
+                                    <td><?php echo $user->name; ?></td>
+                                    <td><?php echo $user->username; ?></td>
+                                    <td><?php echo $user->email; ?></td>
+                                    <td><?php echo $user->department->name; ?></td>
+                                    <td>
+                                        <?php foreach ($user->roles->find_all() as $role): ?>
+                                            <span class="label label-default"><?php echo $role->name; ?></span>
+                                        <?php endforeach; ?>
+                                    </td>
+                                    <td>
+                                        <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

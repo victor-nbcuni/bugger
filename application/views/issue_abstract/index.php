@@ -33,17 +33,17 @@
                         </thead>
                         <tbody>
                             <?php foreach($records as $record): ?>
-                            <tr>
-                                <td><?php echo $record->id; ?></td>
-                                <td><?php echo $record->name; ?></td>
-                                <?php if ($config['model']['name'] == 'Role'): ?>
-                                    <td><?php echo $record->description; ?></td>
-                                <?php endif; ?>
-                                <td>
-                                    <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                    <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-remove"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $record->id; ?></td>
+                                    <td><?php echo $record->name; ?></td>
+                                    <?php if ($config['model']['name'] == 'Role'): ?>
+                                        <td><?php echo $record->description; ?></td>
+                                    <?php endif; ?>
+                                    <td>
+                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-remove"></i></a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

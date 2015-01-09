@@ -16,7 +16,7 @@ class Controller_Sessions extends Controller {
     {
         if ($this->request->method() == Request::POST)  {
             if ($this->auth->login($this->request->post('username'), $this->request->post('password'))) {
-                return $this->redirect('issues');
+                return $this->redirect('issues/my_open_issues');
             }
             else {
                 Session::instance()->flashError('Sorry, unrecognized username or password.');

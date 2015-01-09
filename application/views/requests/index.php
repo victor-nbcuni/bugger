@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-envelope"></i> Requests
+        <i class="fa fa-support"></i> Support Requests
         <small>View and Manage Requests</small>
     </h1>
 </section>
@@ -24,8 +24,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Requester</th>
-                                <th>Title</th>
+                                <th>Requested By</th>
+                                <th>Summary</th>
                                 <th>Status</th>
                                 <th>Priority</th>
                                 <th>Created</th>
@@ -34,14 +34,15 @@
                         </thead>
                         <tbody>
                             <?php foreach($requests as $request): ?>
-                            <tr class="record">
-                                <td><a href="/requests/view/<?php echo $request->id; ?>"><?php echo $request->id; ?></a></td>
-                                <td><?php echo $request->reporter->name; ?></td>
-                                <td><?php echo $request->summary; ?></td>
-                                <td><span class="label label-default"><?php echo $request->status->name; ?></span></td>
-                                <td><span class="label label-default"><?php echo $request->priority->name; ?></span></td>
-                                <td><?php echo $request->created_at; ?></td>
-                                <td><?php echo $request->updated_at; ?></td>
+                                <tr class="record">
+                                    <td><a href="/requests/view/<?php echo $request->id; ?>"><?php echo $request->getKey(); ?></a></td>
+                                    <td><?php echo $request->reporter->name; ?></td>
+                                    <td><?php echo $request->summary; ?></td>
+                                    <td><span class="label label-default"><?php echo $request->status->name; ?></span></td>
+                                    <td><span class="label label-default"><?php echo $request->priority->name; ?></span></td>
+                                    <td><?php echo $request->created_at; ?></td>
+                                    <td><?php echo $request->updated_at; ?></td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

@@ -65,8 +65,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Summary <span class="required-field">*</span></label>
-                            <input type="text" maxlength="128" name="issue[summary]" class="form-control" value="<?php echo $issue->summary; ?>" required>
+                            <label>Brief Description <span class="required-field">*</span></label>
+                            <input type="text" maxlength="30" name="issue[summary]" class="form-control" value="<?php echo $issue->summary; ?>" required>
                         </div>
 
                         <div class="form-group">

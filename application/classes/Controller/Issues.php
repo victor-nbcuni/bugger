@@ -1,13 +1,40 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Issues extends Controller_Abstract_Member {
-
+    /**
+     * Displays ALL issues.
+     */
     public function action_index()
     {
-        $issues = ORM::factory('Issue')
-            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST)
-            ->find_all();
-        $this->template->content = View::factory('issues/index')->set('issues', $issues);
+        $issues = Model_Issue::findAllIssues();
+
+        $this->template->content = View::factory('issues/index')
+            ->set('title', 'All Issues')
+            ->set('issues', $issues);
+    }
+
+    /**
+     * Displays OPEN issues.
+     */
+    public function action_my_open_issues()
+    {
+        $issues = Model_Issue::findMyOpenIssues();
+
+        $this->template->content = View::factory('issues/index')
+            ->set('title', 'My Open Issues')
+            ->set('issues', $issues);
+    }
+
+    /**
+     * Displays ALL issues REPORTED by ME.
+     */
+    public function action_reported_by_me()
+    {
+        $issues = Model_Issue::findReportedByMe();
+
+        $this->template->content = View::factory('issues/index')            
+            ->set('title', 'Reported by Me')
+            ->set('issues', $issues);
     }
 
     public function action_view()
@@ -81,10 +108,11 @@ class Controller_Issues extends Controller_Abstract_Member {
     }
 
     /**
-     * Logs update in the comments table
+     * Logs updates in the comments table.
      *
-     * @param string        $column     The updated column name
-     * @param Model_Issue   $issue      The updated issue
+     * @param   string        $column               The updated column name
+     * @param   Model_Issue   $issue                The updated issue
+     * @see     action_update_editable_field()
      */
     private function _logUpdate($column, Model_Issue $issue)
     {

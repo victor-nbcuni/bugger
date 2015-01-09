@@ -5,11 +5,15 @@
         <title><?php echo APP_NAME; ?> - Bug Tracking System</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/lib/bootstrap-3.3.1/css/bootstrap.min.css">
+        <link href="/assets/lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/assets/lib/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/lib/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/lib/x-editable-1.5.0/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/lib/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
+
         <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/chosen.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,12 +23,15 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="/assets/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="/assets/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+        <script src="/assets/lib/jquery-2.1.3.min.js"></script>
+        <script src="/assets/lib/bootstrap-3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/assets/lib/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="/assets/lib/chosen-1.3.0/chosen.jquery.min.js"></script>
+        <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
+        <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+        <script src="/assets/lib/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
+
         <script src="/assets/js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="/assets/js/plugins/chosen.jquery.min.js"></script>
     </head>
     <body class="skin-blue">
 
@@ -123,19 +130,50 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="<?php if ('Issues' == $request->controller()) echo 'active'; ?>">
+                        <li class="treeview active">
                             <a href="/issues">
                                 <i class="fa fa-bug"></i> <span>Issues</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <?php if ($auth->logged_in('admin')): ?>
+                                    <li class="<?php if ('my_open_issues' == $request->action()) echo 'active'; ?>">
+                                        <a href="/issues/my_open_issues">
+                                            <i class="fa fa-angle-double-right"></i> My Open Issues
+                                            <?php if ($total = Model_Issue::findMyOpenIssues(TRUE)): ?>
+                                                <small class="badge pull-right bg-red"><?php echo $total; ?></small>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                                <li class="<?php if ('reported_by_me' == $request->action()) echo 'active'; ?>">
+                                    <a href="/issues/reported_by_me">
+                                        <i class="fa fa-angle-double-right"></i> Reported by Me
+                                        <?php if ($total = Model_Issue::findReportedByMe(TRUE)): ?>
+                                            <small class="badge pull-right bg-red"><?php echo $total; ?></small>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                                <li class="<?php if ('Issues' == $request->controller() && 'index' == $request->action()) echo 'active'; ?>">
+                                    <a href="/issues">
+                                        <i class="fa fa-angle-double-right"></i> All Issues
+                                        <?php if ($total = Model_Issue::findAllIssues(TRUE)): ?>
+                                            <small class="badge pull-right bg-red"><?php echo $total; ?></small>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                       <li class="<?php if ('Requests' == $request->controller()) echo 'active'; ?>">
+                            <a href="/requests">
+                                <i class="fa fa-support"></i> <span>Support Requests</span>
+                                <?php if ($total = Model_Issue::findSupportRequests(TRUE)): ?>
+                                    <small class="badge pull-right bg-red"><?php echo $total; ?></small>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <?php if ($auth->logged_in('admin')): ?>
-                            <li class="<?php if ('Requests' == $request->controller()) echo 'active'; ?>">
-                                <a href="/requests">
-                                    <i class="fa fa-envelope"></i> <span>Requests</span>
-                                    <small class="badge pull-right bg-green">3</small>
-                                </a>
-                            </li>
-                            <li class="treeview active">
+                            <li class="treeview <?php if (is_subclass_of('Controller_' . $request->controller(), 'Controller_Abstract_Admin')) echo 'active'; ?>">
                                 <a href="#">
                                     <i class="fa fa-cog"></i> <span>Administration</span>
                                     <i class="fa fa-angle-left pull-right"></i>

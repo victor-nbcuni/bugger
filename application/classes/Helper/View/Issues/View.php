@@ -2,12 +2,10 @@
 
 class Helper_View_Issues_View {
    /**
-    * Creates and returns a new model. 
-    * Model name must be passed with its' original casing, e.g.
-    * 
+    * Returns a JSON representation of model records.
     *
     * @param   string  $model  Model name
-    * @return  json string
+    * @return  JSON string
     */
     public static function getEditableSelectSource($model) {
         $json = array();

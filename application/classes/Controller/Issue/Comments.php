@@ -3,7 +3,7 @@
 class Controller_Issue_Comments extends Controller_Abstract_Member {
     /**
      * @uses     ajax
-     * @return   json/html
+     * @return   json / html
      */
     public function action_index()
     {
@@ -23,7 +23,7 @@ class Controller_Issue_Comments extends Controller_Abstract_Member {
 
     /**
      * @uses     ajax
-     * @return   json/html
+     * @return   json / html
      */
     public function action_new()
     { 
@@ -31,8 +31,12 @@ class Controller_Issue_Comments extends Controller_Abstract_Member {
             if ( ! empty($post['issue_id']) && ! empty($post['user_id']) && ! empty($post['comment'])) {
                 $comment = ORM::factory('Issue_Comment')
                     ->values($post)
-                    ->save();  
+                    ->save(); 
 
+                if ($issue = $comment->issue) {
+                    $issue->set('updated_at', date('Y-m-d H:i:s'))->save();
+                }
+                
                 return $this->response->body(View::factory('issue_comments/view')->set('comment', $comment));
             }
         }

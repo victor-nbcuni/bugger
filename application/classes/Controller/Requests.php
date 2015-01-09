@@ -4,10 +4,8 @@ class Controller_Requests extends Controller_Abstract_Member {
 
     public function action_index()
     {
-        $requests = ORM::factory('Issue')
-            ->where('type_id', '=', Model_Issue_Type::SUPPORT_REQUEST)
-            ->find_all();
-
+        $requests = Model_Issue::findSupportRequests();
+        
         $this->template->content = View::factory('requests/index')
             ->set('requests', $requests);
     }
@@ -18,6 +16,12 @@ class Controller_Requests extends Controller_Abstract_Member {
 
         if ($post = $this->request->post()) {
             $post['status_id'] = Model_Issue_Status::OPEN;
+            $post['assigned_department_id'] = Model_Department::DEV;
+            $post['type_id'] = Model_Issue_Type::SUPPORT_REQUEST;
+            $post['reporter_user_id'] = $this->auth_user->id;
+            $post['due_date'] = empty($post['due_date']) ? NULL : date('Y-m-d', strtotime($post['due_date']));
+            $post['due_time'] = empty($post['due_time']) ? NULL : date('H:i:s', strtotime($post['due_time']));
+
             $record->values($post)->save();
             $this->session->flashSuccess('generic.create_ok');
             $this->redirect('requests');

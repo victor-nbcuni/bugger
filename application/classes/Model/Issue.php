@@ -13,6 +13,8 @@ class Model_Issue extends Model_Abstract {
         'assigned_department_id' => NULL,
         'summary' => NULL,
         'description' => NULL,
+        'due_date' => NULL,
+        'due_time' => NULL,
         'created_at' => NULL,
         'updated_at' => NULL
     );
@@ -40,7 +42,105 @@ class Model_Issue extends Model_Abstract {
     public function getKey() 
     {
         if ($this->type_id == Model_Issue_Type::SUPPORT_REQUEST)
-            return 'REQUEST - ' . $this->id;
+            return 'REQUEST-' . $this->id;
         return strtoupper($this->project->name) . '-' . $this->id;
+    }
+
+    /**
+     * Returns an array of ALL requests or count of NON-CLOSED requests.
+     *
+     * @param   int  $count Whether or not return a count of requests.
+     * @return  int|Model_Issue[]
+     */
+    public static function findSupportRequests($count = FALSE)
+    {
+        $auth = Auth::instance();
+
+        $requests = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC')
+            ->where('type_id', '=', Model_Issue_Type::SUPPORT_REQUEST);
+
+        if ( ! $auth->logged_in('admin')) {
+            // Admins may see ALL requests. Regular users may only see their own requests.
+            $requests->where('reporter_user_id', '=', $auth->get_user()->id);
+        }
+
+        if ($count) {
+            // ONLY count open issues.
+            $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
+            return $requests->count_all();
+        }
+        
+        return $requests->find_all();
+    }
+
+    /**
+     * Returns an array of ALL issues or count of NON-CLOSED issues.
+     *
+     * @param   int  $count Whether or not return a count of requests.
+     * @return  int|Model_Issue[]
+     */
+    public static function findAllIssues($count = FALSE)
+    {
+        $requests = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC')
+            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST);
+
+        if ($count) {
+            // ONLY count open issues.
+            $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
+            return $requests->count_all();
+        }
+        
+        return $requests->find_all();
+    }
+
+    /**
+     * Returns an array or count of NON-CLOSED issues.
+     *
+     * @param   int  $count Whether or not return a count of issues.
+     * @return  int|Model_Issue[]
+     */
+    public static function findMyOpenIssues($count = FALSE)
+    {
+        $auth = Auth::instance();
+        $auth_user = $auth->get_user();
+
+        $issues = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC')
+            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST)
+            ->where('status_id', '<>', Model_Issue_Status::CLOSED)
+            ->where('assigned_department_id', '=', $auth_user->department_id);
+
+        if ($count)
+            return $issues->count_all();
+        
+        return $issues->find_all();
+    }
+
+    /**
+     * Returns an array of ALL issues or a count of NON-CLOSED issues 
+     * that have been reported by the logged in user.
+     *
+     * @param   int  $count Whether or not return a count of issues.
+     * @return  int|Model_Issue[]
+     */
+    public static function findReportedByMe($count = FALSE)
+    {
+        $auth = Auth::instance();
+        $auth_user = $auth->get_user();
+
+        $issues = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC')
+            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST)
+            ->where('reporter_user_id', '=', $auth_user->id);
+
+        if ($count) {
+            // ONLY count open issues.
+            $issues->where('status_id', '<>', Model_Issue_Status::CLOSED);
+            return $issues->count_all();
+        }
+        
+        return $issues->find_all();
     }
 }

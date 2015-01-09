@@ -1,6 +1,3 @@
-<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-
 <section class="content-header">
     <h1>
         <i class="fa fa-envelope"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
@@ -14,7 +11,7 @@
             <h4 class="page-header">Details</h4>
 
             <div class="row" style="margin-bottom: 6px;">
-                <div class="col-xs-2 text-muted">Requester:</div> <div class="col-xs-2"><?php echo $issue->reporter->name; ?></div> <div class="col-xs-2 text-muted">Status:</div> <div class="col-xs-2"><span class="label label-primary" id="status_id"><?php echo $issue->status->name; ?></span></div>
+                <div class="col-xs-2 text-muted">Requested By:</div> <div class="col-xs-2"><?php echo $issue->reporter->name; ?></div> <div class="col-xs-2 text-muted">Status:</div> <div class="col-xs-2"><span class="label label-primary" id="status_id"><?php echo $issue->status->name; ?></span></div>
             </div>
 
             <div class="row" style="margin-bottom: 6px;">
