@@ -8,10 +8,17 @@ class Helper_View_Requests_Form {
     */
     public static function getTimeSelectOptions() {
         $options = array();
-        $options[] = '12:00 AM';
 
-        for($i = 1; $i < 23; $i++) {
-            $options[] = ($i < 12) ? $i . ':00 AM' : ($i - 11) . ':00 PM';
+        // AM
+        $options[] = '12:00 AM';
+        for($i = 1; $i <= 11; $i++) {
+            $options[] = $i . ':00 AM';
+        }
+
+        // PM
+        $options[] = '12:00 PM';
+        for($i = 1; $i <= 11; $i++) {
+            $options[] = $i . ':00 PM';
         }
 
         return $options;
