@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="boxbox-primary">
-                <form action="<?php echo "{$config['base_url']}" . ($record->id ? '/edit/' . $record->id : '/new'); ?>" method="post" role="form">
+                <form data-parsley-validate action="<?php echo "{$config['base_url']}" . ($record->id ? '/edit/' . $record->id : '/new'); ?>" method="post" role="form">
                     <div class="box-body">
                         <div class="form-group">
                             <label>Name <span class="required-field">*</span></label>
@@ -21,6 +21,13 @@
                             <div class="form-group">
                                 <label>Description <span class="required-field">*</span></label>
                                 <input type="text" maxlength="100" name="description" placeholder="Description" class="form-control" value="<?php echo $record->description; ?>" required>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($config['model']['name'] == 'Department'): ?>
+                            <div class="form-group">
+                                <label>Group Email <span class="required-field">*</span></label>
+                                <input type="email" maxlength="255" name="group_email" placeholder="Group Email Address" class="form-control" value="<?php echo $record->group_email; ?>" required>
                             </div>
                         <?php endif; ?>
                     </div>

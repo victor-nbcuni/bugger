@@ -28,6 +28,9 @@
                                 <?php if ($config['model']['name'] == 'Role'): ?>
                                     <th>Description</th>
                                 <?php endif; ?>
+                                <?php if ($config['model']['name'] == 'Department'): ?>
+                                    <th>Group Email</th>
+                                <?php endif; ?>
                                 <th></th>
                             </tr>
                         </thead>
@@ -38,6 +41,9 @@
                                     <td><?php echo $record->name; ?></td>
                                     <?php if ($config['model']['name'] == 'Role'): ?>
                                         <td><?php echo $record->description; ?></td>
+                                    <?php endif; ?>
+                                    <?php if ($config['model']['name'] == 'Department'): ?>
+                                        <td><?php echo $record->group_email; ?></td>
                                     <?php endif; ?>
                                     <td>
                                         <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
@@ -54,14 +60,14 @@
 </section>
 
 <script>
-    $(function() {
-        $('table').dataTable();
-        $('.btn-remove').click(function() {
-            event.preventDefault();
-            var self = $(this);
-            if (confirm("Are you sure you want to delete this record?")) {
-                window.location = self.attr('href');
-            }
-        });
+$(function() {
+    $('table').dataTable();
+    $('.btn-remove').click(function() {
+        event.preventDefault();
+        var self = $(this);
+        if (confirm("Are you sure you want to delete this record?")) {
+            window.location = self.attr('href');
+        }
     });
+});
 </script>

@@ -2,7 +2,7 @@
 
 class Helper_View_Requests_Form {
    /**
-    * Returns an array of times for a dropdown field.
+    * Returns an array of times for a drop down field.
     *
     * @return  array
     */

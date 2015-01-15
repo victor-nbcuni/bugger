@@ -6,8 +6,8 @@ class Controller_Issue_Statuses extends Controller_Issue_Abstract {
         'base_url' => '/issue_statuses',
         'model' => array(
             'name' => 'Issue_Status', 
-            'title' => 'Issue Status', 
-            'title_plural' => 'Issue Statuses'
+            'title' => 'Ticket Status', 
+            'title_plural' => 'Ticket Statuses'
         )
     );
 }

@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Model_Issue extends Model_Abstract {
+
     protected $_table_name = 'issues';
 
     protected $_table_columns = array(
@@ -13,6 +14,7 @@ class Model_Issue extends Model_Abstract {
         'assigned_department_id' => NULL,
         'summary' => NULL,
         'description' => NULL,
+        'example_url' => NULL,
         'due_date' => NULL,
         'due_time' => NULL,
         'created_at' => NULL,
@@ -28,7 +30,10 @@ class Model_Issue extends Model_Abstract {
         'format' => 'Y-m-d H:i:s'
     );
 
-    protected $_has_many = array('comments' => array('model' => 'Issue_Comment', 'foreign_key' => 'issue_id'));
+    protected $_has_many = array(
+        'comments' => array('model' => 'Issue_Comment', 'foreign_key' => 'issue_id'),
+        'files' => array('model' => 'Issue_File', 'foreign_key' => 'issue_id')
+    );
 
     protected $_belongs_to = array(
         'priority' => array('model' => 'Issue_Priority', 'foreign_key' => 'priority_id'),
@@ -36,7 +41,8 @@ class Model_Issue extends Model_Abstract {
         'reporter' => array('model' => 'User', 'foreign_key' => 'reporter_user_id'),
         'type' => array('model' => 'Issue_Type', 'foreign_key' => 'type_id'),
         'status' => array('model' => 'Issue_Status', 'foreign_key' => 'status_id'),
-        'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id')
+        'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id'),
+        'source' => array('model' => 'Issue_Source', 'foreign_key' => 'source_id')
     );
 
     public function getKey() 
@@ -44,6 +50,25 @@ class Model_Issue extends Model_Abstract {
         if ($this->type_id == Model_Issue_Type::SUPPORT_REQUEST)
             return 'REQUEST-' . $this->id;
         return strtoupper($this->project->name) . '-' . $this->id;
+    }
+
+    /**
+     * Returns an array of file paths.
+     *
+     * @param   bool                Whether or not to return a JSON string
+     * @return  array|JSON string
+     */
+    public function getAttachments($json =  FALSE)
+    {
+        $arr = array();//glob(Mod::ATTACHMENTS_BASE_UPLOAD_PATH . $this->id . '/*.*');
+        foreach($arr as &$filename) {
+            $filename = str_replace(DOCROOT, '/', $filename);
+        }
+
+        if ($json)
+            return json_encode($arr);
+
+        return $arr;
     }
 
     /**
@@ -87,7 +112,7 @@ class Model_Issue extends Model_Abstract {
             ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST);
 
         if ($count) {
-            // ONLY count open issues.
+            // ONLY count NON-CLOSED issues.
             $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
             return $requests->count_all();
         }

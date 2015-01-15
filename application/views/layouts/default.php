@@ -1,3 +1,4 @@
+<?php $currentPage = $request->currentPage(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,14 +8,7 @@
 
         <link rel="stylesheet" href="/assets/lib/bootstrap-3.3.1/css/bootstrap.min.css">
         <link href="/assets/lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/assets/lib/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/lib/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/lib/x-editable-1.5.0/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/lib/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
 
-        <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,12 +19,52 @@
 
         <script src="/assets/lib/jquery-2.1.3.min.js"></script>
         <script src="/assets/lib/bootstrap-3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="/assets/lib/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="/assets/lib/chosen-1.3.0/chosen.jquery.min.js"></script>
-        <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
-        <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>
-        <script src="/assets/lib/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
 
+        <!-- Datatables -->
+        <link href="/assets/lib/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/lib/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+        <?php if ($currentPage == 'users/new' || $currentPage == 'users/edit'): ?>
+            <!-- Chosen Dropdown -->
+            <link href="/assets/lib/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/chosen-1.3.0/chosen.jquery.min.js"></script>
+        <?php endif; ?>
+
+        <?php if ($currentPage == 'issues/view'): ?>
+            <!-- X-Editable -->
+            <link href="/assets/lib/x-editable-1.5.0/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
+        <?php endif; ?>
+
+        <!-- Multiselect Dropdown -->
+        <!--<link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+        <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>-->
+
+        <?php if ($currentPage == 'issues/new'): ?>
+            <!-- Datepicker -->
+            <link href="/assets/lib/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
+        <?php endif; ?>
+
+        <?php if ($currentPage == 'issues/view' || $currentPage == 'issues/new'): ?>
+            <!-- Dropzone -->
+            <link href="/assets/lib/dropzone/css/dropzone.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/dropzone/dropzone.min.js"></script>
+        <?php endif; ?>
+
+        <?php if ($currentPage == 'issues/view'): ?>
+            <!-- FancyBox -->
+            <link href="/assets/lib/fancybox-2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/fancybox-2.1.5/jquery.fancybox.pack.js"></script>
+        <?php endif; ?>
+
+        <!-- Parsley Form Validation -->
+        <link href="/assets/lib/parsley-2.0.6/parsley.css" rel="stylesheet" type="text/css"/>
+        <script src="/assets/lib/parsley-2.0.6/parsley.min.js"></script>
+
+        <!-- APP -->
+        <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
         <script src="/assets/js/AdminLTE/app.js" type="text/javascript"></script>
     </head>
     <body class="skin-blue">
@@ -39,7 +73,7 @@
 
         <header class="header">
             <a href="/dashboard" class="logo">
-                <?php echo APP_NAME . ' v' . APP_VERSION; ?>
+                <?php echo APP_LOGO . ' v' . APP_VERSION; ?>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -55,8 +89,7 @@
                         <li style="font-weight:bold;background-color:#00c0ef;" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-plus"></i> New <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/issues/new">Issue</a></li>
-                                <li><a href="/requests/new">Request</a></li>
+                                <li><a href="/issues/new">Ticket</a></li>
                             </ul>
                         </li>
                         <!--
@@ -132,14 +165,14 @@
                         </li>
                         <li class="treeview active">
                             <a href="/issues">
-                                <i class="fa fa-bug"></i> <span>Issues</span>
+                                <i class="fa fa-bug"></i> <span>Tickets</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 <?php if ($auth->logged_in('admin')): ?>
                                     <li class="<?php if ('my_open_issues' == $request->action()) echo 'active'; ?>">
                                         <a href="/issues/my_open_issues">
-                                            <i class="fa fa-angle-double-right"></i> My Open Issues
+                                            <i class="fa fa-angle-double-right"></i> My Open Tickets
                                             <?php if ($total = Model_Issue::findMyOpenIssues(TRUE)): ?>
                                                 <small class="badge pull-right bg-red"><?php echo $total; ?></small>
                                             <?php endif; ?>
@@ -156,21 +189,13 @@
                                 </li>
                                 <li class="<?php if ('Issues' == $request->controller() && 'index' == $request->action()) echo 'active'; ?>">
                                     <a href="/issues">
-                                        <i class="fa fa-angle-double-right"></i> All Issues
+                                        <i class="fa fa-angle-double-right"></i> All Tickets
                                         <?php if ($total = Model_Issue::findAllIssues(TRUE)): ?>
                                             <small class="badge pull-right bg-red"><?php echo $total; ?></small>
                                         <?php endif; ?>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                       <li class="<?php if ('Requests' == $request->controller()) echo 'active'; ?>">
-                            <a href="/requests">
-                                <i class="fa fa-support"></i> <span>Support Requests</span>
-                                <?php if ($total = Model_Issue::findSupportRequests(TRUE)): ?>
-                                    <small class="badge pull-right bg-red"><?php echo $total; ?></small>
-                                <?php endif; ?>
-                            </a>
                         </li>
                         <?php if ($auth->logged_in('admin')): ?>
                             <li class="treeview <?php if (is_subclass_of('Controller_' . $request->controller(), 'Controller_Abstract_Admin')) echo 'active'; ?>">
@@ -183,7 +208,7 @@
                                         <a href="/users"><i class="fa fa-angle-double-right"></i> Users</a>
                                     </li>
                                     <li class="<?php if ('Roles' == $request->controller()) echo 'active'; ?>">
-                                        <a href="/roles"><i class="fa fa-angle-double-right"></i> Roles</a>
+                                        <a href="/roles"><i class="fa fa-angle-double-right"></i> User Roles</a>
                                     </li>
                                     <li class="<?php if ('Projects' == $request->controller()) echo 'active'; ?>">
                                         <a href="/projects"><i class="fa fa-angle-double-right"></i> Projects</a>
@@ -192,13 +217,13 @@
                                         <a href="/departments"><i class="fa fa-angle-double-right"></i> Departments</a>
                                     </li>
                                     <li class="<?php if ('Issue_Types' == $request->controller()) echo 'active'; ?>">
-                                        <a href="/issue_types"><i class="fa fa-angle-double-right"></i> Issue Types</a>
+                                        <a href="/issue_types"><i class="fa fa-angle-double-right"></i> Ticket Types</a>
                                     </li>
                                     <li class="<?php if ('Issue_Priorities' == $request->controller()) echo 'active'; ?>">
-                                        <a href="/issue_priorities"><i class="fa fa-angle-double-right"></i> Issue Priorities</a>
+                                        <a href="/issue_priorities"><i class="fa fa-angle-double-right"></i> Ticket Priorities</a>
                                     </li>
                                     <li class="<?php if ('Issue_Statuses' == $request->controller()) echo 'active'; ?>">
-                                        <a href="/issue_statuses"><i class="fa fa-angle-double-right"></i> Issue Statuses</a>
+                                        <a href="/issue_statuses"><i class="fa fa-angle-double-right"></i> Ticket Statuses</a>
                                     </li>
                                 </ul>
                             </li>

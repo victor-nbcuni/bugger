@@ -6,14 +6,14 @@ class Controller_Issue_Types extends Controller_Issue_Abstract {
         'base_url' => '/issue_types',
         'model' => array(
             'name' => 'Issue_Type', 
-            'title' => 'Issue Type', 
-            'title_plural' => 'Issue Types'
+            'title' => 'Ticket Type', 
+            'title_plural' => 'Ticket Types'
         )
     );
 
     public function action_index()
     {
-        $records = ORM::factory($this->_config['model']['name'])->find_all(TRUE);
+        $records = ORM::factory($this->_config['model']['name'])->find_all();
         $this->template->content = View::factory('issue_abstract/index')
             ->set('records', $records)
             ->set('config', $this->_config);

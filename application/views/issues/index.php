@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         <i class="fa fa-bug"></i> <?php echo $title; ?>
-        <small>View and Manage Issues</small>
+        <small><?php echo $subtitle; ?></small>
     </h1>
 </section>
 
@@ -60,10 +60,10 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">View / Manage Issues</h3>
+                    <h3 class="box-title">View / Manage Tickets</h3>
                 </div>
                 <div class="box-body table-responsive">
-                    <table class="table table-striped table-hover tableClickable">
+                    <table class="table table-striped table-hover table-clickable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -103,7 +103,7 @@
 
 <script>
 $(function() {
-    $('form select').multiselect();
+    //$('form select').multiselect();
 
     $('table').on('click', 'tbody > tr.record', function() {
         window.location = $(this).find('td:first-child > a').attr('href');
@@ -111,7 +111,7 @@ $(function() {
 
     $('table').DataTable({
         'aaSorting': [[9, 'desc']],
-        initComplete: function () {
+        /*initComplete: function () {
             var api = this.api();
             api.columns().indexes().flatten().each(function(i) {
                 if (i == 0 || i >= 7) return false;
@@ -139,7 +139,7 @@ $(function() {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
             });
-        }
+        }*/
     });
 });
 </script>

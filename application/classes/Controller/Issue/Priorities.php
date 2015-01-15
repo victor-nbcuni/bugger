@@ -6,8 +6,8 @@ class Controller_Issue_Priorities extends Controller_Issue_Abstract {
         'base_url' => '/issue_priorities',
         'model' => array(
             'name' => 'Issue_Priority', 
-            'title' => 'Issue Priority', 
-            'title_plural' => 'Issue Priorities'
+            'title' => 'Ticket Priority', 
+            'title_plural' => 'Ticket Priorities'
         )
     );
 }

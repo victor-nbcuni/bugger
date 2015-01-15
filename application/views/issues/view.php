@@ -5,7 +5,7 @@
     </h1>
 </section>
 
-<section class="content">
+<section class="content issue-view-page">
     <div class="row">
         <div class="col-xs-12">
             <h4 class="page-header">Details</h4>
@@ -42,11 +42,29 @@
 
             <br>
 
+            <h4 class="page-header">Attachments</h4>
+
+            <div class="row">
+                <div class="dropzone">
+                    <div class="dz-message text-muted" data-dz-message><span>Click or drop files to upload.</span></div>
+                    <?php foreach($issue->files->find_all() as $file): ?>
+                        <div class="col-xs-2">
+                            <div class="alert alert-dismissible" role="alert">
+                                <a class="btn-remove-attachment close" href="/issues/remove_attachment/<?php echo $issue->id; ?>?file_id=<?php echo $file->id; ?>" aria-label="Close"><span aria-hidden="true">×</span></a>
+                                <a class="fancybox" rel="gallery1" href="<?php echo $file->url(); ?>" title="<?php echo $file->filename; ?>">
+                                    <img class="img-thumbnail" src="<?php echo $file->url(); ?>">
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
             <h4 class="page-header">Comments</h4>
 
             <div class="row">
                 <div class="col-xs-12">
-                    <form id="comments-form" action="/issue_comments/new" method="post">
+                    <form data-parsley-validate id="comments-form" action="/issue_comments/new" method="post">
                         <input type="hidden" name="issue_id" value="<?php echo $issue->id; ?>">
                         <input type="hidden" name="user_id" value="<?php echo Auth::instance()->get_user()->id; ?>">
                         <div class="form-group">
@@ -60,26 +78,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-xs-12">
-                    <div id="comments-list">
-                        <?php 
-                            $comments = $issue->comments->order_by('created_at', 'DESC')->offset(0)->limit(5)->find_all();
-                            if (count($comments)) {
-                                foreach($comments as $comment) {
-                                    echo View::factory('issue_comments/view')->set('comment', $comment); 
-                                }
-                            }
-                            else {
-                                echo 'There are no comments yet on this issue.';
-                            }
-                        ?>
-                    </div>
-                    <div class="comments-footer">
-                        <?php if (count($comments) == 5): ?>
-                            <button id="show-more-btn" class="btn btn-default btn-block">Show More</button>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                <?php echo View::factory('issue_comments/index')->set('comments', $comments); ?>
             </div>
         </div>
     </div>
@@ -88,7 +87,47 @@
 <script src="/assets/js/app/issues/view.js"></script>
 <script>
 $(function() {
+    // Bind fancybox
+    $('.fancybox').fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none'
+    });
+
+    // Bind Dropzone
+    Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
+    var dropzone = new Dropzone('.dropzone', {
+        url: '/issues/upload_attachment/<?php echo $issue->id; ?>', 
+        acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
+        maxFilesize: 4, // MB
+        maxFiles: 3,
+        addRemoveLinks: false,
+        autoProcessQueue: true,
+        dictDefaultMessage: 'Click or drop files to upload',
+        previewTemplate: '<div class="dz-preview dz-file-preview">' + 
+              '<div class="dz-details">' +
+                '<div class="dz-filename"><span data-dz-name></span></div>' +
+                '<div class="dz-size" data-dz-size></div>' +
+                '<img data-dz-thumbnail />' +
+              '</div>' + 
+              '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+              '<div class="dz-success-mark"><span>✔</span></div>' +
+              '<div class="dz-error-message"><span data-dz-errormessage></span></div>' +
+            '</div>'
+    });
+
+
+    // Bind attachment remove button
+    $('.btn-remove-attachment').click(function() {
+        event.preventDefault();
+        var self = $(this);
+        if (confirm("Are you sure you want to delete this attachment?")) {
+            $.get(self.attr('href'));
+            self.parent().parent().remove();
+        }
+    });
+
     var issueId = '<?php echo $issue->id; ?>';
+
     var dataSources = {
         departments: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Department'); ?>",
         issue_priorities: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Priority'); ?>",
@@ -99,5 +138,4 @@ $(function() {
     EditableFields.init(issueId, dataSources);
     LazyComments.init(issueId);
 });
-
 </script>

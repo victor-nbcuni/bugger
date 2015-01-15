@@ -29,6 +29,11 @@ class Response extends Kohana_Response {
         $this->json($body);
     }
 
+    public function serverError($error_message = 'Server error') 
+    {
+        $this->jsonError(500, $error_message);
+    }
+
     public function badRequest($error_message = 'Invalid request') 
     {
         $this->jsonError(400, $error_message);

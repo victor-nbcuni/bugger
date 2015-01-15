@@ -1,26 +1,26 @@
 .required-field  {
     color: red;
-    font-size:  24px;
+    font-size:  20px;
 }
 
-.alert {
+.flash {
     color: white;
     border: none;
 }
 
-.alert-danger {
+.flash-danger {
     background-color: #d9534f;
 }
 
-.alert-warning {
+.flash-warning {
     background-color: #F0AD56;
 }
 
-.alert-success {
+.flash-success {
     background-color: #5cb85c;
 }
 
-.tableClickable tr {
+.table-clickable tr {
   cursor: pointer;
 }
 
@@ -51,7 +51,6 @@
   border-radius: 0px;
 }
 
-
 .flash-message {
   position: absolute;
   height: 50px;
@@ -59,4 +58,18 @@
   width: 100%;
   border-radius: 0px;
   font-size: 18px;
+}
+
+.issue-view-page .fancybox img {
+  width: 300px;
+}
+
+.issue-view-page .dropzone .dz-default.dz-message {
+  background-image: none;
+}
+
+.issue-view-page .dropzone {
+  background: none;
+  border: none;
+  min-height: 100px;
 }

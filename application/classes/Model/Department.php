@@ -7,6 +7,7 @@ class Model_Department extends Model_Abstract {
 
     protected $_table_columns = array(
         'id' => NULL,
-        'name' => NULL
+        'name' => NULL,
+        'group_email' => NULL
     );
 }

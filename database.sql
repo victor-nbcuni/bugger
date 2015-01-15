@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 09, 2015 at 10:53 PM
+-- Generation Time: Jan 15, 2015 at 10:07 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
@@ -35,16 +35,18 @@ CREATE TABLE `companies` (
 
 CREATE TABLE `departments` (
 `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `name` varchar(30) NOT NULL,
+  `group_email` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `departments` (`id`, `name`) VALUES
-(1, 'Dev'),
-(3, 'QA');
+INSERT INTO `departments` (`id`, `name`, `group_email`) VALUES
+(1, 'Dev', 'dev@nbcuni.com'),
+(3, 'QA', ''),
+(4, 'Video', 'dev@nbcuni.com');
 
 -- --------------------------------------------------------
 
@@ -57,6 +59,20 @@ CREATE TABLE `issue_comments` (
   `issue_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `comment` varchar(1000) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `issue_files`
+--
+
+CREATE TABLE `issue_files` (
+`id` int(10) unsigned NOT NULL,
+  `filename` varchar(30) NOT NULL,
+  `issue_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -82,6 +98,26 @@ INSERT INTO `issue_priorities` (`id`, `name`) VALUES
 (4, 'High'),
 (5, 'Urgent'),
 (6, 'Immediate');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `issue_source_types`
+--
+
+CREATE TABLE `issue_source_types` (
+`id` int(10) unsigned NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `issue_source_types`
+--
+
+INSERT INTO `issue_source_types` (`id`, `name`) VALUES
+(1, 'Jira'),
+(2, 'Basecamp'),
+(3, 'Lighthouse');
 
 -- --------------------------------------------------------
 
@@ -123,7 +159,7 @@ CREATE TABLE `issue_types` (
 --
 
 INSERT INTO `issue_types` (`id`, `name`) VALUES
-(1, 'Bug'),
+(1, 'Defect'),
 (2, 'Improvement'),
 (3, 'New Feature'),
 (5, 'Support Request');
@@ -142,8 +178,11 @@ CREATE TABLE `issues` (
   `project_id` int(11) NOT NULL,
   `reporter_user_id` int(11) NOT NULL,
   `assigned_department_id` int(11) NOT NULL,
+  `source_type_id` int(11) DEFAULT NULL COMMENT 'Link to issue_source_types',
+  `source_id` int(11) DEFAULT NULL COMMENT 'The Actual JIRA or Basecamp ID',
   `summary` varchar(128) NOT NULL,
   `description` longtext NOT NULL,
+  `example_url` varchar(255) NOT NULL,
   `due_date` date DEFAULT NULL,
   `due_time` time DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -158,12 +197,17 @@ CREATE TABLE `issues` (
 
 CREATE TABLE `projects` (
 `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `name` varchar(30) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `projects`
 --
+
+INSERT INTO `projects` (`id`, `name`, `created_at`) VALUES
+(1, 'Telemundo', '0000-00-00 00:00:00'),
+(2, 'Mun2', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -184,7 +228,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 (1, 'login', 'Login privileges, granted after account confirmation'),
 (2, 'admin', 'Administrative user, has access to everything.'),
-(3, 'reporter', 'Regular user, can report issues and submit requests.');
+(3, 'editor', 'Regular user, can report issues and submit requests.');
 
 -- --------------------------------------------------------
 
@@ -235,14 +279,14 @@ CREATE TABLE `users` (
   `name` varchar(30) NOT NULL,
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login` int(10) unsigned DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `department_id`, `email`, `username`, `password`, `name`, `logins`, `last_login`) VALUES
-(1, 1, 'root@localhost', 'admin', 'e76f11cf0a9e4909853ef06304a792540c7dafdbddf6d6d5080fcadde3ae99c8', 'Administrator', 76, 1420840406);
+(1, 1, 'root@localhost', 'admin', 'e76f11cf0a9e4909853ef06304a792540c7dafdbddf6d6d5080fcadde3ae99c8', 'Administrator', 86, 1421252592);
 
 --
 -- Indexes for dumped tables
@@ -267,9 +311,21 @@ ALTER TABLE `issue_comments`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `issue_files`
+--
+ALTER TABLE `issue_files`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `issue_priorities`
 --
 ALTER TABLE `issue_priorities`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `issue_source_types`
+--
+ALTER TABLE `issue_source_types`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -333,17 +389,27 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `issue_comments`
 --
 ALTER TABLE `issue_comments`
 MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `issue_files`
+--
+ALTER TABLE `issue_files`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `issue_priorities`
 --
 ALTER TABLE `issue_priorities`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `issue_source_types`
+--
+ALTER TABLE `issue_source_types`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `issue_statuses`
 --
@@ -363,7 +429,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -378,7 +444,7 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --

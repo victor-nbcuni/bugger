@@ -71,7 +71,7 @@
     </head>
     <body>
         <div id="login-box">
-            <div class="header"><?php echo APP_NAME; ?></div>
+            <div class="header"><?php echo APP_LOGO; ?></div>
             <?php if ($error = Session::instance()->getFlash()): ?>
                 <div class="alert alert-danger" role="alert"><i class="fa fa-times-circle"></i> <?php echo $error['message']; ?></div>
             <?php endif; ?>
