@@ -73,7 +73,7 @@
 
         <header class="header">
             <a href="/dashboard" class="logo">
-                <?php echo APP_LOGO . ' v' . APP_VERSION; ?>
+                <?php echo APP_NAME . ' v' . APP_VERSION; ?>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

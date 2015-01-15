@@ -4,8 +4,14 @@
 }
 
 .flash {
-    color: white;
-    border: none;
+  color: white;
+  border: none;
+  position: absolute;
+  height: 50px;
+  z-index: 10000;
+  width: 100%;
+  border-radius: 0px;
+  font-size: 18px;
 }
 
 .flash-danger {
@@ -49,15 +55,6 @@
 
 .dataTables_wrapper input {
   border-radius: 0px;
-}
-
-.flash-message {
-  position: absolute;
-  height: 50px;
-  z-index: 10000;
-  width: 100%;
-  border-radius: 0px;
-  font-size: 18px;
 }
 
 .issue-view-page .fancybox img {

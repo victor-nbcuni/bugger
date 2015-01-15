@@ -47,28 +47,7 @@ class Model_Issue extends Model_Abstract {
 
     public function getKey() 
     {
-        if ($this->type_id == Model_Issue_Type::SUPPORT_REQUEST)
-            return 'REQUEST-' . $this->id;
         return strtoupper($this->project->name) . '-' . $this->id;
-    }
-
-    /**
-     * Returns an array of file paths.
-     *
-     * @param   bool                Whether or not to return a JSON string
-     * @return  array|JSON string
-     */
-    public function getAttachments($json =  FALSE)
-    {
-        $arr = array();//glob(Mod::ATTACHMENTS_BASE_UPLOAD_PATH . $this->id . '/*.*');
-        foreach($arr as &$filename) {
-            $filename = str_replace(DOCROOT, '/', $filename);
-        }
-
-        if ($json)
-            return json_encode($arr);
-
-        return $arr;
     }
 
     /**
@@ -82,8 +61,7 @@ class Model_Issue extends Model_Abstract {
         $auth = Auth::instance();
 
         $requests = ORM::factory('Issue')
-            ->order_by('updated_at', 'DESC')
-            ->where('type_id', '=', Model_Issue_Type::SUPPORT_REQUEST);
+            ->order_by('updated_at', 'DESC');
 
         if ( ! $auth->logged_in('admin')) {
             // Admins may see ALL requests. Regular users may only see their own requests.
@@ -108,8 +86,7 @@ class Model_Issue extends Model_Abstract {
     public static function findAllIssues($count = FALSE)
     {
         $requests = ORM::factory('Issue')
-            ->order_by('updated_at', 'DESC')
-            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST);
+            ->order_by('updated_at', 'DESC');
 
         if ($count) {
             // ONLY count NON-CLOSED issues.
@@ -133,7 +110,6 @@ class Model_Issue extends Model_Abstract {
 
         $issues = ORM::factory('Issue')
             ->order_by('updated_at', 'DESC')
-            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST)
             ->where('status_id', '<>', Model_Issue_Status::CLOSED)
             ->where('assigned_department_id', '=', $auth_user->department_id);
 
@@ -157,7 +133,6 @@ class Model_Issue extends Model_Abstract {
 
         $issues = ORM::factory('Issue')
             ->order_by('updated_at', 'DESC')
-            ->where('type_id', '<>', Model_Issue_Type::SUPPORT_REQUEST)
             ->where('reporter_user_id', '=', $auth_user->id);
 
         if ($count) {
