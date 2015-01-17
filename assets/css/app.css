@@ -70,3 +70,7 @@
   border: none;
   min-height: 100px;
 }
+
+.skin-blue .navbar .dropdown-menu > li > a:hover {
+  color: #fff;
+}

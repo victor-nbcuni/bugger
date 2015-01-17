@@ -28,8 +28,13 @@
                                 <?php if ($config['model']['name'] == 'Role'): ?>
                                     <th>Description</th>
                                 <?php endif; ?>
+                                
                                 <?php if ($config['model']['name'] == 'Department'): ?>
                                     <th>Group Email</th>
+                                <?php endif; ?>
+
+                                <?php if ($config['model']['name'] == 'Issue_Priority' || $config['model']['name'] == 'Issue_Status'): ?>
+                                    <th>Color</th>
                                 <?php endif; ?>
                                 <th></th>
                             </tr>
@@ -39,12 +44,19 @@
                                 <tr>
                                     <td><?php echo $record->id; ?></td>
                                     <td><?php echo $record->name; ?></td>
+
                                     <?php if ($config['model']['name'] == 'Role'): ?>
                                         <td><?php echo $record->description; ?></td>
                                     <?php endif; ?>
+
                                     <?php if ($config['model']['name'] == 'Department'): ?>
                                         <td><?php echo $record->group_email; ?></td>
                                     <?php endif; ?>
+
+                                    <?php if ($config['model']['name'] == 'Issue_Priority' || $config['model']['name'] == 'Issue_Status'): ?>
+                                        <td><span class="badge" style="background: <?php echo $record->color; ?>;"><?php echo $record->color; ?></span></td>
+                                    <?php endif; ?>
+
                                     <td>
                                         <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-remove"></i></a>

@@ -6,7 +6,6 @@ $(function() {
         setTimeout(function() {
           self.slideUp(500);
         }, 2000);
-        
     });
 });
 </script>

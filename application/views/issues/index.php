@@ -13,88 +13,49 @@
             </a>
         </div>
     </div>
-    <!--
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="form-inlsine">
-                <label>Project</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-
-                <label>Status</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-
-                <label>Type</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-
-                <label>Priority</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-
-                <label>Reporter</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-
-                <label>Assignee</label>
-                <select class="col-xs-2" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-            </form>
-        </div>
-    </div>
-    -->
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
+                <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
                 <div class="box-header">
                     <h3 class="box-title">View / Manage Tickets</h3>
                 </div>
-                <div class="box-body table-responsive">
-                    <table class="table table-striped table-hover table-clickable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Project</th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th>Priority</th>
-                                <th>Reporter</th>
-                                <th>Assignee</th>
-                                <th>Summary</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($issues as $issue): ?>
-                                <tr class="record">
-                                    <td><a href="/issues/view/<?php echo $issue->id; ?>"><?php echo $issue->getKey(); ?></a></td>
-                                    <td><?php echo $issue->project->name; ?></td>
-                                    <td><span class="label label-default"><?php echo $issue->status->name; ?></span></td>
-                                    <td><span class="label label-default"><?php echo $issue->type->name; ?></span></td>
-                                    <td><span class="label label-default"><?php echo $issue->priority->name; ?></span></td>
-                                    <td><?php echo $issue->reporter->name; ?></td>
-                                    <td><?php echo $issue->assigned_department->name; ?></td>
-                                    <td><?php echo Text::limit_chars($issue->summary, 20, '...'); ?></td>
-                                    <td><?php echo $issue->created_at; ?></td>
-                                    <td><?php echo $issue->updated_at; ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <div class="box-body">
+                    <div class="row" style="margin: 10px 0 20px 0;">
+                        <div class="col-xs-12">
+                            <form id="filter-form" class="form-inline">
+                                <label>Project</label>
+                                <select name="project_id[]" class="col-xs-2" multiple>
+                                    <?php foreach($projects as $project): ?>
+                                        <option  value="<?php echo $project->id; ?>"><?php echo $project->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                               <label>Type</label>
+                                <select name="type_id[]" class="col-xs-2" multiple>
+                                    <?php foreach($types as $type): ?>
+                                        <option  value="<?php echo $type->id; ?>"><?php echo $type->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <label>Status</label>
+                                <select name="status_id[]" class="col-xs-2" multiple>
+                                    <?php foreach($statuses as $status): ?>
+                                        <option  value="<?php echo $status->id; ?>"><?php echo $status->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <label>Priority</label>
+                                <select name="priority_id[]" class="col-xs-2" multiple>
+                                    <?php foreach($priorities as $priority): ?>
+                                        <option value="<?php echo $priority->id; ?>"><?php echo $priority->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,43 +64,65 @@
 
 <script>
 $(function() {
-    //$('form select').multiselect();
-
-    $('table').on('click', 'tbody > tr.record', function() {
-        window.location = $(this).find('td:first-child > a').attr('href');
-    });
-
-    $('table').DataTable({
-        'aaSorting': [[9, 'desc']],
-        /*initComplete: function () {
-            var api = this.api();
-            api.columns().indexes().flatten().each(function(i) {
-                if (i == 0 || i >= 7) return false;
-                var column = api.column(i);
-                var select = $('<select><option value="">All</option></select>')
-                    .appendTo( $(column.header()) )
-                    .on('change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each(function (d, j) {
-                    if (d.indexOf('>') > -1) {
-                        var start = d.indexOf('>') + 1;
-                        var length = (d.indexOf('/') - 1) - start;
-                        d = d.substr(start, length);
-                        //console.log(d);
-                    }
-                    
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            });
-        }*/
-    });
+    FilterableTable.init();
 });
+
+var FilterableTable = {
+    $form: null,
+
+    init: function() {
+        this.$form = $('#filter-form');
+        this.initFilters();
+        this.bindFilters();
+        this.bindRowClickHanlder();
+        this.reloadTable(window.location.hash.substr(1));
+    },
+
+    initFilters: function() {
+        if (window.location.hash != '') {
+            this.$form.deserialize(window.location.hash.substr(1));
+        }
+    },
+
+    bindFilters: function() {
+        var self = this;
+        self.$form.find('select').multiselect({
+            includeSelectAllOption: false,
+            buttonClass: 'btn btn-default',
+            allSelectedText: 'All',
+            nonSelectedText: 'All',
+            //selectAllText: 'All',
+            onChange: function(option, checked, select) {
+                window.location.hash = self.$form.serialize();
+                self.reloadTable(window.location.hash.substr(1));
+            }
+        });
+    },
+
+    bindRowClickHanlder: function() {
+        $('.box').on('click', 'table tbody > tr.record', function() {
+            window.location = $(this).find('td:first-child > a').attr('href');
+        });
+    },
+
+    reloadTable: function(postData) {
+        var $boxBody = $('.box-body'),
+            $box = $('.box'),
+            $loading = $('.loading');
+
+        $loading.show();
+
+        $.post('/issues/filter', postData, function(data) {
+            $('.table-responsive').html(data);
+
+            $('.table').DataTable({
+                'aaSorting': [[9, 'desc']],
+                'bLengthChange': false,
+                'bFilter': false
+            });
+            
+            $loading.hide();
+        });
+    }
+}
 </script>

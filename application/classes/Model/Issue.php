@@ -56,7 +56,7 @@ class Model_Issue extends Model_Abstract {
      * @param   int  $count Whether or not return a count of requests.
      * @return  int|Model_Issue[]
      */
-    public static function findSupportRequests($count = FALSE)
+/*    public static function findSupportRequests($count = FALSE)
     {
         $auth = Auth::instance();
 
@@ -75,7 +75,8 @@ class Model_Issue extends Model_Abstract {
         }
         
         return $requests->find_all();
-    }
+    }*/
+    
 
     /**
      * Returns an array of ALL issues or count of NON-CLOSED issues.
@@ -83,7 +84,7 @@ class Model_Issue extends Model_Abstract {
      * @param   int  $count Whether or not return a count of requests.
      * @return  int|Model_Issue[]
      */
-    public static function findAllIssues($count = FALSE)
+    public static function findAll($count = FALSE)
     {
         $requests = ORM::factory('Issue')
             ->order_by('updated_at', 'DESC');
@@ -103,7 +104,7 @@ class Model_Issue extends Model_Abstract {
      * @param   int  $count Whether or not return a count of issues.
      * @return  int|Model_Issue[]
      */
-    public static function findMyOpenIssues($count = FALSE)
+/*    public static function findAssignedToMe($count = FALSE)
     {
         $auth = Auth::instance();
         $auth_user = $auth->get_user();
@@ -117,7 +118,7 @@ class Model_Issue extends Model_Abstract {
             return $issues->count_all();
         
         return $issues->find_all();
-    }
+    }*/
 
     /**
      * Returns an array of ALL issues or a count of NON-CLOSED issues 

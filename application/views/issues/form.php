@@ -29,7 +29,7 @@
                                 <select name="issue[priority_id]" class="form-control">
                                     <?php 
                                         foreach(ORM::factory('Issue_Priority')->find_all() as $priority): 
-                                            $selected = ( ($issue->id && $issue->priority_id == $priority->id) || ( ! $issue->id && $priority->name == 'Normal') ) ? 'selected' : '';
+                                            $selected = ($issue->priority_id == $priority->id) ? 'selected' : '';
                                     ?>
                                         <option value="<?php echo $priority->id; ?>" <?php echo $selected; ?>><?php echo $priority->name; ?></option>
                                     <?php endforeach; ?>
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Attachment</label>
+                            <label class="col-sm-2 control-label">Attachments</label>
                             <div class="col-sm-7">
                                 <div class="dropzone"></div>
                             </div>

@@ -1,3 +1,4 @@
+
 <section class="content-header">
     <h1>
         <i class="fa fa-dashboard"></i> Dashboard
@@ -6,5 +7,12 @@
 </section>
 
 <section class="content">
-  <h3>Coming soon...</h3>
+    <?php echo $stats; ?>
+</section>
+
+<section class="content">
+    <div class="row">
+        <?php echo $chart_overview; ?>
+        <?php echo $chart_reported_by_me; ?>
+    </div>
 </section>

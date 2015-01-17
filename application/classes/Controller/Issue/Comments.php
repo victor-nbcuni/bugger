@@ -2,8 +2,8 @@
 
 class Controller_Issue_Comments extends Controller_Abstract_Member {
     /**
-     * @uses     ajax
-     * @return   json / html
+     * @uses     AJAX
+     * @return   JSON / HTML
      */
     public function action_index()
     {
@@ -22,8 +22,8 @@ class Controller_Issue_Comments extends Controller_Abstract_Member {
     }
 
     /**
-     * @uses     ajax
-     * @return   json / html
+     * @uses     AJAX
+     * @return   JSON / HTML
      */
     public function action_new()
     { 
@@ -45,8 +45,8 @@ class Controller_Issue_Comments extends Controller_Abstract_Member {
     }
 
     /**
-     * @uses     ajax
-     * @return   json
+     * @uses     AJAX
+     * @return   JSON
      */
     public function action_update_editable_field()
     {

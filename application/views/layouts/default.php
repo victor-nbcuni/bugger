@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="/assets/lib/bootstrap-3.3.1/css/bootstrap.min.css">
         <link href="/assets/lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
+        <link href="/assets/lib/ionicons.min.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,9 +36,13 @@
             <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
         <?php endif; ?>
 
-        <!-- Multiselect Dropdown -->
-        <!--<link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
-        <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>-->
+        <?php if ($currentPage == 'issues/index' || $currentPage == 'issues/reported_by_me'): ?>
+            <!-- Multiselect Dropdown -->
+            <link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+            <!-- JQuery Deserialize -->
+            <script src="/assets/lib/jquery.deserialize.min.js"></script>
+        <?php endif; ?>
 
         <?php if ($currentPage == 'issues/new'): ?>
             <!-- Datepicker -->
@@ -56,6 +60,14 @@
             <!-- FancyBox -->
             <link href="/assets/lib/fancybox-2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
             <script src="/assets/lib/fancybox-2.1.5/jquery.fancybox.pack.js"></script>
+        <?php endif; ?>
+
+        <?php if ($currentPage == 'dashboard/index'): ?>
+            <!-- Morris Charts -->
+            <link href="/assets/lib/morris/morris.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/lib/morris/morris.min.js"></script>
+            <script src="/assets/lib/flot/jquery.flot.min.js"></script>
+            <script src="/assets/lib/flot/jquery.flot.pie.min.js"></script>
         <?php endif; ?>
 
         <!-- Parsley Form Validation -->
@@ -169,30 +181,17 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <?php if ($auth->logged_in('admin')): ?>
-                                    <li class="<?php if ('my_open_issues' == $request->action()) echo 'active'; ?>">
-                                        <a href="/issues/my_open_issues">
-                                            <i class="fa fa-angle-double-right"></i> My Open Tickets
-                                            <?php if ($total = Model_Issue::findMyOpenIssues(TRUE)): ?>
-                                                <small class="badge pull-right bg-red"><?php echo $total; ?></small>
-                                            <?php endif; ?>
+                                <?php if ( ! $auth->logged_in('admin')): ?>
+                                    <li class="<?php if ('reported_by_me' == $request->action() &&  $auth->logged_in('admin')) echo 'active'; ?>">
+                                        <a href="/issues/reported_by_me#reporter_user_id%5B%5D=<?php echo $auth_user->id; ?>">
+                                            <i class="fa fa-angle-double-right"></i> Reported by Me
                                         </a>
                                     </li>
                                 <?php endif; ?>
-                                <li class="<?php if ('reported_by_me' == $request->action()) echo 'active'; ?>">
-                                    <a href="/issues/reported_by_me">
-                                        <i class="fa fa-angle-double-right"></i> Reported by Me
-                                        <?php if ($total = Model_Issue::findReportedByMe(TRUE)): ?>
-                                            <small class="badge pull-right bg-red"><?php echo $total; ?></small>
-                                        <?php endif; ?>
-                                    </a>
-                                </li>
-                                <li class="<?php if ('Issues' == $request->controller() && 'index' == $request->action()) echo 'active'; ?>">
+
+                                <li class="<?php if ($currentPage == 'issues/index') echo 'active'; ?>">
                                     <a href="/issues">
                                         <i class="fa fa-angle-double-right"></i> All Tickets
-                                        <?php if ($total = Model_Issue::findAllIssues(TRUE)): ?>
-                                            <small class="badge pull-right bg-red"><?php echo $total; ?></small>
-                                        <?php endif; ?>
                                     </a>
                                 </li>
                             </ul>

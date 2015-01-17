@@ -2,17 +2,18 @@
 
 class Model_Issue_Status extends Model_Abstract {
     const OPEN              = 1;
-    const IN_PROGRESS       = 2;
-    const RESOLVED          = 3;
-    const CLOSED            = 4;
-    const ON_HOLD           = 5;
-    const READY_FOR_TESTING = 6;
-    const REOPENED          = 7;
+    const REOPENED          = 2;
+    const IN_PROGRESS       = 3;
+    const READY_FOR_TESTING = 4;
+    //const RESOLVED          = 5;
+    const CLOSED            = 6;
+    const ON_HOLD           = 7;
 
     protected $_table_name = 'issue_statuses';
 
     protected $_table_columns = array(
         'id' => NULL,
-        'name' => NULL
+        'name' => NULL,
+        'color' => NULL
     );
 }

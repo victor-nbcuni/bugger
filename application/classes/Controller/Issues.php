@@ -6,25 +6,45 @@ class Controller_Issues extends Controller_Abstract_Member {
      */
     public function action_index()
     {
-        $issues = Model_Issue::findAllIssues();
+        $issues = Model_Issue::findAll();
 
-        $this->template->content = View::factory('issues/index')
-            ->set('title', 'All Tickets')
-            ->set('subtitle', 'View and Manage All Tickets')
-            ->set('issues', $issues);
+        $this->template->content = $view = View::factory('issues/index');
+
+        $view->title = 'All Tickets';
+        $view->subtitle = 'View and Manage All Tickets';
+
+        $view->statuses = ORM::factory('Issue_Status')->find_all();
+        $view->priorities = ORM::factory('Issue_Priority')->find_all();
+        $view->types = ORM::factory('Issue_Type')->find_all();
+        $view->projects = ORM::factory('Project')->find_all();
     }
 
     /**
-     * Displays NON-CLOSED issues assigned to the LOGGED IN user.
+     * Returns a filtered issues table.
+     *
+     * @uses    AJAX
+     * @return  HTML
      */
-    public function action_my_open_issues()
+    public function action_filter()
     {
-        $issues = Model_Issue::findMyOpenIssues();
+        if ($this->request->method() == Request::POST) {
+            $this->auto_render = TRUE;
+            $valid_filters = array('priority_id', 'project_id', 'type_id', 'status_id', 'reporter_user_id');
+            $post = $this->request->post();
 
-        $this->template->content = View::factory('issues/index')
-            ->set('title', 'My Open Tickets')
-            ->set('subtitle', 'View and Manage Tickets Assigned to You')
-            ->set('issues', $issues);
+            $issues = ORM::factory('Issue');
+
+            foreach($post as $filter => $values) {
+                if (in_array($filter, $valid_filters)) {
+                    $issues->where($filter, 'IN', $values);
+                }
+            }
+
+            $issues = $issues->find_all();
+
+            $this->template = View::factory('issues/_index_table')
+                ->set('issues', $issues);           
+        }
     }
 
     /**
@@ -32,12 +52,10 @@ class Controller_Issues extends Controller_Abstract_Member {
      */
     public function action_reported_by_me()
     {
-        $issues = Model_Issue::findReportedByMe();
+        $this->action_index();
 
-        $this->template->content = View::factory('issues/index')            
-            ->set('title', 'Reported by Me')
-            ->set('subtitle', 'View and Manage Tickets Reported by You')
-            ->set('issues', $issues);
+        $this->template->content->title = 'Reported by Me';
+        $this->template->content->subtitle = 'View and Manage Tickets Reported by You';
     }
 
     public function action_view()

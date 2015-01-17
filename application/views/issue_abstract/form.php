@@ -30,6 +30,14 @@
                                 <input type="email" maxlength="255" name="group_email" placeholder="Group Email Address" class="form-control" value="<?php echo $record->group_email; ?>" required>
                             </div>
                         <?php endif; ?>
+
+                        <?php if ($config['model']['name'] == 'Issue_Priority' || $config['model']['name'] == 'Issue_Status'): ?>
+                            <div class="form-group">
+                                <label>Color <span class="required-field">*</span></label>
+                                <p class="help-block">A color name or hex value. For example: green, red, #f0ad4e, #444444</p>
+                                <input type="text" maxlength="20" name="color" placeholder="Color" class="form-control" value="<?php echo $record->color; ?>" required>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
