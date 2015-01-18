@@ -64,7 +64,7 @@ class Controller_Dashboard extends Controller_Abstract_Member {
     private function _stats()
     {
         $statuses = ORM::factory('Issue_Status')
-            ->where('id', 'NOT IN', array(Model_Issue_Status::REOPENED, Model_Issue_Status::CLOSED))
+            //->where('id', 'NOT IN', array(Model_Issue_Status::REOPENED))
             ->find_all();
 
         foreach($statuses as $status) {
@@ -73,7 +73,7 @@ class Controller_Dashboard extends Controller_Abstract_Member {
                 ->count_all();
 
             $data[] = array(
-                'label' => $status->name,
+                'label' => ($status->id == Model_Issue_Status::CLOSED) ? 'Completed' : $status->name,
                 'total' => $status_total,
                 'color' => $status->color,
                 'id' => $status->id

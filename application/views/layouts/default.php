@@ -144,7 +144,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header bg-light-blue">
-                                    <img src="/assets/img/avatar6.png" class="img-circle" alt="User Image" />
+                                    <img src="/assets/img/avatar8.png" class="img-circle" alt="User Image" />
                                     <p>
                                         <?php echo $auth_user->name; ?>
                                     </p>

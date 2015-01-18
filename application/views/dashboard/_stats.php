@@ -1,6 +1,6 @@
 <div class="row">
     <?php foreach($data as $status): ?>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-2 col-xs-6">
             <div class="small-box" style="color: #f9f9f9; background: <?php echo $status['color']; ?>;">
                 <div class="inner">
                     <h3>

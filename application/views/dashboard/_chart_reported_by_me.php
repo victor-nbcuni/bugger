@@ -19,7 +19,9 @@ $(function() {
             pie: {
                 show: true,
                 radius: 1,
-                tilt: 0.5,
+                innerRadius: .5,
+
+                //tilt: 0.5,
                 label: {
                     show: true,
                     radius: 1,
