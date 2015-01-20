@@ -9,6 +9,5 @@ Bugger
 
 **To login:**
 
-user: admin
-
-pass: pass
+* user: admin
+* pass: pass
