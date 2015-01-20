@@ -47,9 +47,14 @@ class Model_Issue extends Model_Abstract {
         'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id')
     );
 
-    public function url() 
+    public function url($full = FALSE) 
     {
-        return '/issues/view/' . $this->id;
+        $url = '/issues/view/' . $this->id;
+
+        if ($full)
+            return APP_BASE_URL . $url;
+
+        return $url;
     }
 
     public function trackingCode() 

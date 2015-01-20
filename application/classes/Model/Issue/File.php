@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Model_Issue_File extends Model_Abstract {
-    const BASE_UPLOAD_PATH = UPLOAD_PATH . 'attachments/issues/';
+    const BASE_UPLOAD_PATH = APP_UPLOAD_PATH . 'attachments/issues/';
     const MAX_UPLOAD_FILESIZE = 16000000; // Bytes (4 MB)
 
     protected $_table_name = 'issue_files';
@@ -84,7 +84,7 @@ class Model_Issue_File extends Model_Abstract {
      */
     public static function processTempUpload($temp_dir, $issue_id, $user_id)
     {
-        $temp_path = UPLOAD_TMP_PATH . $temp_dir;
+        $temp_path = APP_UPLOAD_TMP_PATH . $temp_dir;
 
         if ( ! file_exists($temp_path))
             return;

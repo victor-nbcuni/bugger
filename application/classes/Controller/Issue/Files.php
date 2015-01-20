@@ -78,7 +78,7 @@ class Controller_Issue_Files extends Controller_Auth_User {
 
             try {
                 // Save the file
-                $base_temp_path = UPLOAD_TMP_PATH . $temp_dir . '/';
+                $base_temp_path = APP_UPLOAD_TMP_PATH . $temp_dir . '/';
                 $temp_path = $base_temp_path . $file['name'];
 
                 // Create dir if doesn't exist
@@ -109,7 +109,7 @@ class Controller_Issue_Files extends Controller_Auth_User {
             return $this->response->badRequest('Invalid file');
         
         try {     
-            unlink(UPLOAD_TMP_PATH . $post['dir'] . '/' . $post['filename']);
+            unlink(APP_UPLOAD_TMP_PATH . $post['dir'] . '/' . $post['filename']);
         }
         catch(Exception $ex) {
             $this->log->add(Log::ERROR, $ex->getMessage());

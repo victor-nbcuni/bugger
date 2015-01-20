@@ -3,8 +3,9 @@
 define('APP_VERSION', '1.0');
 define('APP_NAME', 'Bugger');
 define('APP_LOGO', 'B<i class="fa fa-bug"></i>gger');
-define('UPLOAD_PATH', DOCROOT . 'uploads/');
-define('UPLOAD_TMP_PATH', UPLOAD_PATH . 'tmp/');
+define('APP_BASE_URL', 'http://' . $_SERVER['HTTP_HOST']);
+define('APP_UPLOAD_PATH', DOCROOT . 'uploads/');
+define('APP_UPLOAD_TMP_PATH', APP_UPLOAD_PATH . 'tmp/');
 
 // -- Environment setup --------------------------------------------------------
 

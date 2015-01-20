@@ -7,7 +7,7 @@ class Mailer_Issue extends Mailer {
     {
         return new Mailer_Issue($issue);
     }
-    
+
     public function __construct(Model_Issue $issue) {
         parent::__construct();
 
@@ -25,7 +25,7 @@ class Mailer_Issue extends Mailer {
         $body = sprintf("
             %s <b>created</b> ticket %s
 
-            <h3><a href=\"\">%s</a></h3>
+            <h3><a href=\"%s\">%s</a></h3>
 
             Type: %s <br>
 
@@ -39,6 +39,7 @@ class Mailer_Issue extends Mailer {
             ", 
             $this->_issue->reporter->name,
             $this->_issue->trackingCode(),
+            $this->_issue->url(TRUE),
             $this->_issue->summary,
             $this->_issue->type->name,
             $this->_issue->assigned_department->name,
@@ -55,12 +56,13 @@ class Mailer_Issue extends Mailer {
         $body = sprintf("
             %s <b>changed</b> status to <b>\"%s\"</b>
 
-            <h3><a href=\"\">%s</a></h3>
+            <h3><a href=\"%s\">%s</a></h3>
 
             Updated: %s <br>
             ",
             $this->_issue->last_updated_by->name,
             $this->_issue->status->name,
+            $this->_issue->url(TRUE),
             $this->_issue->summary,
             $this->_issue->updated_at
         );
@@ -73,13 +75,14 @@ class Mailer_Issue extends Mailer {
         $body = sprintf("
             %s <b>commented</b> \"%s\"</b>
 
-            <h3><a href=\"\">%s</a></h3>
+            <h3><a href=\"%s\">%s</a></h3>
 
             Updated: %s <br>
             ",
             $comment->user->name,
             $comment->comment,
             $this->_issue->summary,
+            $this->_issue->url(TRUE),
             $this->_issue->updated_at
         );
 
