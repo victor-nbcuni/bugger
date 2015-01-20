@@ -1,9 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Controller_Issue_Abstract extends Controller_Abstract_Admin {
+abstract class Controller_Issue_Abstract extends Controller_Auth_Admin {
 
     protected $_config = array(
-        'base_url' => '',
+        'base_url' => NULL,
         'model' => array(
             'name' => NULL, 
             'title' => NULL, 
@@ -65,6 +65,9 @@ abstract class Controller_Issue_Abstract extends Controller_Abstract_Admin {
         if ($record->loaded()) {
             $record->delete();
             $this->session->flashSuccess('generic.delete_ok');
+        }
+        else {
+            $this->session->flashError('generic.read_fail');
         }
 
         $this->redirect($this->_config['base_url']);

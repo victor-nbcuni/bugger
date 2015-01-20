@@ -1,6 +1,6 @@
 <div class="row">
     <?php foreach($data as $status): ?>
-        <div class="col-lg-2 col-xs-6">
+        <div class=" col-xs-2">
             <div class="small-box" style="color: #f9f9f9; background: <?php echo $status['color']; ?>;">
                 <div class="inner">
                     <h3>
@@ -13,7 +13,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="/issues#status_id%5B%5D=<?php echo $status['id']; ?>" class="small-box-footer">
+                <a href="<?php echo $status['url']; ?>" class="small-box-footer">
                     View <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>

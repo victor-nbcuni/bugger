@@ -1,6 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
-abstract class Controller_Abstract_Member extends Controller_Template {
+/**
+ * Abstract class used as the parent of all member restricted areas.
+ */
+abstract class Controller_Auth_User extends Controller_Template {
     public $template = 'layouts/default';
     public $auth;
     public $auth_user;

@@ -8,11 +8,14 @@
 <section class="content">
    <div class="row">
         <div class="col-xs-12">
-            <a href="<?php echo $config['base_url']; ?>/new" class="btn btn-app">
-                <i class="fa fa-plus"></i> Add New
-            </a>
+            <?php if ( ! in_array($config['model']['name'], array('Issue_Status', 'Issue_Priority'))): ?>
+                <a href="<?php echo $config['base_url']; ?>/new" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add New
+                </a>
+            <?php endif; ?>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -58,8 +61,8 @@
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-remove"></i></a>
+                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a class="btn-remove btn btn-default" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

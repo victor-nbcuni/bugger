@@ -23,8 +23,34 @@ var LazyComments = {
         });
 
         // Bind show more button click handler
-        $('#show-more-btn').on('click', function() {
+        $('#btn-show-more').on('click', function() {
             self.lazyLoad($(this));
+        });
+
+        // Bind edit button
+        $('#comments-list').on('click', '.btn-edit-comment', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var $comment = $(this).parent().siblings('.comment');
+            $comment.editable({
+                //selector: '.editable',
+                type: 'textarea',
+                name: 'comment',
+                toggle: 'manual',
+                ajaxOptions: {
+                    type: 'POST'
+                }
+            });
+            $comment.editable('show');
+        });
+
+        // Bind delete button
+        $('#comments-list').on('click', '.btn-remove-comment', function(event) {
+            event.preventDefault();
+            if (confirm("Are you sure you want to remove this comment?")) {
+                $.post('/issue_comments/update/' + $(this).attr('data-id'), {name: 'archived', value: 1});
+                $(this).parent().closest('.media').fadeOut();
+            }
         });
     },
 
@@ -70,7 +96,7 @@ var LazyComments = {
             submitBtn = form.find('button[type=submit]').attr('disabled', true);
 
         $.ajax({
-            url: '/issue_comments/new',
+            url: '/issue_comments/create',
             type: 'POST',
             data: form.serialize()
         }).done(function(data) {
@@ -101,12 +127,12 @@ var EditableFields = {
     init: function(issueId, dataSources) {
         var self = this;
 
-        $.fn.editable.defaults.mode = 'inline';
-        $.fn.editableform.buttons = '<button type="submit" class="btn btn-success editable-submit"><i class="fa fa-check"></i></button><button type="button" class="btn btn-danger editable-cancel"><i class="fa fa-close"></i></button>';
+        $.fn.editable.defaults.mode = 'popup';
+        $.fn.editableform.buttons = '<button type="submit" class="btn btn-primary editable-submit"><i class="fa fa-check"></i></button><button type="button" class="btn btn-default editable-cancel"><i class="fa fa-close"></i></button>';
         
         $('#summary').editable({
             url: '/issues/update_editable_field',
-            type: 'text',
+            type: 'textarea',
             pk: issueId,
             name: 'summary',
             ajaxOptions: {
@@ -119,16 +145,6 @@ var EditableFields = {
             type: 'textarea',
             pk: issueId,
             name: 'description',
-            ajaxOptions: {
-                type: 'POST'
-            }
-        });
-
-        $('#comments-list').editable({
-            selector: '.editable-comment',
-            url: '/issue_comments/update_editable_field',
-            type: 'textarea',
-            name: 'comment',
             ajaxOptions: {
                 type: 'POST'
             }
@@ -153,10 +169,11 @@ var EditableFields = {
             ajaxOptions: {
                 type: 'POST'
             }, 
-            source: dataSources.issue_statuses
+            source: '/issues/status_options/' + issueId,
+            sourceCache: false
         });
 
-        $('#assigned_department_id').editable({
+        /*$('#assigned_department_id').editable({
             url: '/issues/update_editable_field',
             type: 'select',
             pk: issueId,
@@ -165,7 +182,7 @@ var EditableFields = {
                 type: 'POST'
             }, 
             source: dataSources.departments
-        });
+        });*/
 
         $('#type_id').editable({
             url: '/issues/update_editable_field',

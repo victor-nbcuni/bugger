@@ -1,59 +1,57 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Dashboard extends Controller_Abstract_Member {
+class Controller_Dashboard extends Controller_Auth_User {
 
     public function action_index()
     {
         $this->template->content = $view = View::factory('dashboard/index');
-        $view->chart_overview = $this->_chartOverview();
-        $view->chart_reported_by_me = $this->auth->logged_in('admin') ? $this->_chartReportedByMe() : $this->_chartReportedByMe();
-        $view->stats = $this->_stats();
+        $view->chart_pending = $this->_pendingChart();
+        $view->chart_reported_by_me = $this->auth->logged_in('admin') ? $this->_reportedByMeChart() : $this->_reportedByMeChart();
+        $view->stats = $this->_statsChart();
     }
 
-    private function _chartOverview()
+    private function _pendingChart()
     {
         $data = array();
-        $total_issues = ORM::factory('Issue')->count_all();
 
-        foreach(ORM::factory('Issue_Status')->find_all() as $status) {
-            $status_total = ORM::factory('Issue')->where('status_id', '=', $status->id)->count_all();
+        $statuses = ORM::factory('Issue_Status')
+            ->where('id', '<>', Model_Issue_Status::CLOSED)
+            ->find_all();
 
-            if ($status_total == 0) 
+        foreach($statuses as $status) {
+            $total = ORM::factory('Issue')
+                ->where('status_id', '=', $status->id)
+                ->count_all();
+
+            if ($total == 0) 
                 continue;
-
-            $percent = ($status_total / $total_issues) * 100;
-
+        
             $data[] = array(
                 'label' => $status->name,
-                'data' => $percent,
+                'data' => $total,
                 'color' => $status->color
             );
         }
 
-        return View::factory('dashboard/_chart_overview')->set('data', json_encode($data));
+        return View::factory('dashboard/_chart_pending')->set('data', json_encode($data));
     }
 
-    private function _chartReportedByMe()
+    private function _reportedByMeChart()
     {
         $data = array();
-        $total_issues = ORM::factory('Issue')
-            ->where('reporter_user_id', '=', $this->auth_user->id)
-            ->count_all();
 
         foreach(ORM::factory('Issue_Status')->find_all() as $status) {
-            $status_total = ORM::factory('Issue')
+            $total = ORM::factory('Issue')
                 ->where('reporter_user_id', '=', $this->auth_user->id)
                 ->where('status_id', '=', $status->id)
                 ->count_all();
 
-            if ($status_total == 0) 
+            if ($total == 0) 
                 continue;
-
-            $percent = ($status_total / $total_issues) * 100;
         
             $data[] = array(
                 'label' => $status->name,
-                'data' => $percent,
+                'data' => $total,
                 'color' => $status->color
             );
         }
@@ -61,24 +59,34 @@ class Controller_Dashboard extends Controller_Abstract_Member {
         return View::factory('dashboard/_chart_reported_by_me')->set('data', json_encode($data));
     }
 
-    private function _stats()
+    private function _statsChart()
     {
         $statuses = ORM::factory('Issue_Status')
-            //->where('id', 'NOT IN', array(Model_Issue_Status::REOPENED))
+            //->where('id', 'NOT IN', array(Model_Issue_Status::OPEN))
             ->find_all();
 
+
         foreach($statuses as $status) {
-            $status_total = ORM::factory('Issue')
+            $status_count = ORM::factory('Issue')
                 ->where('status_id', '=', $status->id)
                 ->count_all();
 
-            $data[] = array(
-                'label' => ($status->id == Model_Issue_Status::CLOSED) ? 'Completed' : $status->name,
-                'total' => $status_total,
+            //if ($status_count == 0) 
+            //    continue;
+
+            $data[$status->id] = array(
+                'label' => $status->name,
+                'total' => $status_count,
                 'color' => $status->color,
-                'id' => $status->id
+                'id' => $status->id,
+                'url' => '/issues#status_id[]=' . $status->id
             );
         }
+
+        // Combine Open & Reopened
+        $data[Model_Issue_Status::OPEN]['total'] += $data[Model_Issue_Status::REOPENED]['total'];
+        $data[Model_Issue_Status::OPEN]['url'] .= '&status_id[]=' . Model_Issue_Status::REOPENED;
+        unset($data[Model_Issue_Status::REOPENED]);
 
         return View::factory('dashboard/_stats')->set('data', $data);
     }

@@ -8,52 +8,63 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/issues/new" class="btn btn-app">
+            <a href="/issues/new" class="btn btn-success">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>
     </div>
+    
+    <br>
+
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
+            <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">View / Manage Tickets</h3>
+                    <h3 class="box-title">Filter Tickets</h3>
+                    <div class="box-tools pull-right">
+                    </div>
                 </div>
                 <div class="box-body">
-                    <div class="row" style="margin: 10px 0 20px 0;">
-                        <div class="col-xs-12">
-                            <form id="filter-form" class="form-inline">
-                                <label>Project</label>
-                                <select name="project_id[]" class="col-xs-2" multiple>
-                                    <?php foreach($projects as $project): ?>
-                                        <option  value="<?php echo $project->id; ?>"><?php echo $project->name; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                    <form id="filter-form" class="form-inline">
+                        <label> Project</label>
+                        <select name="project_id[]" class="col-xs-2" multiple>
+                            <?php foreach($projects as $project): ?>
+                                <option  value="<?php echo $project->id; ?>"><?php echo $project->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
-                               <label>Type</label>
-                                <select name="type_id[]" class="col-xs-2" multiple>
-                                    <?php foreach($types as $type): ?>
-                                        <option  value="<?php echo $type->id; ?>"><?php echo $type->name; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                       <label>Type</label>
+                        <select name="type_id[]" class="col-xs-2" multiple>
+                            <?php foreach($types as $type): ?>
+                                <option  value="<?php echo $type->id; ?>"><?php echo $type->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
-                                <label>Status</label>
-                                <select name="status_id[]" class="col-xs-2" multiple>
-                                    <?php foreach($statuses as $status): ?>
-                                        <option  value="<?php echo $status->id; ?>"><?php echo $status->name; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                        <label>Status</label>
+                        <select name="status_id[]" class="col-xs-2" multiple>
+                            <?php foreach($statuses as $status): ?>
+                                <option  value="<?php echo $status->id; ?>"><?php echo $status->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
-                                <label>Priority</label>
-                                <select name="priority_id[]" class="col-xs-2" multiple>
-                                    <?php foreach($priorities as $priority): ?>
-                                        <option value="<?php echo $priority->id; ?>"><?php echo $priority->name; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
+                        <label>Priority</label>
+                        <select name="priority_id[]" class="col-xs-2" multiple>
+                            <?php foreach($priorities as $priority): ?>
+                                <option value="<?php echo $priority->id; ?>"><?php echo $priority->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid box-primary">
+                <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
+                <div class="box-header">
+                </div>
+                <div class="box-body">
                     <div class="table-responsive"></div>
                 </div>
             </div>
@@ -87,7 +98,7 @@ var FilterableTable = {
         var self = this;
         self.$form.find('select').multiselect({
             includeSelectAllOption: false,
-            buttonClass: 'btn btn-default',
+            buttonClass: 'btn btn-primary',
             allSelectedText: 'All',
             nonSelectedText: 'All',
             //selectAllText: 'All',

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2015 at 10:07 PM
+-- Generation Time: Jan 20, 2015 at 05:10 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
@@ -25,7 +25,7 @@ USE `bugger`;
 CREATE TABLE `companies` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,10 @@ CREATE TABLE `issue_comments` (
   `issue_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `created_at` datetime NOT NULL
+  `can_edit` tinyint(1) NOT NULL DEFAULT '1',
+  `archived` tinyint(1) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,7 +73,7 @@ CREATE TABLE `issue_comments` (
 
 CREATE TABLE `issue_files` (
 `id` int(10) unsigned NOT NULL,
-  `filename` varchar(30) NOT NULL,
+  `filename` varchar(255) NOT NULL,
   `issue_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL
@@ -84,20 +87,19 @@ CREATE TABLE `issue_files` (
 
 CREATE TABLE `issue_priorities` (
 `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `name` varchar(30) NOT NULL,
+  `color` varchar(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `issue_priorities`
 --
 
-INSERT INTO `issue_priorities` (`id`, `name`) VALUES
-(1, 'None'),
-(2, 'Low'),
-(3, 'Normal'),
-(4, 'High'),
-(5, 'Urgent'),
-(6, 'Immediate');
+INSERT INTO `issue_priorities` (`id`, `name`, `color`) VALUES
+(1, 'Low', '#7E8B8C'),
+(2, 'Medium', '#40A4D8'),
+(3, 'High', '#F1731F'),
+(4, 'Urgent', '#D71A21');
 
 -- --------------------------------------------------------
 
@@ -127,21 +129,22 @@ INSERT INTO `issue_source_types` (`id`, `name`) VALUES
 
 CREATE TABLE `issue_statuses` (
 `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `name` varchar(30) NOT NULL,
+  `color` varchar(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `issue_statuses`
 --
 
-INSERT INTO `issue_statuses` (`id`, `name`) VALUES
-(1, 'Open'),
-(2, 'In Progress'),
-(3, 'Resolved'),
-(4, 'Closed'),
-(5, 'On Hold'),
-(6, 'Ready For Testing'),
-(7, 'Reopened');
+INSERT INTO `issue_statuses` (`id`, `name`, `color`) VALUES
+(1, 'Open', '#D71A21'),
+(2, 'Reopened', '#DB617A'),
+(3, 'In Progress', '#40A4D8'),
+(4, 'Ready For Testing', '#985C8F'),
+(5, 'Resolved', '#AED143'),
+(6, 'Closed', '#61AE48'),
+(7, 'On Hold', '#F1731F');
 
 -- --------------------------------------------------------
 
@@ -152,7 +155,7 @@ INSERT INTO `issue_statuses` (`id`, `name`) VALUES
 CREATE TABLE `issue_types` (
 `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `issue_types`
@@ -228,7 +231,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 (1, 'login', 'Login privileges, granted after account confirmation'),
 (2, 'admin', 'Administrative user, has access to everything.'),
-(3, 'editor', 'Regular user, can report issues and submit requests.');
+(3, 'editor', 'Regular user, can view and create tickets.');
 
 -- --------------------------------------------------------
 
@@ -247,7 +250,9 @@ CREATE TABLE `roles_users` (
 
 INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 (1, 1),
-(1, 2);
+(6, 1),
+(1, 2),
+(6, 3);
 
 -- --------------------------------------------------------
 
@@ -279,14 +284,15 @@ CREATE TABLE `users` (
   `name` varchar(30) NOT NULL,
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login` int(10) unsigned DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `department_id`, `email`, `username`, `password`, `name`, `logins`, `last_login`) VALUES
-(1, 1, 'root@localhost', 'admin', 'e76f11cf0a9e4909853ef06304a792540c7dafdbddf6d6d5080fcadde3ae99c8', 'Administrator', 86, 1421252592);
+(1, 1, 'root@localhost.com', 'admin', 'e76f11cf0a9e4909853ef06304a792540c7dafdbddf6d6d5080fcadde3ae99c8', 'Administrator', 107, 1421767668),
+(6, 4, 'editor@localhost.com', 'editor', 'e76f11cf0a9e4909853ef06304a792540c7dafdbddf6d6d5080fcadde3ae99c8', 'Editor', 5, 1421730624);
 
 --
 -- Indexes for dumped tables
@@ -344,7 +350,7 @@ ALTER TABLE `issue_types`
 -- Indexes for table `issues`
 --
 ALTER TABLE `issues`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `status_id` (`status_id`), ADD KEY `type_id` (`type_id`), ADD KEY `priority_id` (`priority_id`);
 
 --
 -- Indexes for table `projects`
@@ -384,7 +390,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `departments`
 --
@@ -404,7 +410,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `issue_priorities`
 --
 ALTER TABLE `issue_priorities`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `issue_source_types`
 --
@@ -414,12 +420,12 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `issue_statuses`
 --
 ALTER TABLE `issue_statuses`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `issue_types`
 --
 ALTER TABLE `issue_types`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `issues`
 --
@@ -444,7 +450,7 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --

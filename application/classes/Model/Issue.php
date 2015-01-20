@@ -144,4 +144,50 @@ class Model_Issue extends Model_Abstract {
         
         return $issues->find_all();
     }
+
+    /**
+     * Logs an update in the comments table.
+     *
+     * @param   int         $issue_id             
+     * @param   string      $column               The updated column name
+     * @param   int         $old_value
+     * @param   int         $new_value
+     * @return  bool
+     */
+    public static function logUpdate($issue_id, $column, $old_value, $new_value)
+    {
+        if ($old_value == $new_value)
+            return FALSE;
+
+        switch($column) {
+            case 'type_id':
+            case 'status_id':
+            case 'priority_id':
+                $column_parts = explode('_', $column);
+                $model = 'Issue_' . ucfirst($column_parts[0]);
+                $old_record = ORM::factory($model, $old_value);
+                $new_record = ORM::factory($model, $new_value);
+                $comment = sprintf('Changed %s of "%s" to "%s"', $column_parts[0], $old_record->name, $new_record->name);
+                break;
+
+            case 'assigned_department_id':
+                $old_record = ORM::factory('Department', $old_value);
+                $new_record = ORM::factory('Department', $new_value);
+                $comment = sprintf('Changed assignee from "%s" to "%s"', $old_record->name, $new_record->name);
+                break;
+        }
+               
+        if (isset($comment)) {
+            ORM::factory('Issue_Comment')
+                ->values( array(
+                    'user_id' => Auth::instance()->get_user()->id, 
+                    'issue_id' => $issue_id, 
+                    'can_edit' => FALSE,
+                    'comment' => $comment
+                ) )
+                ->save();
+        }
+
+        return TRUE;
+    }
 }

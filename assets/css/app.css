@@ -57,18 +57,26 @@
   border-radius: 0px;
 }
 
-.issue-view-page .fancybox img {
+.page-view-issue .fancybox img {
   width: 300px;
 }
 
-.issue-view-page .dropzone .dz-default.dz-message {
+.page-view-issue .dropzone .dz-default.dz-message {
   background-image: none;
 }
 
-.issue-view-page .dropzone {
+.page-view-issue .dropzone {
   background: none;
   border: none;
   min-height: 100px;
+}
+
+.page-view-issue .dropzone .alert {
+  text-align: center;
+}
+
+.page-view-issue .btn-remove-attachment, .page-view-issue .btn-remove-attachment i {
+  cursor: pointer;
 }
 
 .skin-blue .navbar .dropdown-menu > li > a:hover {

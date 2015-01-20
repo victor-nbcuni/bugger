@@ -5,7 +5,7 @@ class Model_Issue_Status extends Model_Abstract {
     const REOPENED          = 2;
     const IN_PROGRESS       = 3;
     const READY_FOR_TESTING = 4;
-    //const RESOLVED          = 5;
+    const RESOLVED          = 5;
     const CLOSED            = 6;
     const ON_HOLD           = 7;
 

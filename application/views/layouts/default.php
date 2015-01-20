@@ -36,7 +36,7 @@
             <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
         <?php endif; ?>
 
-        <?php if ($currentPage == 'issues/index' || $currentPage == 'issues/reported_by_me'): ?>
+        <?php if ($currentPage == 'issues/index' || $currentPage == 'issues/reported_by_me' || $currentPage == 'issues/pending'): ?>
             <!-- Multiselect Dropdown -->
             <link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
             <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>
@@ -98,7 +98,7 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        <li style="font-weight:bold;background-color:#00c0ef;" class="dropdown">
+                        <li style="font-weight:bold;" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-plus"></i> New <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/issues/new">Ticket</a></li>
@@ -183,8 +183,14 @@
                             <ul class="treeview-menu">
                                 <?php if ( ! $auth->logged_in('admin')): ?>
                                     <li class="<?php if ('reported_by_me' == $request->action() &&  $auth->logged_in('admin')) echo 'active'; ?>">
-                                        <a href="/issues/reported_by_me#reporter_user_id%5B%5D=<?php echo $auth_user->id; ?>">
+                                        <a href="/issues/reported_by_me#reporter_user_id[]=<?php echo $auth_user->id; ?>">
                                             <i class="fa fa-angle-double-right"></i> Reported by Me
+                                        </a>
+                                    </li>
+                                <?php else: ?>
+                                    <li class="<?php if ($currentPage == 'issues/index') echo 'active'; ?>">
+                                        <a href="/issues/pending#status_id[]=1&status_id[]=2&status_id[]=3&status_id[]=4&status_id[]=5&status_id[]=7">
+                                            <i class="fa fa-angle-double-right"></i> Pending Tickets
                                         </a>
                                     </li>
                                 <?php endif; ?>

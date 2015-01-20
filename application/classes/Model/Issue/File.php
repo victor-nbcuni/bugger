@@ -37,7 +37,7 @@ class Model_Issue_File extends Model_Abstract {
      * @param   int        $user_id      The uploader user id
      * @throws  Exception
      */
-    public static function processUploadedFile($file, $issue_id, $user_id)
+    public static function processUpload($file, $issue_id, $user_id)
     {
         $dest_base_path = self::BASE_UPLOAD_PATH . $issue_id . '/';
         $dest_path = $dest_base_path . $file['name'];
@@ -82,7 +82,7 @@ class Model_Issue_File extends Model_Abstract {
      * @param   int         $user_id      The uploader user id
      * @throws  Exception
      */
-    public static function processUploadedTempFiles($temp_dir, $issue_id, $user_id)
+    public static function processTempUpload($temp_dir, $issue_id, $user_id)
     {
         $temp_path = UPLOAD_TMP_PATH . $temp_dir;
 

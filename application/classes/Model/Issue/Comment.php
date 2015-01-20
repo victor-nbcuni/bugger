@@ -8,11 +8,19 @@ class Model_Issue_Comment extends Model_Abstract {
         'issue_id' => NULL,
         'user_id' => NULL,
         'comment' => NULL,
-        'created_at' => NULL
+        'can_edit' => 1,
+        'archived' => 0,
+        'created_at' => NULL,
+        'updated_at' => NULL
     );
 
     protected $_created_column = array(
         'column' => 'created_at',
+        'format' => 'Y-m-d H:i:s'
+    );
+
+    protected $_updated_column = array(
+        'column' => 'updated_at',
         'format' => 'Y-m-d H:i:s'
     );
 
@@ -24,5 +32,16 @@ class Model_Issue_Comment extends Model_Abstract {
     public function niceDate()
     {
         return date('l d/M/y g:i A', strtotime($this->created_at));
+    }
+
+    public static function findByIssueId($issue_id, $offset, $limit)
+    {
+        return ORM::factory('Issue_Comment')
+            ->where('issue_id', '=', $issue_id)
+            ->where('archived', '=', 0)
+            ->order_by('created_at', 'DESC')
+            ->offset($offset) 
+            ->limit($limit)
+            ->find_all();
     }
 }
