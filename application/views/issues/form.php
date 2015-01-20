@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Ticket <br><small>' . $issue->getKey() . '</small>' : 'Add New Ticket'); ?>
+        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Ticket <br><small>' . $issue->trackingCode() . '</small>' : 'Add New Ticket'); ?>
     </h1>
 </section>
 
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="boxbox-primary">
-                <form data-parsley-validate action="<?php echo ($issue->id ? '/issues/edit/' . $issue->id : '/issues/new'); ?>" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+                <form data-parsley-validate action="<?php echo ($issue->id ? '/issues/edit/' . $issue->id : '/issues/add'); ?>" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
                     <input type="hidden" name="attachment_temp_dir" value="<?php echo $attachment_temp_dir; ?>">
                     <div class="box-body">
                         <div class="form-group">

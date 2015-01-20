@@ -9,7 +9,7 @@
    <div class="row">
         <div class="col-xs-12">
             <?php if ( ! in_array($config['model']['name'], array('Issue_Status', 'Issue_Priority'))): ?>
-                <a href="<?php echo $config['base_url']; ?>/new" class="btn btn-success">
+                <a href="<?php echo $config['base_url']; ?>/add" class="btn btn-success">
                     <i class="fa fa-plus"></i> Add New
                 </a>
             <?php endif; ?>

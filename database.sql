@@ -188,6 +188,7 @@ CREATE TABLE `issues` (
   `example_url` varchar(255) NOT NULL,
   `due_date` date DEFAULT NULL,
   `due_time` time DEFAULT NULL,
+  `last_updated_by_user_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

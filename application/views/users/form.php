@@ -2,7 +2,7 @@
     <h1>
         <?php echo ($user->id ? 'Edit User' : 'Add New User'); ?>
         <?php if ($user->id): ?>
-            <small><a href="/users/new">Add New</a></small>
+            <small><a href="/users/add">Add New</a></small>
         <?php endif; ?>
     </h1>
 </section>
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="boxbox-primary">
-                <form data-parsley-validate action="<?php echo ($user->id ? '/users/edit/' . $user->id : '/users/new'); ?>" class="form-horizontal" method="post" role="form">
+                <form data-parsley-validate action="<?php echo ($user->id ? '/users/edit/' . $user->id : '/users/add'); ?>" class="form-horizontal" method="post" role="form">
                     <div class="box-body">
                         <div class="form-group">
                             <label class="col-sm-1 control-label">Roles <span class="required-field">*</span></label>

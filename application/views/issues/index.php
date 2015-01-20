@@ -8,7 +8,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/issues/new" class="btn btn-success">
+            <a href="/issues/add" class="btn btn-success">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>
@@ -18,11 +18,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="box box-primary">
+                <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
                 <div class="box-header">
-                    <h3 class="box-title">Filter Tickets</h3>
-                    <div class="box-tools pull-right">
-                    </div>
+                    <h3 class="box-title">View / Manage Tickets</h3>
                 </div>
                 <div class="box-body">
                     <form id="filter-form" class="form-inline">
@@ -54,17 +53,6 @@
                             <?php endforeach; ?>
                         </select>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-solid box-primary">
-                <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
-                <div class="box-header">
-                </div>
-                <div class="box-body">
                     <div class="table-responsive"></div>
                 </div>
             </div>
@@ -98,7 +86,7 @@ var FilterableTable = {
         var self = this;
         self.$form.find('select').multiselect({
             includeSelectAllOption: false,
-            buttonClass: 'btn btn-primary',
+            buttonClass: 'btn btn-link btn-flat',
             allSelectedText: 'All',
             nonSelectedText: 'All',
             //selectAllText: 'All',

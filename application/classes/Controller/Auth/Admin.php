@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Abstract class used as the parent of all admin restricted areas.
+ * Abstract class used as the parent of all admin restricted controllers.
  */
 abstract class Controller_Auth_Admin extends Controller_Auth_User {
 

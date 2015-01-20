@@ -33,11 +33,16 @@ class Controller_Issue_Comments extends Controller_Auth_User {
                     ->values($post)
                     ->save(); 
 
-                $comment->issue->set('updated_at', date('Y-m-d H:i:s'))->save();
+                $comment->issue
+                    ->set('last_updated_by_user_id', $this->auth_user->id)
+                    ->set('updated_at', date('Y-m-d H:i:s'))
+                    ->save();
 
                 $view = View::factory('issue_comments/view')
                     ->set('auth_user', $this->auth_user)
                     ->set('comment', $comment);
+
+               Mailer_Issue::factory($comment->issue)->notifyCommentAdded($comment);
 
                 return $this->response->body($view);
             }

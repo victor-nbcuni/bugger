@@ -24,7 +24,7 @@
         <link href="/assets/lib/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <script src="/assets/lib/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
 
-        <?php if ($currentPage == 'users/new' || $currentPage == 'users/edit'): ?>
+        <?php if ($currentPage == 'users/add' || $currentPage == 'users/edit'): ?>
             <!-- Chosen Dropdown -->
             <link href="/assets/lib/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
             <script src="/assets/lib/chosen-1.3.0/chosen.jquery.min.js"></script>
@@ -44,13 +44,13 @@
             <script src="/assets/lib/jquery.deserialize.min.js"></script>
         <?php endif; ?>
 
-        <?php if ($currentPage == 'issues/new'): ?>
+        <?php if ($currentPage == 'issues/add'): ?>
             <!-- Datepicker -->
             <link href="/assets/lib/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
             <script src="/assets/lib/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
         <?php endif; ?>
 
-        <?php if ($currentPage == 'issues/view' || $currentPage == 'issues/new'): ?>
+        <?php if ($currentPage == 'issues/view' || $currentPage == 'issues/add'): ?>
             <!-- Dropzone -->
             <link href="/assets/lib/dropzone/css/dropzone.css" rel="stylesheet" type="text/css"/>
             <script src="/assets/lib/dropzone/dropzone.min.js"></script>
@@ -101,7 +101,7 @@
                         <li style="font-weight:bold;" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-plus"></i> New <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/issues/new">Ticket</a></li>
+                                <li><a href="/issues/add">Ticket</a></li>
                             </ul>
                         </li>
                         <!--
@@ -134,7 +134,7 @@
                             </ul>
                         </li>
                         
-                        <li style="font-weight:bold;background-color:#00c0ef;"><a style="color:white;" href="/issues/new"><i class="fa fa-plus"></i> New Issue</a></li>
+                        <li style="font-weight:bold;background-color:#00c0ef;"><a style="color:white;" href="/issues/add"><i class="fa fa-plus"></i> New Issue</a></li>
                         -->
 
                         <li class="dropdown user user-menu">

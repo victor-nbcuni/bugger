@@ -3,7 +3,7 @@
 <?php if ($issue->status_id != Model_Issue_Status::CLOSED): ?>
     <div class="row">
         <div class="col-xs-12">
-            <form data-parsley-validate id="comments-form" action="/issue_comments/new" method="post">
+            <form data-parsley-validate id="comments-form" action="/issue_comments/add" method="post">
                 <input type="hidden" name="issue_id" value="<?php echo $issue->id; ?>">
                 <input type="hidden" name="user_id" value="<?php echo Auth::instance()->get_user()->id; ?>">
                 <div class="form-group">

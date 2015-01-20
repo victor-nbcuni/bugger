@@ -19,7 +19,7 @@
             $priority = $issue->priority;
         ?>
             <tr class="record">
-                <td><a href="/issues/view/<?php echo $issue->id; ?>"><?php echo $issue->getKey(); ?></a></td>
+                <td><a href="<?php echo $issue->url(); ?>"><?php echo $issue->trackingCode(); ?></a></td>
                 <td><?php echo $issue->project->name; ?></td>
                 <td><?php echo $issue->type->name; ?></span></td>
                 <td><span class="label" style="background:<?php echo $status->color; ?>"><?php echo strtoupper($status->name); ?></span></td>

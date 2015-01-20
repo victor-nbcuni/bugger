@@ -8,7 +8,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/users/new" class="btn btn-success">
+            <a href="/users/add" class="btn btn-success">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>

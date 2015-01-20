@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         <i class="fa fa-bug"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
-        <small><?php echo $issue->getKey(); ?></small>
+        <small><?php echo $issue->trackingCode(); ?></small>
     </h1>
 </section>
 

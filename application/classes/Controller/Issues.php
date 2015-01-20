@@ -17,6 +17,12 @@ class Controller_Issues extends Controller_Auth_User {
         $view->priorities = ORM::factory('Issue_Priority')->find_all();
         $view->types = ORM::factory('Issue_Type')->find_all();
         $view->projects = ORM::factory('Project')->find_all();
+
+        if (isset($_GET['email'])) {
+            Mailer_Issue::factory(ORM::factory('Issue', 1))->notifyCreated();
+            Mailer_Issue::factory(ORM::factory('Issue', 1))->notifyStatusUpdated();
+            Mailer_Issue::factory(ORM::factory('Issue_Comment', 2)->issue)->notifyCommentAdded(ORM::factory('Issue_Comment', 2));
+        }
     }
 
     /**
@@ -90,7 +96,7 @@ class Controller_Issues extends Controller_Auth_User {
     /**
      * Creates a NEW issue.
      */
-    public function action_new()
+    public function action_add()
     {
         $issue = ORM::factory('Issue');
 
@@ -100,20 +106,25 @@ class Controller_Issues extends Controller_Auth_User {
             $post['issue']['due_date'] = empty($post['issue']['due_date']) ? NULL : date('Y-m-d', strtotime($post['issue']['due_date']));
             $post['issue']['due_time'] = empty($post['issue']['due_time']) ? NULL : date('H:i:s', strtotime($post['issue']['due_time']));
 
-            // Assign support requests to DEV
             if ($post['issue']['type_id'] == Model_Issue_Type::SUPPORT_REQUEST) {
+                // Assign support requests to DEV
                 $post['issue']['assigned_department_id'] == Model_Department::DEV;
             }
 
+            // Create issue
             $issue->values($post['issue'])->save();
 
             try {
+                // Proccess uploads
                 Model_Issue_File::processTempUpload($post['attachment_temp_dir'], $issue->id, $this->auth_user->id);
             }
             catch(Exception $ex) {
                 $this->log->add(Log::ERROR, $ex->getMessage());
                 return $this->session->flashError('Error: ' . $ex->getMessage());
             }
+
+            // Notify users
+            Mailer_Issue::factory($issue)->notifyCreated();
        
             $this->redirect('issues/view/' . $issue->id);
         }
@@ -136,14 +147,24 @@ class Controller_Issues extends Controller_Auth_User {
                 return $this->response->notFound('Invalid ticket ID');
 
             $column = trim($post['name']);
+            $value = $post['value'];
 
             try {
-                $old_value = $issue->$column;
-                $new_value = $post['value'];
-                $issue->set($column, $new_value)->save();
-                Model_Issue::logUpdate($issue->id, $column, $old_value, $new_value);
+                // Update issue
+                $issue->last_updated_by_user_id = $this->auth_user->id;
+                $issue->$column = $value;
+                $issue->save();
+
+                // Log update
+                $issue->logUpdate($column, $value);
+
+                // Notify users of status changes
+                if ($column == 'status_id') {
+                   Mailer_Issue::factory($issue)->notifyStatusUpdated();
+                }
             }
             catch(Exception $e) {
+                echo $e->getMessage();
                 return $this->response->badRequest("The field $column does not exist");
             }
         }

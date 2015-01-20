@@ -2,7 +2,7 @@
     <h1>
         <?php echo ($record->id ? 'Edit ' : 'Add New ') . $config['model']['title']; ?>
         <?php if ($record->id): ?>
-            <small><a href="<?php echo $config['base_url']; ?>/new">Add New</a></small>
+            <small><a href="<?php echo $config['base_url']; ?>/add">Add New</a></small>
         <?php endif; ?>
     </h1>
 </section>
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="boxbox-primary">
-                <form data-parsley-validate action="<?php echo "{$config['base_url']}" . ($record->id ? '/edit/' . $record->id : '/new'); ?>" method="post" role="form">
+                <form data-parsley-validate action="<?php echo "{$config['base_url']}" . ($record->id ? '/edit/' . $record->id : '/add'); ?>" method="post" role="form">
                     <div class="box-body">
                         <div class="form-group">
                             <label>Name <span class="required-field">*</span></label>

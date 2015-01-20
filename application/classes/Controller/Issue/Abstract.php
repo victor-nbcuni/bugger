@@ -19,7 +19,7 @@ abstract class Controller_Issue_Abstract extends Controller_Auth_Admin {
             ->set('config', $this->_config);
     }
 
-    public function action_new()
+    public function action_add()
     {
         $record = ORM::factory($this->_config['model']['name']);
 

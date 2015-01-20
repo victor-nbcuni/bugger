@@ -8,7 +8,7 @@ class Controller_Users extends Controller_Auth_Admin {
         $this->template->content = View::factory('users/index')->set('users', $users);
     }
 
-    public function action_new()
+    public function action_add()
     {
         $user = ORM::factory('User');
 

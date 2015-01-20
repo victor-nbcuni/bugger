@@ -17,6 +17,7 @@ class Model_Issue extends Model_Abstract {
         'example_url' => NULL,
         'due_date' => NULL,
         'due_time' => NULL,
+        'last_updated_by_user_id' => NULL,
         'created_at' => NULL,
         'updated_at' => NULL
     );
@@ -42,10 +43,16 @@ class Model_Issue extends Model_Abstract {
         'type' => array('model' => 'Issue_Type', 'foreign_key' => 'type_id'),
         'status' => array('model' => 'Issue_Status', 'foreign_key' => 'status_id'),
         'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id'),
-        'source' => array('model' => 'Issue_Source', 'foreign_key' => 'source_id')
+        'source' => array('model' => 'Issue_Source', 'foreign_key' => 'source_id'),
+        'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id')
     );
 
-    public function getKey() 
+    public function url() 
+    {
+        return '/issues/view/' . $this->id;
+    }
+
+    public function trackingCode() 
     {
         return strtoupper($this->project->name) . '-' . $this->id;
     }
@@ -148,32 +155,24 @@ class Model_Issue extends Model_Abstract {
     /**
      * Logs an update in the comments table.
      *
-     * @param   int         $issue_id             
      * @param   string      $column               The updated column name
-     * @param   int         $old_value
-     * @param   int         $new_value
+     * @param   int         $value
      * @return  bool
      */
-    public static function logUpdate($issue_id, $column, $old_value, $new_value)
+    public function logUpdate($column, $value)
     {
-        if ($old_value == $new_value)
-            return FALSE;
-
         switch($column) {
             case 'type_id':
             case 'status_id':
             case 'priority_id':
                 $column_parts = explode('_', $column);
-                $model = 'Issue_' . ucfirst($column_parts[0]);
-                $old_record = ORM::factory($model, $old_value);
-                $new_record = ORM::factory($model, $new_value);
-                $comment = sprintf('Changed %s of "%s" to "%s"', $column_parts[0], $old_record->name, $new_record->name);
+                $record = ORM::factory('Issue_' . ucfirst($column_parts[0]), $value);
+                $comment = sprintf('Changed %s to "%s"', $column_parts[0], $record->name);
                 break;
 
             case 'assigned_department_id':
-                $old_record = ORM::factory('Department', $old_value);
-                $new_record = ORM::factory('Department', $new_value);
-                $comment = sprintf('Changed assignee from "%s" to "%s"', $old_record->name, $new_record->name);
+                $department = ORM::factory('Department', $value);
+                $comment = sprintf('Changed assignee to "%s"', $department->name);
                 break;
         }
                
@@ -181,7 +180,7 @@ class Model_Issue extends Model_Abstract {
             ORM::factory('Issue_Comment')
                 ->values( array(
                     'user_id' => Auth::instance()->get_user()->id, 
-                    'issue_id' => $issue_id, 
+                    'issue_id' => $this->id, 
                     'can_edit' => FALSE,
                     'comment' => $comment
                 ) )
