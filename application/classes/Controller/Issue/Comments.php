@@ -14,7 +14,6 @@ class Controller_Issue_Comments extends Controller_Auth_User {
         $comments = Model_Issue_Comment::findByIssueId($issue_id, $offset, $limit);
 
         $view = View::factory('issue_comments/ajax')
-            ->set('auth_user', $this->auth_user)
             ->set('comments', $comments);
 
         $this->response->body($view);
@@ -39,10 +38,9 @@ class Controller_Issue_Comments extends Controller_Auth_User {
                     ->save();
 
                 $view = View::factory('issue_comments/view')
-                    ->set('auth_user', $this->auth_user)
                     ->set('comment', $comment);
 
-               Mailer_Issue::factory($comment->issue)->notifyCommentAdded($comment);
+                Mailer_Issue::factory($comment->issue)->notifyCommentAdded($comment);
 
                 return $this->response->body($view);
             }

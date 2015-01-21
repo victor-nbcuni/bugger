@@ -9,7 +9,7 @@
         <div class="comment" data-url="/issue_comments/update/<?php echo $comment->id; ?>" data-pk="<?php echo $comment->id; ?>"><?php echo $comment->comment; ?></div>
         <p>
           <small class="text-muted">Posted on <?php echo $comment->created_at; ?></small>
-          <?php if ($comment->can_edit && $comment->user_id == $auth_user->id): ?>
+          <?php if ($comment->can_edit && $comment->user_id == Auth::instance()->get_user()->id): ?>
             <a href="#" class="btn-edit-comment"><i class="fa fa-edit"></i></a>
             <a href="#" data-id="<?php echo $comment->id; ?>" class="btn-remove-comment"><i class="fa fa-trash"></i></a>
           <?php endif; ?>

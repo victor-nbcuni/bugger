@@ -23,7 +23,6 @@
                 if (count($comments)):
                     foreach($comments as $comment) 
                         echo View::factory('issue_comments/view')
-                            ->set('auth_user', $auth_user)
                             ->set('comment', $comment); 
                 else:
                     echo '<span class="text-muted">There are no comments yet on this ticket.</span>';

@@ -1,13 +1,13 @@
 Bugger
 ==========
 
-**To install:**
+**Installation**
 
-1. Clone the repo
-2. Setup a virtual host
+1. Clone repository
+2. Setup virtual host
 3. Import database.sql in your database
 
-**To login:**
+**Default Login**
 
 * user: admin
 * pass: pass
