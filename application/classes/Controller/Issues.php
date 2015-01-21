@@ -6,7 +6,6 @@ class Controller_Issues extends Controller_Auth_User {
      */
     public function action_index()
     {
-
         $issues = Model_Issue::findAll();
 
         $this->template->content = $view = View::factory('issues/index');
