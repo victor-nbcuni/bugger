@@ -82,3 +82,7 @@
 .skin-blue .navbar .dropdown-menu > li > a:hover {
   color: #fff;
 }
+
+.parsley-required {
+  color: #B94A48;
+}

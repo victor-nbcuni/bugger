@@ -173,7 +173,7 @@ class Controller_Issues extends Controller_Auth_User {
     }
 
     /**
-     * Returns the available statuses for an issue.
+     * Returns the status options for an x-editable dropdown.
      *
      * @uses    ajax
      * @return  json
@@ -211,6 +211,42 @@ class Controller_Issues extends Controller_Auth_User {
 
         foreach($statuses as $status) {
             $json[$status->id] = $status->name;
+        }
+
+        $this->response->json($json);
+    }
+
+    /**
+     * Returns the issue type options for an x-editable dropdown.
+     *
+     * @uses    ajax
+     * @return  json
+     */
+    public function action_type_options()
+    {
+        $json = array();
+        $records = ORM::factory('Issue_Type')->find_all();
+
+        foreach($records as $record) {
+            $json[$record->id] = $record->name;
+        }
+
+        $this->response->json($json);
+    }
+
+    /**
+     * Returns the issue priority options for an x-editable dropdown.
+     *
+     * @uses    ajax
+     * @return  json
+     */
+    public function action_priority_options()
+    {
+        $json = array();
+        $records = ORM::factory('Issue_Priority')->find_all();
+
+        foreach($records as $record) {
+            $json[$record->id] = $record->name;
         }
 
         $this->response->json($json);

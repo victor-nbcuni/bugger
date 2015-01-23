@@ -14,7 +14,7 @@
                 <form data-parsley-validate action="<?php echo ($user->id ? '/users/edit/' . $user->id : '/users/add'); ?>" class="form-horizontal" method="post" role="form">
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="col-sm-1 control-label">Roles <span class="required-field">*</span></label>
+                            <label class="col-sm-1 control-label">Roles<span class="required-field">*</span></label>
                             <?php
                                 if ($user->id) {
                                     $roles = $user->roles->find_all();
@@ -36,25 +36,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-1 control-label">Name <span class="required-field">*</span></label>
+                            <label class="col-sm-1 control-label">Name<span class="required-field">*</span></label>
                             <div class="col-sm-7">
                                 <input type="text" maxlength="30" name="user[name]" class="form-control" placeholder="Name" value="<?php echo $user->name; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-1 control-label">SSO <span class="required-field">*</span></label>
+                            <label class="col-sm-1 control-label">SSO<span class="required-field">*</span></label>
                             <div class="col-sm-7">
                                 <input type="text" maxlength="32" name="user[username]" class="form-control" placeholder="SSO" value="<?php echo $user->username; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-1 control-label">Email <span class="required-field">*</span></label>
+                            <label class="col-sm-1 control-label">Email<span class="required-field">*</span></label>
                             <div class="col-sm-7">
                                 <input type="email" maxlength="254" name="user[email]" class="form-control" placeholder="Email Address" value="<?php echo $user->email; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-1 control-label">Password <span class="required-field"><?php echo ($user->id ? '' : '*'); ?></span></label>
+                            <label class="col-sm-1 control-label">Password<span class="required-field"><?php echo ($user->id ? '' : '*'); ?></span></label>
                             <div class="col-sm-7">
                                 <input type="password" maxlength="64" name="user[password]" class="form-control" placeholder="Password" value="" <?php echo ($user->id ? '' : 'required'); ?>>
                             </div>

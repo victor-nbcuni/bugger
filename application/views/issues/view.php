@@ -52,7 +52,13 @@
 <script src="/assets/js/app/issues/view.js"></script>
 <script>
 $(function() {
-    // Bind fancybox
+    var issueId = '<?php echo $issue->id; ?>';
+
+    // Bind Editable fields and Lazy comments
+    EditableFields.init(issueId);
+    LazyComments.init(issueId);
+
+    // Bind Fancybox
     $('.fancybox').fancybox({
         openEffect  : 'none',
         closeEffect : 'none'
@@ -79,7 +85,6 @@ $(function() {
             '</div>'
     });
 
-
     // Bind attachment remove button
     $('.btn-remove-attachment').click(function() {
         event.preventDefault();
@@ -91,17 +96,5 @@ $(function() {
             });
         }
     });
-
-    var issueId = '<?php echo $issue->id; ?>';
-
-    var dataSources = {
-        //departments: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Department'); ?>",
-        issue_priorities: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Priority'); ?>",
-        issue_statuses: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Status'); ?>",
-        issue_types: "<?php echo Helper_View_Issues_View::getEditableSelectSource('Issue_Type'); ?>",
-    }
-
-    EditableFields.init(issueId, dataSources);
-    LazyComments.init(issueId);
 });
 </script>

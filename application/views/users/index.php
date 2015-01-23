@@ -47,7 +47,7 @@
                                         <?php endforeach; ?>
                                     </td>
                                     <td>
-                                        <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

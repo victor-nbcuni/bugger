@@ -124,7 +124,7 @@ var LazyComments = {
  * X-Editable Fields Class
  */
 var EditableFields = {
-    init: function(issueId, dataSources) {
+    init: function(issueId) {
         var self = this;
 
         $.fn.editable.defaults.mode = 'popup';
@@ -158,7 +158,8 @@ var EditableFields = {
             ajaxOptions: {
                 type: 'POST'
             }, 
-            source: dataSources.issue_priorities
+            source: '/issues/priority_options/' + issueId,
+            sourceCache: true          
         });
 
         $('#status_id').editable({
@@ -192,7 +193,8 @@ var EditableFields = {
             ajaxOptions: {
                 type: 'POST'
             }, 
-            source: dataSources.issue_types
+            source: '/issues/type_options/' + issueId,
+            sourceCache: true        
         });
     }
 }

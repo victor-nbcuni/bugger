@@ -188,7 +188,7 @@
                                         </a>
                                     </li>
                                 <?php else: ?>
-                                    <li class="<?php if ($currentPage == 'issues/index') echo 'active'; ?>">
+                                    <li class="<?php if ($currentPage == 'issues/pending') echo 'active'; ?>">
                                         <a href="/issues/pending#status_id[]=1&status_id[]=2&status_id[]=3&status_id[]=4&status_id[]=5&status_id[]=7">
                                             <i class="fa fa-angle-double-right"></i> Pending Tickets
                                         </a>
@@ -203,7 +203,7 @@
                             </ul>
                         </li>
                         <?php if ($auth->logged_in('admin')): ?>
-                            <li class="treeview <?php if (is_subclass_of('Controller_' . $request->controller(), 'Controller_Abstract_Admin')) echo 'active'; ?>">
+                            <li class="treeview <?php if (is_subclass_of('Controller_' . $request->controller(), 'Controller_Auth_Admin')) echo 'active'; ?>">
                                 <a href="#">
                                     <i class="fa fa-cog"></i> <span>Administration</span>
                                     <i class="fa fa-angle-left pull-right"></i>
@@ -243,6 +243,5 @@
                 <?php echo isset($content) ? $content : ''; ?>
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-
     </body>
 </html>

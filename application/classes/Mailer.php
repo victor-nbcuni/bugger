@@ -43,12 +43,12 @@ class Mailer extends PHPMailer {
 
         if ( ! parent::send()) {
             Log::instance()->add(Log::ERROR, $this->ErrorInfo);
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $this->ErrorInfo;
+            //echo 'Message could not be sent.';
+            //echo 'Mailer Error: ' . $this->ErrorInfo;
             return FALSE;
         } 
         else {
-            echo 'Message has been sent';
+            //echo 'Message has been sent';
             return TRUE;
         }
     }

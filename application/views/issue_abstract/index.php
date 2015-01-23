@@ -57,12 +57,12 @@
                                     <?php endif; ?>
 
                                     <?php if ($config['model']['name'] == 'Issue_Priority' || $config['model']['name'] == 'Issue_Status'): ?>
-                                        <td><span class="badge" style="background: <?php echo $record->color; ?>;"><?php echo $record->color; ?></span></td>
+                                        <td><span class="label" style="background: <?php echo $record->color; ?>;"><?php echo $record->color; ?></span></td>
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-remove btn btn-default" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
+                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

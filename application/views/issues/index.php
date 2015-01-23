@@ -73,7 +73,7 @@ var FilterableTable = {
         this.initFilters();
         this.bindFilters();
         this.bindRowClickHanlder();
-        this.reloadTable(window.location.hash.substr(1));
+        this.loadData(window.location.hash.substr(1));
     },
 
     initFilters: function() {
@@ -92,7 +92,7 @@ var FilterableTable = {
             //selectAllText: 'All',
             onChange: function(option, checked, select) {
                 window.location.hash = self.$form.serialize();
-                self.reloadTable(window.location.hash.substr(1));
+                self.loadData(window.location.hash.substr(1));
             }
         });
     },
@@ -103,14 +103,14 @@ var FilterableTable = {
         });
     },
 
-    reloadTable: function(postData) {
+    loadData: function(postParams) {
         var $boxBody = $('.box-body'),
             $box = $('.box'),
             $loading = $('.loading');
 
         $loading.show();
 
-        $.post('/issues/filter', postData, function(data) {
+        $.post('/issues/filter', postParams, function(data) {
             $('.table-responsive').html(data);
 
             $('.table').DataTable({
