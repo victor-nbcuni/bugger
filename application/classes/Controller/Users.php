@@ -14,17 +14,19 @@ class Controller_Users extends Controller_Auth_Admin {
 
         if ($post = $this->request->post()) {
             try {
-                if (ORM::factory('User', array('username' => $post['user']['username']))->loaded())
+                if ( ! Model_User::isUnique('username', $post['user']['username']))
                     throw new Form_Validation_Exception(Messages::get('user.username_taken'));
 
-                if (ORM::factory('User', array('email' => $post['user']['email']))->loaded())
+                if ( ! Model_User::isUnique('email', $post['user']['email']))
                     throw new Form_Validation_Exception(Messages::get('user.email_taken'));
 
                 $post['user']['name'] = ucwords(strtolower($post['user']['name']));
 
-                if ($user->values($post['user'])->save()) {
-                    $user->addRoles($post['roles']);
-                }
+                // Create user
+                $user->values($post['user'])->save();
+
+                // Assign roles
+                $user->addRoles($post['roles']);
 
                 $this->session->flashSuccess('generic.create_ok');
                 $this->redirect('users');
@@ -50,20 +52,24 @@ class Controller_Users extends Controller_Auth_Admin {
         
         if ($post = $this->request->post()) {
             try {
-                if (ORM::factory('User')->where('username', '=', $post['user']['username'])->where('id', '<>', $user->id)->find()->loaded())
+                if ( ! Model_User::isUnique('username', $post['user']['username'], $user->id))
                     throw new Form_Validation_Exception(Messages::get('user.username_taken'));
 
-                if (ORM::factory('User')->where('email', '=', $post['user']['email'])->where('id', '<>', $user->id)->find()->loaded())
+                if ( ! Model_User::isUnique('email', $post['user']['email'], $user->id))
                     throw new Form_Validation_Exception(Messages::get('user.email_taken'));
 
+                // Capitalize name
                 $post['user']['name'] = ucwords(strtolower($post['user']['name']));
 
+                // NEVER save blank passwords
                 if (empty($post['user']['password'])) {
-                    // NEVER save blank passwords.
                     unset($post['user']['password']);
                 }
 
+                // Save user
                 $user->values($post['user'])->save();
+
+                // Assign roles
                 $user->clearRoles();
                 $user->addRoles($post['roles']);
 
