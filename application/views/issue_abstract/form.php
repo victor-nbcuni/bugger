@@ -12,6 +12,7 @@
         <div class="col-xs-12">
             <div class="boxbox-primary">
                 <form data-parsley-validate action="<?php echo "{$config['base_url']}" . ($record->id ? '/edit/' . $record->id : '/add'); ?>" method="post" role="form">
+                    <input type="hidden" name="_token" value="<?php echo Session::instance()->getToken(); ?>">
                     <div class="box-body">
                         <div class="form-group">
                             <label>Name<span class="required-field">*</span></label>

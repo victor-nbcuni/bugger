@@ -9,17 +9,20 @@ class Controller_Sessions extends Controller {
     {
         parent::before();
         $this->auth = Auth::instance();
-        $this->session = Auth::instance();
+        $this->session = Session::instance();
     }
 
     public function action_login() 
     {
         if ($this->request->method() == Request::POST)  {
             if ($this->auth->login($this->request->post('username'), $this->request->post('password'))) {
+                // Generate a CSRF token
+                $this->session->makeToken();
+                // Redirect to Dashboard
                 return $this->redirect('dashboard');
             }
             else {
-                Session::instance()->flashError('Sorry, unrecognized username or password.');
+                $this->session->flashError('Sorry, unrecognized username or password.');
             }
         }
         $this->response->body(View::factory('layouts/login'));

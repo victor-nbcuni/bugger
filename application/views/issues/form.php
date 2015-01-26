@@ -9,6 +9,7 @@
         <div class="col-xs-12">
             <div class="boxbox-primary">
                 <form data-parsley-validate action="<?php echo ($issue->id ? '/issues/edit/' . $issue->id : '/issues/add'); ?>" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="<?php echo Session::instance()->getToken(); ?>">
                     <input type="hidden" name="attachment_temp_dir" value="<?php echo $attachment_temp_dir; ?>">
                     <div class="box-body">
                         <div class="form-group">
@@ -174,14 +175,14 @@ $(function() {
     // Bind Dropzone
     Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     var dropzone = new Dropzone('.dropzone', {
-        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>', 
+        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>?_token=' + _token, 
         acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
         maxFilesize: 4, // MB
         maxFiles: 3,
         addRemoveLinks: true,
         autoProcessQueue: true,
         removedfile: function(file) {
-            $.post('/issue_files/remove_temp', {filename: file.name, dir: '<?php echo $attachment_temp_dir; ?>'});
+            $.post('/issue_files/remove_temp', {filename: file.name, dir: '<?php echo $attachment_temp_dir; ?>', _token: _token});
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });

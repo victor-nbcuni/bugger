@@ -78,6 +78,10 @@
         <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
         <script src="/assets/js/AdminLTE/app.js" type="text/javascript"></script>
+
+        <script>
+            var _token = '<?php echo $session->getToken(); ?>';
+        </script>
     </head>
     <body class="skin-blue">
 

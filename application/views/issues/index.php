@@ -110,7 +110,7 @@ var FilterableTable = {
 
         $loading.show();
 
-        $.post('/issues/filter', postParams, function(data) {
+        $.get('/issues/filter', postParams, function(data) {
             $('.table-responsive').html(data);
 
             $('.table').DataTable({

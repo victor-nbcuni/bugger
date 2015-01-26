@@ -7,6 +7,7 @@ class Messages {
       'generic.delete_ok' => 'Record deleted successfully.',
       'generic.read_fail' => 'Record not found.',
       'generic.unauthorized' => 'Unauthorized access.',
+      'generic.invalid_token' => 'Invalid session token',
 
       'user.email_taken' => 'Sorry, that Email is already registered.',
       'user.username_taken' => 'Sorry, that SSO is already registered.'

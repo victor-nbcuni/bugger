@@ -5,7 +5,7 @@ class Controller_Issues extends Controller_Auth_User {
      * Displays ALL issues.
      */
     public function action_index()
-    {
+    { 
         $issues = Model_Issue::findAll();
 
         $this->template->content = $view = View::factory('issues/index');
@@ -55,24 +55,22 @@ class Controller_Issues extends Controller_Auth_User {
      */
     public function action_filter()
     {
-        if ($this->request->method() == Request::POST) {
-            $this->auto_render = TRUE;
-            $valid_filters = array('priority_id', 'project_id', 'type_id', 'status_id', 'reporter_user_id');
-            $post = $this->request->post();
+        $this->auto_render = TRUE;
+        $valid_filters = array('priority_id', 'project_id', 'type_id', 'status_id', 'reporter_user_id');
+        $post = $this->request->post();
 
-            $issues = ORM::factory('Issue');
+        $issues = ORM::factory('Issue');
 
-            foreach($post as $filter => $values) {
-                if (in_array($filter, $valid_filters)) {
-                    $issues->where($filter, 'IN', $values);
-                }
+        foreach($post as $filter => $values) {
+            if (in_array($filter, $valid_filters)) {
+                $issues->where($filter, 'IN', $values);
             }
-
-            $issues = $issues->find_all();
-
-            $this->template = View::factory('issues/_index_table')
-                ->set('issues', $issues);           
         }
+
+        $issues = $issues->find_all();
+
+        $this->template = View::factory('issues/_index_table')
+            ->set('issues', $issues);           
     }
 
     public function action_view()

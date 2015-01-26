@@ -62,7 +62,7 @@
 
                                     <td>
                                         <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-remove btn btn-danger" href="<?php echo $config['base_url']; ?>/delete/<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
+                                        <a class="btn-remove btn btn-danger" data-id="<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -81,7 +81,7 @@ $(function() {
         event.preventDefault();
         var self = $(this);
         if (confirm("Are you sure you want to delete this record?")) {
-            window.location = self.attr('href');
+            window.location = '<?php echo $config['base_url']; ?>/delete/' + self.attr('data-id') + '?_token=' + _token;
         }
     });
 });

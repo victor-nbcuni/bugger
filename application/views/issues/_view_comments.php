@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-xs-12">
             <form data-parsley-validate id="comments-form" action="/issue_comments/add" method="post">
+                <input type="hidden" name="_token" value="<?php echo Session::instance()->getToken(); ?>">
                 <input type="hidden" name="issue_id" value="<?php echo $issue->id; ?>">
                 <input type="hidden" name="user_id" value="<?php echo Auth::instance()->get_user()->id; ?>">
                 <div class="form-group">
@@ -20,13 +21,12 @@
     <div class="col-xs-12">
         <div id="comments-list">
             <?php 
-                if (count($comments)):
-                    foreach($comments as $comment) 
-                        echo View::factory('issue_comments/view')
-                            ->set('comment', $comment); 
-                else:
+                if (count($comments)) {
+                    foreach($comments as $comment) echo View::factory('issue_comments/view')->set('comment', $comment); 
+                }
+                else {
                     echo '<span class="text-muted">There are no comments yet on this ticket.</span>';
-                endif;
+                }
             ?>
         </div>
         <div class="comments-footer">

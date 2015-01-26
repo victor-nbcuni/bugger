@@ -23,7 +23,7 @@ class Response extends Kohana_Response {
         $this->status($status);
 
         if (is_string($body)) {
-          $body = array('error_message' => $body);
+            $body = array('error_message' => $body);
         }
 
         $this->json($body);
@@ -44,7 +44,7 @@ class Response extends Kohana_Response {
         $this->jsonError(401, $error_message);
     }
 
-    public function notFound($error_message = 'Record not found') 
+    public function notFound($error_message = 'Not found') 
     {
         $this->jsonError(404, $error_message);
     }

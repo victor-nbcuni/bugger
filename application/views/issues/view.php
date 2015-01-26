@@ -49,25 +49,27 @@
     </div>
 </section>
 
-<script src="/assets/js/app/issues/view.js"></script>
+<script src="/assets/js/app/issue/lazy-comments.js"></script>
+<script src="/assets/js/app/issue/editable-fields.js"></script>
+
 <script>
 $(function() {
     var issueId = '<?php echo $issue->id; ?>';
 
-    // Bind Editable fields and Lazy comments
+    // Bind editable fields and lazy comments
     EditableFields.init(issueId);
     LazyComments.init(issueId);
 
-    // Bind Fancybox
+    // Bind fancybox
     $('.fancybox').fancybox({
         openEffect  : 'none',
         closeEffect : 'none'
     });
 
-    // Bind Dropzone
+    // Bind dropzone
     Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     var dropzone = new Dropzone('.dropzone', {
-        url: '/issue_files/upload/<?php echo $issue->id; ?>', 
+        url: '/issue_files/upload/<?php echo $issue->id; ?>?_token=' + _token, 
         acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
         maxFilesize: 4, // MB
         maxFiles: 3,
@@ -85,14 +87,24 @@ $(function() {
             '</div>'
     });
 
-    // Bind attachment remove button
+    // Bind attachment remove button click handler
     $('.btn-remove-attachment').click(function() {
         event.preventDefault();
-        var self = $(this);
+        var $btn = $(this);
         if (confirm("Are you sure you want to delete this attachment?")) {
-            $.get(self.attr('href'));
-            self.parent().parent().fadeOut('normal', function() {
-                $(this).remove();
+            $.ajax({
+                url: $btn.attr('href'),
+                type: 'POST',
+                data: {
+                    _token: _token
+                }
+            }).done(function() {
+                $btn.parent().parent().fadeOut('normal', function() {
+                    $(this).remove();
+                });
+            }).fail(function(data) {
+                var data = JSON.parse(data.responseText);
+                alert('Error: ' + data.error_message);
             });
         }
     });

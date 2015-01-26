@@ -58,15 +58,11 @@ class Model_User extends Model_Auth_User {
         return DB::query(Database::DELETE, 'DELETE FROM roles_users WHERE user_id = ' . $this->id)->execute();
     }
 
-    public static function isUnique($column, $value, $exclude_id = NULL)
+    public static function exists($column, $value)
     {
         $record = ORM::factory('User')
             ->where($column, '=', $value);
 
-        if ($exclude_id !== NULL) {
-            $record->where('id', '<>', $exclude_id);
-        }
-
-        return ($record->find()->loaded() ? FALSE : TRUE);
+        return ($record->find()->loaded() ? TRUE : FALSE);
     }
 }
