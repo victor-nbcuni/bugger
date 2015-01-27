@@ -175,14 +175,14 @@ $(function() {
     // Bind Dropzone
     Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     var dropzone = new Dropzone('.dropzone', {
-        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>?_token=' + _token, 
+        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>', 
         acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
         maxFilesize: 4, // MB
         maxFiles: 3,
         addRemoveLinks: true,
         autoProcessQueue: true,
         removedfile: function(file) {
-            $.post('/issue_files/remove_temp', {filename: file.name, dir: '<?php echo $attachment_temp_dir; ?>', _token: _token});
+            $.post('/issue_files/remove_temp', {filename: file.name, dir: '<?php echo $attachment_temp_dir; ?>'});
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });

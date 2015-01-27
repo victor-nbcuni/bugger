@@ -49,8 +49,8 @@
     </div>
 </section>
 
-<script src="/assets/js/app/issue/lazy-comments.js"></script>
-<script src="/assets/js/app/issue/editable-fields.js"></script>
+<script src="/assets/js/issue/lazy-comments.js"></script>
+<script src="/assets/js/issue/editable-fields.js"></script>
 
 <script>
 $(function() {
@@ -69,7 +69,7 @@ $(function() {
     // Bind dropzone
     Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     var dropzone = new Dropzone('.dropzone', {
-        url: '/issue_files/upload/<?php echo $issue->id; ?>?_token=' + _token, 
+        url: '/issue_files/upload/<?php echo $issue->id; ?>', 
         acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
         maxFilesize: 4, // MB
         maxFiles: 3,
@@ -92,19 +92,9 @@ $(function() {
         event.preventDefault();
         var $btn = $(this);
         if (confirm("Are you sure you want to delete this attachment?")) {
-            $.ajax({
-                url: $btn.attr('href'),
-                type: 'POST',
-                data: {
-                    _token: _token
-                }
-            }).done(function() {
-                $btn.parent().parent().fadeOut('normal', function() {
-                    $(this).remove();
-                });
-            }).fail(function(data) {
-                var data = JSON.parse(data.responseText);
-                alert('Error: ' + data.error_message);
+            $.post($btn.attr('href'));
+            $btn.parent().parent().fadeOut('normal', function() {
+                $(this).remove();
             });
         }
     });

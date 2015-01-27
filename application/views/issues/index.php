@@ -116,7 +116,7 @@ var FilterableTable = {
             $('.table').DataTable({
                 'aaSorting': [[9, 'desc']],
                 'bLengthChange': false,
-                'bFilter': false
+                'bFilter': true
             });
             
             $loading.hide();

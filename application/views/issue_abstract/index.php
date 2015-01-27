@@ -81,7 +81,7 @@ $(function() {
         event.preventDefault();
         var self = $(this);
         if (confirm("Are you sure you want to delete this record?")) {
-            window.location = '<?php echo $config['base_url']; ?>/delete/' + self.attr('data-id') + '?_token=' + _token;
+            window.location = '<?php echo $config['base_url']; ?>/delete/' + self.attr('data-id');
         }
     });
 });

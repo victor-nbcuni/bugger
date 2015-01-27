@@ -37,7 +37,6 @@ var LazyComments = {
                 type: 'textarea',
                 name: 'comment',
                 toggle: 'manual',
-                params: {_token: _token},
                 ajaxOptions: {
                     type: 'POST'
                 }
@@ -50,26 +49,14 @@ var LazyComments = {
             event.preventDefault();
             var $btn = $(this);
             if (confirm("Are you sure you want to remove this comment?")) {
-                $.ajax({
-                    url: '/issue_comments/update/' + $btn.attr('data-id'),
-                    type: 'POST',
-                    data: {
-                        name: 'archived', 
-                        value: 1,
-                        _token: _token
-                    }
-                }).done(function() {
-                    $btn.parent().closest('.media').fadeOut();
-                }).fail(function(data) {
-                    var data = JSON.parse(data.responseText);
-                    alert('Error: ' + data.error_message);
-                });
+                $.post('/issue_comments/update/' + $btn.attr('data-id'), {name: 'archived', value: 1});
+                $btn.parent().closest('.media').fadeOut();
             }
         });
     },
 
     /**
-     * Loads more comments
+     * Lazy loads comments
      */
     lazyLoad: function($showMoreBtn) {
         var self = this;

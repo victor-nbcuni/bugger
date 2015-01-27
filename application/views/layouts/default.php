@@ -6,9 +6,9 @@
         <title><?php echo APP_NAME; ?> - Bug Tracking System</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-        <link rel="stylesheet" href="/assets/lib/bootstrap-3.3.1/css/bootstrap.min.css">
-        <link href="/assets/lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/assets/lib/ionicons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/libs/bootstrap-3.3.1/css/bootstrap.min.css">
+        <link href="/assets/libs/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/assets/libs/ionicons.min.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,71 +17,67 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <script src="/assets/lib/jquery-2.1.3.min.js"></script>
-        <script src="/assets/lib/bootstrap-3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/assets/libs/jquery-2.1.3.min.js"></script>
+        <script src="/assets/libs/bootstrap-3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
 
         <!-- Datatables -->
-        <link href="/assets/lib/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-        <script src="/assets/lib/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <link href="/assets/libs/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/libs/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
 
         <?php if ($currentPage == 'users/add' || $currentPage == 'users/edit'): ?>
             <!-- Chosen Dropdown -->
-            <link href="/assets/lib/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/chosen-1.3.0/chosen.jquery.min.js"></script>
+            <link href="/assets/libs/chosen-1.3.0/chosen.min.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/chosen-1.3.0/chosen.jquery.min.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'issues/view'): ?>
             <!-- X-Editable -->
-            <link href="/assets/lib/x-editable-1.5.0/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
+            <link href="/assets/libs/x-editable-1.5.0/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/x-editable-1.5.0/js/bootstrap-editable.min.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'issues/index' || $currentPage == 'issues/reported_by_me' || $currentPage == 'issues/pending'): ?>
             <!-- Multiselect Dropdown -->
-            <link href="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+            <link href="/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
             <!-- JQuery Deserialize -->
-            <script src="/assets/lib/jquery.deserialize.min.js"></script>
+            <script src="/assets/libs/jquery.deserialize.min.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'issues/add'): ?>
             <!-- Datepicker -->
-            <link href="/assets/lib/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
+            <link href="/assets/libs/bootstrap-datepicker-1.3.1/datepicker.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/bootstrap-datepicker-1.3.1/bootstrap-datepicker.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'issues/view' || $currentPage == 'issues/add'): ?>
             <!-- Dropzone -->
-            <link href="/assets/lib/dropzone/css/dropzone.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/dropzone/dropzone.min.js"></script>
+            <link href="/assets/libs/dropzone/css/dropzone.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/dropzone/dropzone.min.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'issues/view'): ?>
             <!-- FancyBox -->
-            <link href="/assets/lib/fancybox-2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/fancybox-2.1.5/jquery.fancybox.pack.js"></script>
+            <link href="/assets/libs/fancybox-2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/fancybox-2.1.5/jquery.fancybox.pack.js"></script>
         <?php endif; ?>
 
         <?php if ($currentPage == 'dashboard/index'): ?>
             <!-- Morris Charts -->
-            <link href="/assets/lib/morris/morris.css" rel="stylesheet" type="text/css"/>
-            <script src="/assets/lib/morris/morris.min.js"></script>
-            <script src="/assets/lib/flot/jquery.flot.min.js"></script>
-            <script src="/assets/lib/flot/jquery.flot.pie.min.js"></script>
+            <link href="/assets/libs/morris/morris.css" rel="stylesheet" type="text/css"/>
+            <script src="/assets/libs/morris/morris.min.js"></script>
+            <script src="/assets/libs/flot/jquery.flot.min.js"></script>
+            <script src="/assets/libs/flot/jquery.flot.pie.min.js"></script>
         <?php endif; ?>
 
         <!-- Parsley Form Validation -->
-        <link href="/assets/lib/parsley-2.0.6/parsley.css" rel="stylesheet" type="text/css"/>
-        <script src="/assets/lib/parsley-2.0.6/parsley.min.js"></script>
+        <link href="/assets/libs/parsley-2.0.6/parsley.css" rel="stylesheet" type="text/css"/>
+        <script src="/assets/libs/parsley-2.0.6/parsley.min.js"></script>
 
         <!-- APP -->
-        <link href="/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/libs/adminlte/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/libs/adminlte/app.js" type="text/javascript"></script>
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
-        <script src="/assets/js/AdminLTE/app.js" type="text/javascript"></script>
-
-        <script>
-            var _token = '<?php echo $session->getToken(); ?>';
-        </script>
     </head>
     <body class="skin-blue">
 

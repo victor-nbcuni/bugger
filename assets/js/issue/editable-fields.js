@@ -13,7 +13,6 @@ var EditableFields = {
             type: 'textarea',
             pk: issueId,
             name: 'summary',
-            params: {_token: _token},
             ajaxOptions: {
                 type: 'POST'
             }
@@ -24,7 +23,6 @@ var EditableFields = {
             type: 'textarea',
             pk: issueId,
             name: 'description',
-            params: {_token: _token},
             ajaxOptions: {
                 type: 'POST'
             }
@@ -35,7 +33,6 @@ var EditableFields = {
             type: 'select',
             pk: issueId,
             name: 'priority_id',
-            params: {_token: _token},
             ajaxOptions: {
                 type: 'POST'
             }, 
@@ -48,7 +45,6 @@ var EditableFields = {
             type: 'select',
             pk: issueId,
             name: 'status_id',
-            params: {_token: _token},
             ajaxOptions: {
                 type: 'POST'
             }, 
@@ -72,7 +68,6 @@ var EditableFields = {
             type: 'select',
             pk: issueId,
             name: 'type_id',
-            params: {_token: _token},
             ajaxOptions: {
                 type: 'POST'
             }, 

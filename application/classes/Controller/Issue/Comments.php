@@ -40,7 +40,7 @@ class Controller_Issue_Comments extends Controller_Auth_User {
                 $view = View::factory('issue_comments/view')
                     ->set('comment', $comment);
 
-                Mailer_Issue::factory($comment->issue)->notifyCommentAdded($comment);
+                //Mailer_Issue::factory($comment->issue)->notifyCommentAdded($comment);
 
                 return $this->response->body($view);
             }
