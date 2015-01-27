@@ -125,7 +125,7 @@ class Controller_Issue_Files extends Controller_Auth_User {
      */
     private function _validateAttachment($file)
     {
-        // Check file size (4 MB max)
+        // Check file size (4 MB limit)
         if ($file['size'] > Model_Issue_File::MAX_UPLOAD_FILESIZE)
             return $this->response->badRequest('Invalid file size');
 

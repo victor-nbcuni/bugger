@@ -83,7 +83,7 @@ class Controller_Dashboard extends Controller_Auth_User {
             );
         }
 
-        // Combine Open & Reopened
+        // Combine open & reopened
         $data[Model_Issue_Status::OPEN]['total'] += $data[Model_Issue_Status::REOPENED]['total'];
         $data[Model_Issue_Status::OPEN]['url'] .= '&status_id[]=' . Model_Issue_Status::REOPENED;
         unset($data[Model_Issue_Status::REOPENED]);
