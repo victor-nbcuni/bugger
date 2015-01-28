@@ -43,7 +43,6 @@ class Model_Issue extends Model_Abstract {
         'type' => array('model' => 'Issue_Type', 'foreign_key' => 'type_id'),
         'status' => array('model' => 'Issue_Status', 'foreign_key' => 'status_id'),
         'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id'),
-        'source' => array('model' => 'Issue_Source', 'foreign_key' => 'source_id'),
         'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id')
     );
 

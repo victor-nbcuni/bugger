@@ -19,6 +19,7 @@ class Controller_Sessions extends Controller {
                 // Generate a CSRF token
                 $this->session->makeToken();
                 // Redirect to Dashboard
+                $this->session->set('play_eott', TRUE);
                 return $this->redirect('dashboard');
             }
             else {

@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <title><?php echo APP_NAME; ?> | Log In</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link rel="stylesheet" href="/assets/lib/bootstrap-3.3.1/css/bootstrap.min.css">
-        <link href="/assets/lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/libs/bootstrap-3.3.1/css/bootstrap.min.css">
+        <link href="/assets/libs/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>

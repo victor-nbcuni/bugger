@@ -57,11 +57,11 @@ class Controller_Issues extends Controller_Auth_User {
     {
         $this->auto_render = TRUE;
         $valid_filters = array('priority_id', 'project_id', 'type_id', 'status_id', 'reporter_user_id');
-        $post = $this->request->post();
+        $input = $this->request->query();
 
         $issues = ORM::factory('Issue');
 
-        foreach($post as $filter => $values) {
+        foreach($input as $filter => $values) {
             if (in_array($filter, $valid_filters)) {
                 $issues->where($filter, 'IN', $values);
             }
