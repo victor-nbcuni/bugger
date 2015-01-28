@@ -243,10 +243,10 @@
                 <?php echo isset($content) ? $content : ''; ?>
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-        
-        <audio controls <?php if ($session->get_once('play_eott')) echo 'autoplay'; ?>>
+        <?php /*
+        <audio  <?php if ($session->get_once('play_eott')) echo 'autoplay'; ?>>
             <source src="/assets/eott.mp3" type="audio/ogg">
             Your browser does not support the audio element.
-        </audio>
+        </audio>*/ ?>
     </body>
 </html>
