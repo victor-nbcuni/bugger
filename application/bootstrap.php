@@ -6,6 +6,7 @@ define('APP_LOGO', 'T<i class="fa fa-bug"></i>ger');
 define('APP_BASE_URL', 'http://' . $_SERVER['HTTP_HOST']);
 define('APP_UPLOAD_PATH', DOCROOT . 'uploads/');
 define('APP_UPLOAD_TMP_PATH', APP_UPLOAD_PATH . 'tmp/');
+define('APP_ISSUE_ATTACHMENTS_UPLOAD_PATH', APP_UPLOAD_PATH . 'attachments/issues/');
 
 // -- Environment setup --------------------------------------------------------
 

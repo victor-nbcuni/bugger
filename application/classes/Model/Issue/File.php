@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Model_Issue_File extends Model_Abstract {
-    public static $BASE_UPLOAD_PATH = APP_UPLOAD_PATH . 'attachments/issues/';
     const MAX_UPLOAD_FILESIZE = 16000000; // Bytes (4 MB)
 
     protected $_table_name = 'issue_files';
@@ -21,12 +20,12 @@ class Model_Issue_File extends Model_Abstract {
 
     public function url()
     {
-        return str_replace(DOCROOT, '/', self::$BASE_UPLOAD_PATH) . $this->issue_id . '/' . $this->filename;
+        return str_replace(DOCROOT, '/', APP_ISSUE_ATTACHMENTS_UPLOAD_PATH) . $this->issue_id . '/' . $this->filename;
     }
 
     public function path()
     {
-        return self::$BASE_UPLOAD_PATH . $this->issue_id . '/' . $this->filename;
+        return APP_ISSUE_ATTACHMENTS_UPLOAD_PATH . $this->issue_id . '/' . $this->filename;
     }
 
     /**
@@ -39,7 +38,7 @@ class Model_Issue_File extends Model_Abstract {
      */
     public static function processUpload($file, $issue_id, $user_id)
     {
-        $dest_base_path = self::$BASE_UPLOAD_PATH . $issue_id . '/';
+        $dest_base_path = APP_ISSUE_ATTACHMENTS_UPLOAD_PATH . $issue_id . '/';
         $dest_path = $dest_base_path . $file['name'];
 
         // Create dir if doesn't exist
@@ -90,10 +89,10 @@ class Model_Issue_File extends Model_Abstract {
             return;
 
         // Move temp files
-        rename($temp_path, self::$BASE_UPLOAD_PATH . $issue_id);
+        rename($temp_path, APP_ISSUE_ATTACHMENTS_UPLOAD_PATH . $issue_id);
 
         // Save files to database
-        $files = glob(self::$BASE_UPLOAD_PATH . $issue_id . '/*');
+        $files = glob(APP_ISSUE_ATTACHMENTS_UPLOAD_PATH . $issue_id . '/*');
 
         foreach($files as $path) {
             ORM::factory('Issue_File')
