@@ -27,7 +27,7 @@ else {
         (
             'type'       => 'PDO',
             'connection' => array(
-                'dsn'        => 'mysql:host=216.178.106.72;dbname=TLMPTLMDSAS01',
+                'dsn'        => 'mysql:host=216.178.106.71;dbname=TLMPTLMDSAS01',
                 'username'   => 'teltigrpusr01',
                 'password'   => 'tL3P#10&',
                 'persistent' => FALSE
