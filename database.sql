@@ -7,14 +7,14 @@
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+--SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";--
+--SET time_zone = "+00:00";--
 
 --
 -- Database: `bugger`
 --
-CREATE DATABASE IF NOT EXISTS `bugger` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `bugger`;
+--CREATE DATABASE IF NOT EXISTS `bugger` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;--
+--USE `bugger`;--
 
 -- --------------------------------------------------------
 
