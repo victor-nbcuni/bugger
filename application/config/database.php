@@ -1,18 +1,40 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-return array
-(
-    'default' => array
+if (Kohana::$environment == Kohana::DEVELOPMENT) {
+    // DEV
+    return array
     (
-        'type'       => 'pdo',
-        'connection' => array(
-            'dsn'        => 'mysql:host=localhost;dbname=bugger',
-            'username'   => 'root',
-            'password'   => 'root',
-            'persistent' => FALSE
+        'default' => array
+        (
+            'type'       => 'PDO',
+            'connection' => array(
+                'dsn'        => 'mysql:host=localhost;dbname=bugger',
+                'username'   => 'root',
+                'password'   => 'root',
+                'persistent' => FALSE
+            ),
+            'table_prefix' => '',
+            'charset'      => 'utf8',
+            'profiling'    => TRUE
         ),
-        'table_prefix' => '',
-        'charset'      => 'utf8',
-        'profiling'    => TRUE
-    ),
-);
+    );
+}
+else {
+    // PRODUCTION
+    return array
+    (
+        'default' => array
+        (
+            'type'       => 'PDO',
+            'connection' => array(
+                'dsn'        => 'mysql:host=216.178.106.72;dbname=TLMPTLMDSAS01',
+                'username'   => 'teltigrpusr01',
+                'password'   => 'tL3P#10&',
+                'persistent' => FALSE
+            ),
+            'table_prefix' => '',
+            'charset'      => 'utf8',
+            'profiling'    => TRUE
+        ),
+    );
+}
