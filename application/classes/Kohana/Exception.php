@@ -8,11 +8,11 @@ class Kohana_Exception extends Kohana_Kohana_Exception {
     {
       if (Kohana::$environment > Kohana::PRODUCTION) {
         // Turn on errors on DEV
-        //return parent::response($e);
+        return parent::response($e);
       }
 
       $response = Response::factory()
-        ->body('<h1>Oops! Something went wrong.</h1><h3>' . $e->getMessage() . '</h3>');
+        ->body('<h1>Oops! Something went wrong.</h1>');
 
       Log::instance()->add(Log::ERROR, $e->getMessage());
 
