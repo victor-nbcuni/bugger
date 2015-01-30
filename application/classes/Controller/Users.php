@@ -53,8 +53,8 @@ class Controller_Users extends Controller_Auth_Admin {
 
         if ($post = $this->request->post()) {
             try {
-                if (Model_User::exists('username', $post['user']['username']))
-                    throw new Form_Validation_Exception(Messages::get('user.username_taken'));
+                // if (Model_User::exists('username', $post['user']['username']))
+                //     throw new Form_Validation_Exception(Messages::get('user.username_taken'));
 
                 if (Model_User::exists('email', $post['user']['email']))
                     throw new Form_Validation_Exception(Messages::get('user.email_taken'));
@@ -92,8 +92,8 @@ class Controller_Users extends Controller_Auth_Admin {
         
         if ($post = $this->request->post()) {
             try {
-                if ($user->username != $post['user']['username'] && Model_User::exists('username', $post['user']['username']))
-                    throw new Form_Validation_Exception(Messages::get('user.username_taken'));
+                // if ($user->username != $post['user']['username'] && Model_User::exists('username', $post['user']['username']))
+                //     throw new Form_Validation_Exception(Messages::get('user.username_taken'));
 
                 if ($user->email != $post['user']['email'] && Model_User::exists('email', $post['user']['email']))
                     throw new Form_Validation_Exception(Messages::get('user.email_taken'));
