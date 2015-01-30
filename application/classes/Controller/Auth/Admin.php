@@ -8,7 +8,7 @@ abstract class Controller_Auth_Admin extends Controller_Auth_User {
     {
         parent::before();
 
-        if ( ! $this->auth->logged_in('admin')) {
+        if ( ! $this->auth->logged_in('admin') && ! in_array($this->request->action(), array('profile', 'change_password'))) {
           $this->session->flashError('Unauthorized access');
           $this->redirect('dashboard');
         }
