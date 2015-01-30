@@ -80,7 +80,7 @@
                 <div class="body">
                     <div class="form-group">
                         <i class="fa fa-user"></i>
-                        <input type="text" name="username" class="form-control" placeholder="Email or SSO" required>
+                        <input type="text" name="username" class="form-control" placeholder="Email or SSO" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : ''); ?>" required>
                     </div>
                     <div class="form-group">
                         <i class="fa fa-lock"></i>
