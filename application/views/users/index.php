@@ -26,7 +26,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>SSO</th>
                                 <th>Email</th>
                                 <th>Department</th>
                                 <th>Roles</th>
@@ -38,7 +37,6 @@
                                 <tr>
                                     <td><?php echo $user->id; ?></td>
                                     <td><?php echo $user->name; ?></td>
-                                    <td><?php echo $user->username; ?></td>
                                     <td><?php echo $user->email; ?></td>
                                     <td><?php echo $user->department->name; ?></td>
                                     <td>

@@ -42,12 +42,12 @@
                                 <input type="text" maxlength="30" name="user[name]" class="form-control" placeholder="Name" value="<?php echo $user->name; ?>" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <?php /*<div class="form-group">
                             <label class="col-sm-1 control-label">SSO<span class="required-field">*</span></label>
                             <div class="col-sm-7">
                                 <input type="text" maxlength="32" name="user[username]" class="form-control" placeholder="SSO" value="<?php echo $user->username; ?>" required>
                             </div>
-                        </div>
+                        </div>*/ ?>
                         <div class="form-group">
                             <label class="col-sm-1 control-label">Email<span class="required-field">*</span></label>
                             <div class="col-sm-7">
