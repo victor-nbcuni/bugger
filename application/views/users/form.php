@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label class="col-sm-1 control-label">Password<span class="required-field"><?php echo ($user->id ? '' : '*'); ?></span></label>
                             <div class="col-sm-7">
-                                <input type="password" maxlength="64" name="user[password]" class="form-control" placeholder="Password" value="" <?php echo ($user->id ? '' : 'required'); ?>>
+                                <input type="password" maxlength="64" name="user[password]" class="form-control" placeholder="Password" value="" <?php echo ($user->id ? '' : 'required data-parsley-minlength="6"'); ?>>
                             </div>
                         </div>
                         <div class="form-group">

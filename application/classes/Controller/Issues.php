@@ -19,9 +19,9 @@ class Controller_Issues extends Controller_Auth_User {
         $view->projects = ORM::factory('Project')->find_all();
 
         if (isset($_GET['email'])) {
-            Mailer_Issue::factory(ORM::factory('Issue', 1))->notifyCreated();
-            Mailer_Issue::factory(ORM::factory('Issue', 1))->notifyStatusUpdated();
-            Mailer_Issue::factory(ORM::factory('Issue_Comment', 2)->issue)->notifyCommentAdded(ORM::factory('Issue_Comment', 2));
+            Mailer_Issue::factory(ORM::factory('Issue', 1))->sendCreated();
+            Mailer_Issue::factory(ORM::factory('Issue', 1))->sendStatusUpdated();
+            Mailer_Issue::factory(ORM::factory('Issue_Comment', 2)->issue)->sendCommentAdded(ORM::factory('Issue_Comment', 2));
         }
     }
 
@@ -121,7 +121,7 @@ class Controller_Issues extends Controller_Auth_User {
             }
 
             // Notify users
-            Mailer_Issue::factory($issue)->notifyCreated();
+            Mailer_Issue::factory($issue)->sendCreated();
        
             $this->redirect('issues/view/' . $issue->id);
         }
@@ -157,7 +157,7 @@ class Controller_Issues extends Controller_Auth_User {
 
                 // Notify users of status changes
                 if ($column == 'status_id') {
-                   Mailer_Issue::factory($issue)->notifyStatusUpdated();
+                   Mailer_Issue::factory($issue)->sendStatusUpdated();
                 }
             }
             catch(Exception $e) {

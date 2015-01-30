@@ -1,3 +1,50 @@
+<?php
+// LOGIN
+/*
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://lighthouse.nbcuots.com');
+curl_setopt($ch, CURLOPT_POST, TRUE);
+$params = array(
+    'lh_username' => 'vic.lantigua@nbcuni.com',
+    'lh_password' => 'M@nnyMund0',
+    'action' => '/login'
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+curl_setopt($ch, CURLOPT_COOKIEJAR, DOCROOT . 'cookies.txt');
+curl_setopt($ch, CURLOPT_COOKIEFILE, DOCROOT . 'cookies.txt');
+// curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//     'x-api-key: test',
+//     'x-timestamp: ' . $timestamp,
+//     'x-signature: ' . Helper_Api::makeSignature('GET', '/api/create_ticket', 'test', $timestamp)
+// ));
+$content = curl_exec($ch);
+curl_close($ch);
+var_dump($content);
+exit;
+*/
+
+//echo '<pre>';print_r($_SERVER);exit;
+/*
+// CREATE WO
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://lighthouse.nbcuots.com/_ajaxphp/save_wo.php');
+curl_setopt($ch, CURLOPT_POST, TRUE);
+$params = array(
+    'requestedId' => 4225,
+    'woREQ_TYPE' => 3,
+    'projectId' => 21379,
+    'woSITE_NAME' => 9,
+    'woTitle' => 'test',
+    'woDesc' => 'test'
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+$content = curl_exec($ch);
+curl_close($ch);
+var_dump($content);
+exit;
+*/
+?>
 <?php $currentPage = $request->currentPage(); ?>
 <!DOCTYPE html>
 <html>
@@ -151,7 +198,7 @@
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="/users/profile" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="/logout" class="btn btn-default btn-flat">Sign out</a>

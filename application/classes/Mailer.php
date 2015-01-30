@@ -6,10 +6,10 @@ require APPPATH . 'vendor/PHPMailer/class.smtp.php';
  * Class used as the parent of all Mailing classes.
  */
 class Mailer extends PHPMailer {
-    const SMTP_HOST     = 'smtp.mail.yahoo.com';
-    const SMTP_USERNAME = 'victor_nbcuni';
-    const SMTP_PASSWORD = 't3l3mund0';
-    const FROM_EMAIL    = 'victor_nbcuni@yahoo.com';
+    const SMTP_HOST     = '';
+    const SMTP_USERNAME = '';
+    const SMTP_PASSWORD = '';
+    const FROM_EMAIL    = '';
 
     /*public static function factory()
     {
@@ -40,7 +40,7 @@ class Mailer extends PHPMailer {
     public function send($body = '')
     {
         $this->Body = $body;
-
+        return TRUE; // Disable emails momentarily.
         if ( ! parent::send()) {
             Log::instance()->add(Log::ERROR, $this->ErrorInfo);
             //echo 'Message could not be sent.';

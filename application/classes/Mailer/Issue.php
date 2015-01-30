@@ -24,7 +24,7 @@ class Mailer_Issue extends Mailer {
         $this->Subject = sprintf("[%s] (%s) %s", strtoupper(APP_NAME), $issue->trackingCode(), $issue->summary);
     }
 
-    public function notifyCreated()
+    public function sendCreated()
     {
         $body = sprintf('
             %s <b>created</b> ticket %s
@@ -55,7 +55,7 @@ class Mailer_Issue extends Mailer {
         return $this->send($body);
     }
 
-    public function notifyStatusUpdated()
+    public function sendStatusUpdated()
     {
         $body = sprintf('
             %s <b>changed</b> status to <b>"%s"</b>
@@ -74,7 +74,7 @@ class Mailer_Issue extends Mailer {
         return $this->send($body);
     }
 
-    public function notifyCommentAdded(Model_Issue_Comment $comment)
+    public function sendCommentAdded(Model_Issue_Comment $comment)
     {
         $body = sprintf('
             %s <b>commented:</b> "%s"</b>
