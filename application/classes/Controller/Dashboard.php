@@ -56,7 +56,12 @@ class Controller_Dashboard extends Controller_Auth_User {
             );
         }
 
-        return View::factory('dashboard/_chart_reported_by_me')->set('data', json_encode($data));
+        if (empty($data)) {
+            return NULL;
+        }
+        else {
+            return View::factory('dashboard/_chart_reported_by_me')->set('data', json_encode($data));
+        }
     }
 
     private function _statsChart()
