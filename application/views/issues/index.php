@@ -115,7 +115,7 @@ var FilterableTable = {
 
             $('.table').DataTable({
                 'aaSorting': [[9, 'desc']],
-                'bLengthChange': false,
+                'bLengthChange': true,
                 'bFilter': true
             });
             
