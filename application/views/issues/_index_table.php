@@ -8,7 +8,7 @@
             <th>Priority</th>
             <th>Reporter</th>
             <th>Assignee</th>
-            <th>Summary</th>
+            <th>Title</th>
             <th>Created</th>
             <th>Updated</th>
         </tr>
