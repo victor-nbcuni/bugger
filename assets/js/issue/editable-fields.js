@@ -13,6 +13,7 @@ var EditableFields = {
             type: 'textarea',
             pk: issueId,
             name: 'summary',
+            placement: 'bottom',
             ajaxOptions: {
                 type: 'POST'
             }

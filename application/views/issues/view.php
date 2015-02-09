@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-bug"></i> <?php echo Text::limit_chars($issue->summary, 40); ?>
+        <i class="fa fa-bug"></i> <span id="summary"><?php echo Text::limit_chars($issue->summary, 120); ?></span>
         <small><?php echo $issue->trackingCode(); ?></small>
     </h1>
 </section>
@@ -25,14 +25,6 @@
             <div class="row">
                 <div class="col-xs-2 text-muted">Created:</div> <div class="col-xs-2"><?php echo $issue->created_at; ?></div>  <div class="col-xs-2 text-muted">Updated:</div> <div class="col-xs-2"><?php echo $issue->updated_at; ?></div> 
             </div>
-
-            <h4 class="page-header">Summary</h4>
-
-            <div class="row">
-                <div class="col-xs-12"><span id="summary"><?php echo $issue->summary; ?></span></div>
-            </div>
-
-            <br>
 
             <h4 class="page-header">Description</h4>
 

@@ -124,9 +124,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Summary<span class="required-field">*</span></label>
+                            <label class="col-sm-2 control-label">Brief Description<span class="required-field">*</span></label>
                             <div class="col-sm-7">
-                                <input type="text" maxlength="30" name="issue[summary]" class="form-control" value="<?php echo $issue->summary; ?>" required>
+                                <input type="text" maxlength="128" name="issue[summary]" class="form-control" value="<?php echo $issue->summary; ?>" required>
                             </div>
                         </div>
 
