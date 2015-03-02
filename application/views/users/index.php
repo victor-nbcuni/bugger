@@ -8,7 +8,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/users/add" class="btn btn-success">
+            <a href="/users/add" class="btn btn-danger">
                 <i class="fa fa-plus"></i> Add New
             </a>
         </div>
@@ -45,7 +45,7 @@
                                         <?php endforeach; ?>
                                     </td>
                                     <td>
-                                        <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="/users/edit/<?php echo $user->id; ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

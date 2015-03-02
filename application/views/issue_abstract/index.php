@@ -9,7 +9,7 @@
    <div class="row">
         <div class="col-xs-12">
             <?php if ( ! in_array($config['model']['name'], array('Issue_Status', 'Issue_Priority'))): ?>
-                <a href="<?php echo $config['base_url']; ?>/add" class="btn btn-success">
+                <a href="<?php echo $config['base_url']; ?>/add" class="btn btn-danger">
                     <i class="fa fa-plus"></i> Add New
                 </a>
             <?php endif; ?>
@@ -61,7 +61,7 @@
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="<?php echo $config['base_url']; ?>/edit/<?php echo $record->id; ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                         <a class="btn-remove btn btn-danger" data-id="<?php echo $record->id; ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
