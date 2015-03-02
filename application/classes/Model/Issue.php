@@ -164,6 +164,7 @@ class Model_Issue extends Model_Abstract {
                 COUNT(issues.id) AS data
             FROM issues
             JOIN issue_statuses ON issues.status_id = issue_statuses.id
+            ' . $where_clause . '
             GROUP BY issues.status_id
             HAVING data > 0
         ');
