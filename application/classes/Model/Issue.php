@@ -62,34 +62,6 @@ class Model_Issue extends Model_Abstract {
     }
 
     /**
-     * Returns an array of ALL requests or count of NON-CLOSED requests.
-     *
-     * @param   int  $count Whether or not return a count of requests.
-     * @return  int|Model_Issue[]
-     */
-    // public static function findSupportRequests($count = FALSE)
-    // {
-    //     $auth = Auth::instance();
-
-    //     $requests = ORM::factory('Issue')
-    //         ->order_by('updated_at', 'DESC');
-
-    //     if ( ! $auth->logged_in('admin')) {
-    //         // Admins may see ALL requests. Regular users may only see their own requests.
-    //         $requests->where('reporter_user_id', '=', $auth->get_user()->id);
-    //     }
-
-    //     if ($count) {
-    //         // ONLY count open issues.
-    //         $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
-    //         return $requests->count_all();
-    //     }
-
-    //     return $requests->find_all();
-    // }
-
-
-    /**
      * Returns an array of ALL issues or count of NON-CLOSED issues.
      *
      * @param   int  $count Whether or not return a count of requests.
@@ -108,28 +80,6 @@ class Model_Issue extends Model_Abstract {
 
         return $requests->find_all();
     }
-
-    /**
-     * Returns an array or count of NON-CLOSED issues.
-     *
-     * @param   int  $count Whether or not return a count of issues.
-     * @return  int|Model_Issue[]
-     */
-    // public static function findAssignedToMe($count = FALSE)
-    // {
-    //     $auth = Auth::instance();
-    //     $auth_user = $auth->get_user();
-
-    //     $issues = ORM::factory('Issue')
-    //         ->order_by('updated_at', 'DESC')
-    //         ->where('status_id', '<>', Model_Issue_Status::CLOSED)
-    //         ->where('assigned_department_id', '=', $auth_user->department_id);
-
-    //     if ($count)
-    //         return $issues->count_all();
-
-    //     return $issues->find_all();
-    // }
 
     /**
      * Returns an array of ALL issues or a count of NON-CLOSED issues
@@ -213,7 +163,7 @@ class Model_Issue extends Model_Abstract {
                 issues.status_id AS status_id,
                 COUNT(issues.id) AS data
             FROM issues
-            LEFT JOIN issue_statuses ON issues.status_id = issue_statuses.id
+            JOIN issue_statuses ON issues.status_id = issue_statuses.id
             ' . $where_clause . '
             GROUP BY issues.status_id
             HAVING data > 0
@@ -223,4 +173,53 @@ class Model_Issue extends Model_Abstract {
 
         return $result;
     }
+
+    /**
+     * Returns an array of ALL requests or count of NON-CLOSED requests.
+     *
+     * @param   int  $count Whether or not return a count of requests.
+     * @return  int|Model_Issue[]
+     */
+    // public static function findSupportRequests($count = FALSE)
+    // {
+    //     $auth = Auth::instance();
+
+    //     $requests = ORM::factory('Issue')
+    //         ->order_by('updated_at', 'DESC');
+
+    //     if ( ! $auth->logged_in('admin')) {
+    //         // Admins may see ALL requests. Regular users may only see their own requests.
+    //         $requests->where('reporter_user_id', '=', $auth->get_user()->id);
+    //     }
+
+    //     if ($count) {
+    //         // ONLY count open issues.
+    //         $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
+    //         return $requests->count_all();
+    //     }
+
+    //     return $requests->find_all();
+    // }
+
+    /**
+     * Returns an array or count of NON-CLOSED issues.
+     *
+     * @param   int  $count Whether or not return a count of issues.
+     * @return  int|Model_Issue[]
+     */
+    // public static function findAssignedToMe($count = FALSE)
+    // {
+    //     $auth = Auth::instance();
+    //     $auth_user = $auth->get_user();
+
+    //     $issues = ORM::factory('Issue')
+    //         ->order_by('updated_at', 'DESC')
+    //         ->where('status_id', '<>', Model_Issue_Status::CLOSED)
+    //         ->where('assigned_department_id', '=', $auth_user->department_id);
+
+    //     if ($count)
+    //         return $issues->count_all();
+
+    //     return $issues->find_all();
+    // }
 }
