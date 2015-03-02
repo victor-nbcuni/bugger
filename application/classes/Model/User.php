@@ -46,7 +46,7 @@ class Model_User extends Model_Auth_User {
         );
     }
 
-    public function addRoles($role_ids = array())
+    public function attachRoles($role_ids = array())
     {
         foreach($role_ids as $role_id) {
             ORM::factory('Role_User')->values(array('user_id' => $this->id, 'role_id' => $role_id))->save();

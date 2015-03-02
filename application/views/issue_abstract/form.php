@@ -40,7 +40,7 @@
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="box-footer">
+                    <div class="">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="<?php echo $config['base_url']; ?>">Cancel</a>
                     </div>

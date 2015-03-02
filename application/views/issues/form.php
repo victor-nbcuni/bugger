@@ -28,8 +28,8 @@
                             <label class="col-sm-2 control-label">Priority<span class="required-field">*</span></label>
                             <div class="col-sm-7">
                                 <select name="issue[priority_id]" class="form-control">
-                                    <?php 
-                                        foreach(ORM::factory('Issue_Priority')->find_all() as $priority): 
+                                    <?php
+                                        foreach(ORM::factory('Issue_Priority')->find_all() as $priority):
                                             $selected = ($issue->priority_id == $priority->id) ? 'selected' : '';
                                     ?>
                                         <option value="<?php echo $priority->id; ?>" <?php echo $selected; ?>><?php echo $priority->name; ?></option>
@@ -144,10 +144,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                        
-                    <div class="box-footer">
+
+                    <div class="">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="/issues">Cancel</a>
                     </div>
@@ -175,7 +175,7 @@ $(function() {
     // Bind Dropzone
     Dropzone.autoDiscover = false; // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     var dropzone = new Dropzone('.dropzone', {
-        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>', 
+        url: '/issue_files/upload_temp/<?php echo $attachment_temp_dir; ?>',
         acceptedFiles: 'image/jpeg, image/jpg, image/png, image/gif',
         maxFilesize: 4, // MB
         maxFiles: 3,

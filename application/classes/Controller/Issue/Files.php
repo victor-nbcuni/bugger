@@ -89,7 +89,7 @@ class Controller_Issue_Files extends Controller_Auth_User {
                 //if (file_exists($temp_path))
                 //    unlink($temp_path);
 
-                move_uploaded_file($file['tmp_name'], $temp_path); 
+                move_uploaded_file($file['tmp_name'], $temp_path);
             }
             catch(Exception $ex) {
                 $this->log->add(Log::ERROR, $ex->getMessage());
@@ -107,8 +107,8 @@ class Controller_Issue_Files extends Controller_Auth_User {
 
         if ( ! isset($post['filename'], $post['dir']))
             return $this->response->badRequest('Invalid file');
-        
-        try {     
+
+        try {
             unlink(APP_UPLOAD_TMP_PATH . $post['dir'] . '/' . $post['filename']);
         }
         catch(Exception $ex) {

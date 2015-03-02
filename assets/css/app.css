@@ -1,3 +1,7 @@
+body {
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
 .required-field  {
     color: red;
     font-size:  20px;
@@ -34,8 +38,8 @@
   font-size: 14px!important;
 }
 
-/** 
- * Style datatable pages dropdown 
+/**
+ * Style datatable pages dropdown
  */
 .dataTables_wrapper select, .dataTables_wrapper input {
   height: 34px;

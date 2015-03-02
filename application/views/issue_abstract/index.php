@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
-                <div class="box-header">
+                <!--<div class="box-header">
                     <h3 class="box-title">View / Manage <?php echo $config['model']['title_plural']; ?></h3>
-                </div>
+                </div>-->
                 <div class="box-body table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -31,7 +31,7 @@
                                 <?php if ($config['model']['name'] == 'Role'): ?>
                                     <th>Description</th>
                                 <?php endif; ?>
-                                
+
                                 <?php if ($config['model']['name'] == 'Department'): ?>
                                     <th>Group Email</th>
                                 <?php endif; ?>
@@ -76,7 +76,6 @@
 
 <script>
 $(function() {
-    $('table').dataTable();
     $('.btn-remove').click(function() {
         event.preventDefault();
         var self = $(this);

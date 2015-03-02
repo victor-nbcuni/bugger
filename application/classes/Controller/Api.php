@@ -20,8 +20,8 @@ class Controller_Api extends Controller {
     const API_KEY = 'test';
 
     public function action_create_ticket()
-    { 
-        
+    {
+
     }
 
     /**

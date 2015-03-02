@@ -24,13 +24,13 @@ class Controller_Issue_Comments extends Controller_Auth_User {
      * @return   json / html
      */
     public function action_create()
-    { 
+    {
         if ($post = $this->request->post()) {
             if ( ! empty($post['issue_id']) && ! empty($post['user_id']) && ! empty($post['comment'])) {
                 $comment = ORM::factory('Issue_Comment')
                     ->set('can_edit', 1)
                     ->values($post)
-                    ->save(); 
+                    ->save();
 
                 $comment->issue
                     ->set('last_updated_by_user_id', $this->auth_user->id)
@@ -40,7 +40,7 @@ class Controller_Issue_Comments extends Controller_Auth_User {
                 $view = View::factory('issue_comments/view')
                     ->set('comment', $comment);
 
-                //Mailer_Issue::factory($comment->issue)->sendCommentAdded($comment);
+                // Mailer_Issue::factory($comment->issue)->sendCommentAdded($comment);
 
                 return $this->response->body($view);
             }

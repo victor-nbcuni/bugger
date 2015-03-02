@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-footer">
+                    <div class="">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="/users">Cancel</a>
                     </div>
@@ -84,7 +84,7 @@
 
 <script type="text/javascript">
 $(function() {
-    $('#role-select').chosen(); 
+    $('#role-select').chosen();
 });
 </script>
 

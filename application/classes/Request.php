@@ -2,7 +2,7 @@
 
 class Request extends Kohana_Request {
 
-    public function currentPage() 
+    public function page()
     {
         return strtolower($this->controller() . '/' . $this->action());
     }

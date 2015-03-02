@@ -13,16 +13,16 @@
             </a>
         </div>
     </div>
-    
+
     <br>
 
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="overlay loading" style="display: none;"></div><div class="loading loading-img" style="display: none;"></div>
-                <div class="box-header">
+                <!--<div class="box-header">
                     <h3 class="box-title">View / Manage Tickets</h3>
-                </div>
+                </div>-->
                 <div class="box-body">
                     <form id="filter-form" class="form-inline">
                         <label> Project</label>
@@ -115,10 +115,10 @@ var FilterableTable = {
 
             $('.table').DataTable({
                 'aaSorting': [[9, 'desc']],
-                'bLengthChange': true,
+                'bLengthChange': false,
                 'bFilter': true
             });
-            
+
             $loading.hide();
         });
     }
