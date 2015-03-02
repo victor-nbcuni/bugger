@@ -12,25 +12,21 @@ $(function() {
                 show: true,
                 radius: 1,
                 innerRadius: .5,
-                //tilt: 0.5,
                 label: {
                     show: true,
                     radius: 1,
-                    formatter: labelFormatter,
+                    formatter: function (label, series) {
+                        return '<div style="font-size:12px; text-align:center; padding:2px; color:white;">' + label + '<br>' + series.data[0][1] + '</div>';
+                    },
                     background: {
                         opacity: 0.8
                     }
-                },
-                combine: {
-                    color: '#999',
-                    threshold: 0.1
                 }
             }
+        },
+        legend: {
+            show: false
         }
     });
-
-    function labelFormatter(label, series) {
-        return '<div style="font-size:8pt; text-align:center; padding:2px; color:white;">' + label + '<br>' + series.data[0][1] + '</div>';
-    }
 });
 </script>
