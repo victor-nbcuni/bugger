@@ -37,8 +37,8 @@
                 <h3 class="box-title">People</h3>
                 </div>
                 <div class="box-body">
-                    <div class="text-muted row"><div class="col-md-2">Reporter:</div> <div class="col-md-8"> <?php echo $issue->reporter->name; ?></div></div>
-                    <div class="text-muted row"><div class="col-md-2">Assignee:</div> <div class="col-md-8"> <span id="assigned_department_id"><?php echo $issue->assigned_department->name; ?></span></div></div>
+                    <div class="text-muted row"><div class="col-md-3">Reporter:</div> <div class="col-md-8"> <?php echo $issue->reporter->name; ?></div></div>
+                    <div class="text-muted row"><div class="col-md-3">Assignee:</div> <div class="col-md-8"> <span id="assigned_department_id"><?php echo $issue->assigned_department->name; ?></span></div></div>
                 </div>
             </div>
         </div>
@@ -48,16 +48,16 @@
                 <h3 class="box-title">Dates</h3>
                 </div>
                 <div class="box-body">
-                    <div class="text-muted row"><div class="col-md-2">Created:</div> <div class="col-md-8"> <?php echo $issue->created_at; ?></div></div>
-                    <div class="text-muted row"><div class="col-md-2">Updated</div> <div class="col-md-8"> <?php echo $issue->updated_at; ?></div></div>
+                    <div class="text-muted row"><div class="col-md-3">Created:</div> <div class="col-md-8"> <?php echo $issue->created_at; ?></div></div>
+                    <div class="text-muted row"><div class="col-md-3">Updated:</div> <div class="col-md-8"> <?php echo $issue->updated_at; ?></div></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<script src="/assets/js/issue/lazy-comments.js"></script>
-<script src="/assets/js/issue/editable-fields.js"></script>
+<script src="/assets/js/pages/issue/lazy-comments.js"></script>
+<script src="/assets/js/page/issue/editable-fields.js"></script>
 
 <script>
 $(function() {
