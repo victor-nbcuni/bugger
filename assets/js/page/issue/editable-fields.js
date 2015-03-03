@@ -5,7 +5,7 @@ var EditableFields = {
     init: function(issueId) {
         var self = this;
 
-        $.fn.editable.defaults.mode = 'popup';
+        $.fn.editable.defaults.mode = 'inline';
         $.fn.editableform.buttons = '<button type="submit" class="btn btn-primary editable-submit"><i class="fa fa-check"></i></button><button type="button" class="btn btn-default editable-cancel"><i class="fa fa-close"></i></button>';
 
         $('#summary').editable({
@@ -27,6 +27,17 @@ var EditableFields = {
             ajaxOptions: {
                 type: 'POST'
             }
+        });
+
+        $('#example_url').editable({
+            url: '/issues/update_editable_field',
+            type: 'textarea',
+            pk: issueId,
+            name: 'example_url',
+            ajaxOptions: {
+                type: 'POST'
+            },
+            emptytext: 'Click here to add URL'
         });
 
         $('#priority_id').editable({
@@ -85,7 +96,8 @@ var EditableFields = {
                 type: 'POST'
             },
             source: '/issues/duplicate_options/' + issueId,
-            sourceCache: true
+            sourceCache: true,
+            emptytext: 'Not Duplicate'
         });
     }
 }

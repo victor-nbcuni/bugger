@@ -257,12 +257,13 @@ class Controller_Issues extends Controller_Auth_User {
 
         // Exclude id from the choices
         $records = ORM::factory('Issue')
+            ->select('id')
             ->where('id', '<>', $id)
             ->where('duplicate_id', '<', 1)
             ->order_by('id', 'DESC')
             ->find_all();
 
-        $json[0] = '';
+        $json[0] = 'Not Duplicate';
         foreach($records as $record) {
             $json[$record->id] = $record->trackingId();
         }

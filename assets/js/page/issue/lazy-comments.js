@@ -9,7 +9,7 @@
 var LazyComments = {
     perPage: 5,         // The number of comments to load per request
     currentPage: 1,     // The current page
-    numAdded: 0,        // Keeps track of the number of comments just added
+    offset: 0,
     issueId: null,
 
     init: function(issueId) {
@@ -67,7 +67,7 @@ var LazyComments = {
             data: {
                 issue_id: self.issueId,
                 limit: self.perPage,
-                offset: self.numAdded + (self.currentPage * self.perPage)
+                offset: self.offset + (self.currentPage * self.perPage)
             }
         }).done(function(html) {
             self.currentPage++;
@@ -98,13 +98,13 @@ var LazyComments = {
         }).done(function(data) {
             $form[0].reset();
             $submitBtn.attr('disabled', false);
-            self.numAdded++;
+            self.offset++;
 
             if ($('#comments-list').find('.media').length) { // Add it to the top of the list.
                 $('#comments-list').prepend(data);
             } else { // First comment, replace empty text with comment.
                 $('#comments-list').html(data);
-            } 
+            }
         }).fail(function(data) {
             var data = JSON.parse(data.responseText);
             $submitBtn.attr('disabled', false);

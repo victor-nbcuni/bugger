@@ -13,12 +13,18 @@
                 <div class="col-xs-12"><span id="description"><?php echo $issue->description; ?></span></div>
             </div>
 
+            <h4 class="page-header">Example URL <a target="_blank" href="<?php echo $issue->example_url; ?>"><i class="fa fa-link"></i></a></h4>
+
+            <div class="row">
+                <div class="col-xs-12"><span id="example_url"><?php echo $issue->example_url; ?></span></div>
+            </div>
+
             <?php include Kohana::find_file('views', 'issues/_view_attachments'); ?>
 
             <?php include Kohana::find_file('views', 'issues/_view_comments'); ?>
         </div>
         <div class="col-xs-4">
-            <div class="box box-solid">
+            <div class="box box-default">
                 <div class="box-header with-border">
                 <h3 class="box-title">Details</h3>
                 </div>
@@ -32,7 +38,7 @@
             </div>
         </div>
         <div class="col-xs-4">
-            <div class="box box-solid">
+            <div class="box box-default">
                 <div class="box-header with-border">
                 <h3 class="box-title">People</h3>
                 </div>
@@ -43,7 +49,7 @@
             </div>
         </div>
         <div class="col-xs-4">
-            <div class="box box-solid">
+            <div class="box box-default">
                 <div class="box-header with-border">
                 <h3 class="box-title">Dates</h3>
                 </div>
@@ -56,7 +62,7 @@
     </div>
 </section>
 
-<script src="/assets/js/pages/issue/lazy-comments.js"></script>
+<script src="/assets/js/page/issue/lazy-comments.js"></script>
 <script src="/assets/js/page/issue/editable-fields.js"></script>
 
 <script>
