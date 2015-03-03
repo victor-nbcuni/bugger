@@ -6,6 +6,7 @@ class Model_Issue extends Model_Abstract {
 
     protected $_table_columns = array(
         'id' => NULL,
+        'duplicate_id' => NULL,
         'status_id' => NULL,
         'type_id' => NULL,
         'project_id' => NULL,
@@ -43,7 +44,8 @@ class Model_Issue extends Model_Abstract {
         'type' => array('model' => 'Issue_Type', 'foreign_key' => 'type_id'),
         'status' => array('model' => 'Issue_Status', 'foreign_key' => 'status_id'),
         'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id'),
-        'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id')
+        'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id'),
+        'duplicate' => array('model' => 'Issue', 'foreign_key' => 'duplicate_id'),
     );
 
     public function url($full = FALSE)
@@ -56,7 +58,7 @@ class Model_Issue extends Model_Abstract {
         return $url;
     }
 
-    public function trackingCode()
+    public function trackingId()
     {
         return strtoupper($this->project->name) . '-' . $this->id;
     }
@@ -147,29 +149,41 @@ class Model_Issue extends Model_Abstract {
     }
 
     /**
-     * Gives ticket count based on status.
+     * Gives ticket count based on status for dashboard pie charts.
      *
      * @param  int      $reporter_user_id    A reporter user ID to filter by.
      * @return array
      */
     public static function getStatusBreakdown($reporter_user_id = NULL)
     {
-        $where_clause = ($reporter_user_id) ? 'WHERE issues.reporter_user_id = ' . (int) $reporter_user_id : '';
+        $where = array();
+
+        // Don't take duplicate tickets into account
+        $where[] = 'issues.duplicate_id < 1';
+
+        if ($reporter_user_id) {
+            $where[] = 'issues.reporter_user_id = ' . (int) $reporter_user_id;
+        }
 
         $query = DB::query(Database::SELECT, '
             SELECT
                 issue_statuses.name AS label,
+                issue_statuses.name AS status_name,
                 issue_statuses.color AS color,
                 issues.status_id AS status_id,
                 COUNT(issues.id) AS data
             FROM issues
             JOIN issue_statuses ON issues.status_id = issue_statuses.id
-            ' . $where_clause . '
+            WHERE ' . implode(' AND ', $where) . '
             GROUP BY issues.status_id
             HAVING data > 0
         ');
 
         $result = $query->execute()->as_array();
+
+        foreach($result as &$row) {
+            $row['label'] .= ',' . $row['status_id'];
+        }
 
         return $result;
     }
@@ -180,26 +194,26 @@ class Model_Issue extends Model_Abstract {
      * @param   int  $count Whether or not return a count of requests.
      * @return  int|Model_Issue[]
      */
-    // public static function findSupportRequests($count = FALSE)
-    // {
-    //     $auth = Auth::instance();
+    public static function findSupportRequests($count = FALSE)
+    {
+        $auth = Auth::instance();
 
-    //     $requests = ORM::factory('Issue')
-    //         ->order_by('updated_at', 'DESC');
+        $requests = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC');
 
-    //     if ( ! $auth->logged_in('admin')) {
-    //         // Admins may see ALL requests. Regular users may only see their own requests.
-    //         $requests->where('reporter_user_id', '=', $auth->get_user()->id);
-    //     }
+        if ( ! $auth->logged_in('admin')) {
+            // Admins may see ALL requests. Regular users may only see their own requests.
+            $requests->where('reporter_user_id', '=', $auth->get_user()->id);
+        }
 
-    //     if ($count) {
-    //         // ONLY count open issues.
-    //         $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
-    //         return $requests->count_all();
-    //     }
+        if ($count) {
+            // ONLY count open issues.
+            $requests->where('status_id', '<>', Model_Issue_Status::CLOSED);
+            return $requests->count_all();
+        }
 
-    //     return $requests->find_all();
-    // }
+        return $requests->find_all();
+    }
 
     /**
      * Returns an array or count of NON-CLOSED issues.
@@ -207,19 +221,19 @@ class Model_Issue extends Model_Abstract {
      * @param   int  $count Whether or not return a count of issues.
      * @return  int|Model_Issue[]
      */
-    // public static function findAssignedToMe($count = FALSE)
-    // {
-    //     $auth = Auth::instance();
-    //     $auth_user = $auth->get_user();
+    public static function findAssignedToMe($count = FALSE)
+    {
+        $auth = Auth::instance();
+        $auth_user = $auth->get_user();
 
-    //     $issues = ORM::factory('Issue')
-    //         ->order_by('updated_at', 'DESC')
-    //         ->where('status_id', '<>', Model_Issue_Status::CLOSED)
-    //         ->where('assigned_department_id', '=', $auth_user->department_id);
+        $issues = ORM::factory('Issue')
+            ->order_by('updated_at', 'DESC')
+            ->where('status_id', '<>', Model_Issue_Status::CLOSED)
+            ->where('assigned_department_id', '=', $auth_user->department_id);
 
-    //     if ($count)
-    //         return $issues->count_all();
+        if ($count)
+            return $issues->count_all();
 
-    //     return $issues->find_all();
-    // }
+        return $issues->find_all();
+    }
 }

@@ -127,7 +127,7 @@ exit;
         <link href="/assets/libs/adminlte/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/libs/adminlte/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
         <script src="/assets/libs/adminlte/js/app.min.js" type="text/javascript"></script>
-        <link href="/assets/css/app.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
 
     </head>
     <body class="skin-blue">

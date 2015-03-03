@@ -7,7 +7,7 @@ var EditableFields = {
 
         $.fn.editable.defaults.mode = 'popup';
         $.fn.editableform.buttons = '<button type="submit" class="btn btn-primary editable-submit"><i class="fa fa-check"></i></button><button type="button" class="btn btn-default editable-cancel"><i class="fa fa-close"></i></button>';
-        
+
         $('#summary').editable({
             url: '/issues/update_editable_field',
             type: 'textarea',
@@ -36,9 +36,9 @@ var EditableFields = {
             name: 'priority_id',
             ajaxOptions: {
                 type: 'POST'
-            }, 
+            },
             source: '/issues/priority_options/' + issueId,
-            sourceCache: true          
+            sourceCache: true
         });
 
         $('#status_id').editable({
@@ -48,7 +48,7 @@ var EditableFields = {
             name: 'status_id',
             ajaxOptions: {
                 type: 'POST'
-            }, 
+            },
             source: '/issues/status_options/' + issueId,
             sourceCache: false
         });
@@ -60,7 +60,7 @@ var EditableFields = {
             name: 'assigned_department_id',
             ajaxOptions: {
                 type: 'POST'
-            }, 
+            },
             source: dataSources.departments
         });*/
 
@@ -71,9 +71,21 @@ var EditableFields = {
             name: 'type_id',
             ajaxOptions: {
                 type: 'POST'
-            }, 
+            },
             source: '/issues/type_options/' + issueId,
-            sourceCache: true        
+            sourceCache: true
+        });
+
+        $('#duplicate_id').editable({
+            url: '/issues/update_editable_field',
+            type: 'select',
+            pk: issueId,
+            name: 'duplicate_id',
+            ajaxOptions: {
+                type: 'POST'
+            },
+            source: '/issues/duplicate_options/' + issueId,
+            sourceCache: true
         });
     }
 }

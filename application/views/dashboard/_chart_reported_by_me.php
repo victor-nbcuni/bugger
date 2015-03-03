@@ -14,12 +14,9 @@ $(function() {
                 innerRadius: .5,
                 label: {
                     show: true,
-                    radius: 1,
                     formatter: function (label, series) {
-                        return '<div style="font-size:12px; text-align:center; padding:2px; color:white;">' + label + '<br>' + series.data[0][1] + '</div>';
-                    },
-                    background: {
-                        opacity: 0.8
+                        var arr = label.split(',');
+                        return '<a style="font-size:12px;padding:2px;" class="btn btn-default" href="/issues#status_id[]=' + arr[1] + '">' + arr[0] + ' (' + series.data[0][1] + ')</a>';
                     }
                 }
             }

@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Ticket <br><small>' . $issue->trackingCode() . '</small>' : 'Add New Ticket'); ?>
+        <i class="fa fa-bug"></i> <?php echo ($issue->id ? 'Edit Ticket <br><small>' . $issue->trackingId() . '</small>' : 'Add New Ticket'); ?>
     </h1>
 </section>
 
@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Example URL <span class="required-field"></span></label>
                             <div class="col-sm-7">
-                                <input type="text" maxlength="30" name="issue[example_url]" class="form-control" value="<?php echo $issue->example_url; ?>">
+                                <input type="text" maxlength="255" name="issue[example_url]" class="form-control" value="<?php echo $issue->example_url; ?>">
                             </div>
                         </div>
 

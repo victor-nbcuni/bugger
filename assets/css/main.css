@@ -83,6 +83,15 @@ body {
   cursor: pointer;
 }
 
+.page-view-issue .page-header {
+  padding-bottom: 0px;
+  margin-top: 20px;
+}
+
+.editable {
+  border-bottom: dashed 1px #f56954!important;
+}
+
 .skin-blue .navbar .dropdown-menu > li > a:hover {
   color: #fff;
 }
@@ -90,3 +99,4 @@ body {
 .parsley-required {
   color: #B94A48;
 }
+

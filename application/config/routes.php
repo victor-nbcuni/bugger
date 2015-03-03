@@ -2,13 +2,13 @@
 
 Route::set('login', 'login')
     ->defaults(array(
-        'controller' => 'Sessions',
+        'controller' => 'Login',
         'action'     => 'login',
     ));
 
 Route::set('logout', 'logout')
     ->defaults(array(
-        'controller' => 'Sessions',
+        'controller' => 'Login',
         'action'     => 'logout',
     ));
 

@@ -16,12 +16,12 @@ class Mailer_Issue extends Mailer {
         $this->_issue = $issue;
 
         $this->FromName = $issue->reporter->name;
-        
+
         //$this->_mail->addAddress('jonathan.vasquez@nbcuni.com');
         $this->addAddress(self::FROM_EMAIL); //$issue->assigned_department->group_email);
         $this->addCC($issue->reporter->email);
 
-        $this->Subject = sprintf("[%s] (%s) %s", strtoupper(APP_NAME), $issue->trackingCode(), $issue->summary);
+        $this->Subject = sprintf("[%s] (%s) %s", strtoupper(APP_NAME), $issue->trackingId(), $issue->summary);
     }
 
     public function sendCreated()
@@ -40,9 +40,9 @@ class Mailer_Issue extends Mailer {
             Priority: %s <br>
 
             Reporter: %s
-            ', 
+            ',
             $this->_issue->reporter->name,
-            $this->_issue->trackingCode(),
+            $this->_issue->trackingId(),
             $this->_issue->url(TRUE),
             $this->_issue->summary,
             $this->_issue->type->name,

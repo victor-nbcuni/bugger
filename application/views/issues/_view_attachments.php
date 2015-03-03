@@ -1,4 +1,4 @@
-<h4 class="page-header">Attachments</h4>
+<h4 class="page-header" style="margin-bottom: 0px">Attachments</h4>
 
 <div class="row">
     <div class="dropzone">

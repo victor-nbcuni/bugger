@@ -14,12 +14,12 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($issues as $issue): 
+        <?php foreach($issues as $issue):
             $status = $issue->status;
             $priority = $issue->priority;
         ?>
             <tr class="record">
-                <td><a href="<?php echo $issue->url(); ?>"><?php echo $issue->trackingCode(); ?></a></td>
+                <td><a href="<?php echo $issue->url(); ?>"><?php echo $issue->trackingId(); ?></a></td>
                 <td><?php echo $issue->project->name; ?></td>
                 <td><?php echo $issue->type->name; ?></span></td>
                 <td><span class="label" style="background:<?php echo $status->color; ?>"><?php echo strtoupper($status->name); ?></span></td>

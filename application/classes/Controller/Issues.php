@@ -5,7 +5,7 @@ class Controller_Issues extends Controller_Auth_User {
      * Displays ALL issues.
      */
     public function action_index()
-    { 
+    {
         $issues = Model_Issue::findAll();
 
         $this->template->content = $view = View::factory('issues/index');
@@ -17,12 +17,6 @@ class Controller_Issues extends Controller_Auth_User {
         $view->priorities = ORM::factory('Issue_Priority')->find_all();
         $view->types = ORM::factory('Issue_Type')->find_all();
         $view->projects = ORM::factory('Project')->find_all();
-
-        if (isset($_GET['email'])) {
-            Mailer_Issue::factory(ORM::factory('Issue', 1))->sendCreated();
-            Mailer_Issue::factory(ORM::factory('Issue', 1))->sendStatusUpdated();
-            Mailer_Issue::factory(ORM::factory('Issue_Comment', 2)->issue)->sendCommentAdded(ORM::factory('Issue_Comment', 2));
-        }
     }
 
     /**
@@ -70,24 +64,24 @@ class Controller_Issues extends Controller_Auth_User {
         $issues = $issues->find_all();
 
         $this->template = View::factory('issues/_index_table')
-            ->set('issues', $issues);           
+            ->set('issues', $issues);
     }
 
     public function action_view()
     {
         $id = $this->request->param('id');
         $issue = ORM::factory('Issue', $id);
-        
+
         if ( ! $issue->loaded()) {
             $this->session->flashError('generic.read_fail');
             $this->redirect('issues');
         }
-            
+
         $comments = Model_Issue_Comment::findByIssueId($issue->id, 0, 5);
 
         $this->template->content = View::factory('issues/view')
             ->set('issue', $issue)
-            ->set('comments', $comments);               
+            ->set('comments', $comments);
     }
 
     /**
@@ -122,7 +116,7 @@ class Controller_Issues extends Controller_Auth_User {
 
             // Notify users
             Mailer_Issue::factory($issue)->sendCreated();
-       
+
             $this->redirect('issues/view/' . $issue->id);
         }
 
@@ -171,7 +165,7 @@ class Controller_Issues extends Controller_Auth_User {
     }
 
     /**
-     * Returns the status options for an x-editable dropdown.
+     * Returns the options for the issue status dropdown in the issue page.
      *
      * @uses    ajax
      * @return  json
@@ -215,7 +209,7 @@ class Controller_Issues extends Controller_Auth_User {
     }
 
     /**
-     * Returns the issue type options for an x-editable dropdown.
+     * Returns the options for the issue type dropdown in the issue page.
      *
      * @uses    ajax
      * @return  json
@@ -233,7 +227,7 @@ class Controller_Issues extends Controller_Auth_User {
     }
 
     /**
-     * Returns the issue priority options for an x-editable dropdown.
+     * Returns the options for the issue priority dropdown in the issue page.
      *
      * @uses    ajax
      * @return  json
@@ -245,6 +239,32 @@ class Controller_Issues extends Controller_Auth_User {
 
         foreach($records as $record) {
             $json[$record->id] = $record->name;
+        }
+
+        $this->response->json($json);
+    }
+
+    /**
+     * Returns the options for duplicate dropdown in the issue page.
+     *
+     * @uses    ajax
+     * @return  json
+     */
+    public function action_duplicate_options()
+    {
+        $id = $this->request->param('id');
+        $json = array();
+
+        // Exclude id from the choices
+        $records = ORM::factory('Issue')
+            ->where('id', '<>', $id)
+            ->where('duplicate_id', '<', 1)
+            ->order_by('id', 'DESC')
+            ->find_all();
+
+        $json[] = '';
+        foreach($records as $record) {
+            $json[$record->id] = $record->trackingId();
         }
 
         $this->response->json($json);
