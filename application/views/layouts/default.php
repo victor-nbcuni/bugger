@@ -67,7 +67,7 @@ exit;
         <script src="/assets/libs/jquery-2.1.3.min.js"></script>
         <script src="/assets/libs/bootstrap-3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
 
-        <?php if (in_array($page, array('issues/index', 'issues/reported_by_me', 'issues/pending'))): ?>
+        <?php if (in_array($page, array('users/index', 'issues/index', 'issues/reported_by_me', 'issues/pending'))): ?>
             <!-- Datatables -->
             <link href="/assets/libs/datatables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
             <script src="/assets/libs/datatables-1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>

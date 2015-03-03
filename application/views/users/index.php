@@ -16,7 +16,7 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-primary">
+            <div class="box box-default">
                 <!--<div class="box-header">
                     <h3 class="box-title">View / Manage Users</h3>
                 </div>-->

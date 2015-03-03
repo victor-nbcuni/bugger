@@ -12,7 +12,7 @@ class Controller_Sessions extends Controller {
         $this->session = Session::instance();
     }
 
-    public function action_login() 
+    public function action_login()
     {
         if ($this->request->method() == Request::POST)  {
             if ($this->auth->login($this->request->post('username'), $this->request->post('password'))) {
@@ -23,13 +23,13 @@ class Controller_Sessions extends Controller {
                 return $this->redirect('dashboard');
             }
             else {
-                $this->session->flashError('Sorry, unrecognized username or password.');
+                $this->session->flashError('Oops...The email or password you entered is incorrect.');
             }
         }
         $this->response->body(View::factory('layouts/login'));
     }
 
-    public function action_logout() 
+    public function action_logout()
     {
         $this->auth->logout();
         $this->redirect('login');
