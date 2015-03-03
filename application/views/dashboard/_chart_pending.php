@@ -5,7 +5,7 @@
 
 <script>
 $(function() {
-    var data = <?php echo $chart_data; ?>;
+    var data = <?php echo $data; ?>;
     $.plot('#chartPending', data, {
         series: {
             pie: {

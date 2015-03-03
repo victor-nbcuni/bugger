@@ -26,13 +26,20 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-8">
-                            <?php echo $pending_chart; ?>
-                            <?php echo $reported_by_me_chart; ?>
-                        </div>
-                        <div class="col-md-4">
-                            <?php echo $completion_chart; ?>
-                        </div>
+                        <?php if ($reported_by_me_chart): ?>
+                            <div class="col-md-8">
+                                <?php echo $pending_chart; ?>
+                                <?php echo $reported_by_me_chart; ?>
+                            </div>
+                            <div class="col-md-4">
+                                <?php echo $completion_chart; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="col-md-11 col-md-offset-0">
+                                <?php echo $pending_chart; ?>
+                                <?php echo $completion_chart; ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
