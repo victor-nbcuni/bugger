@@ -1,6 +1,6 @@
 <div class="col-lg-6">
     <p class="text-center"><strong>Pending Tickets</strong></p>
-    <div id="chartPending" style="height: 300px; padding: 0px; position: relative;"></div>
+    <div id="chartPending" style="height: 350px; padding: 0px; position: relative;"></div>
 </div>
 
 <script>

@@ -1,6 +1,6 @@
 <div class="col-lg-6">
     <p class="text-center"><strong>Reported By Me</strong></p>
-    <div id="chartReportedByMe" style="height: 300px; padding: 0px; position: relative;"></div>
+    <div id="chartReportedByMe" style="height: 350px; padding: 0px; position: relative;"></div>
 </div>
 
 <script>
