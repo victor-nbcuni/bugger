@@ -58,6 +58,25 @@ class Model_Issue extends Model_Abstract {
         return $url;
     }
 
+    /**
+     * Overriden method.
+     *
+     *
+     */
+    public function save(Validation $validation = NULL)
+    {
+        $this->_beforeSave();
+        return parent::save($validation);
+    }
+
+    private function _beforeSave(Validation $validation = NULL)
+    {
+        // Prepend http:// to example URLs
+        if ( ! empty($this->_object['example_url']) && strpos($this->_object['example_url'], 'http://') === FALSE) {
+            $this->_object['example_url'] = 'http://' . $this->_object['example_url'];
+        }
+    }
+
     public function trackingId()
     {
         return strtoupper($this->project->name) . '-' . $this->id;

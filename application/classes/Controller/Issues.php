@@ -97,8 +97,8 @@ class Controller_Issues extends Controller_Auth_User {
             $post['issue']['due_date'] = empty($post['issue']['due_date']) ? NULL : date('Y-m-d', strtotime($post['issue']['due_date']));
             $post['issue']['due_time'] = empty($post['issue']['due_time']) ? NULL : date('H:i:s', strtotime($post['issue']['due_time']));
 
+            // Assign support requests to DEV
             if ($post['issue']['type_id'] == Model_Issue_Type::SUPPORT_REQUEST) {
-                // Assign support requests to DEV
                 $post['issue']['assigned_department_id'] == Model_Department::DEV;
             }
 

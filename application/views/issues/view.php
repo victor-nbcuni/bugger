@@ -13,7 +13,7 @@
                 <div class="col-xs-12"><span id="description"><?php echo $issue->description; ?></span></div>
             </div>
 
-            <h4 class="page-header">Example URL <a target="_blank" href="<?php echo $issue->example_url; ?>"><i class="fa fa-link"></i></a></h4>
+            <h4 class="page-header">Example URL <a target="_blank" href="<?php echo $issue->example_url; ?>"><?php echo empty($issue->example_url) ? '' : '<i class="fa fa-link"></i>'; ?></a></h4>
 
             <div class="row">
                 <div class="col-xs-12"><span id="example_url"><?php echo $issue->example_url; ?></span></div>
