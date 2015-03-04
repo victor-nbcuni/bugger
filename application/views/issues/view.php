@@ -1,12 +1,9 @@
-<section class="content-header">
-    <h1>
-        <i class="fa fa-bug"></i> <span id="summary"><?php echo Text::limit_chars($issue->summary, 120); ?></span>
-    </h1>
-</section>
-
 <section class="content page-view-issue">
     <div class="row">
         <div class="col-xs-8">
+            <h1>
+                <i class="fa fa-bug"></i> <span id="summary"><?php echo Text::limit_chars($issue->summary, 120); ?></span>
+            </h1>
             <h4 class="page-header">Description</h4>
 
             <div class="row">
@@ -62,8 +59,8 @@
     </div>
 </section>
 
-<script src="/assets/js/page/issue/lazy-comments.js"></script>
-<script src="/assets/js/page/issue/editable-fields.js"></script>
+<script src="/assets/js/pages/issue/lazy-comments.js"></script>
+<script src="/assets/js/pages/issue/editable-fields.js"></script>
 
 <script>
 $(function() {

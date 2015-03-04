@@ -1,4 +1,3 @@
-
 <p class="text-center">
     <strong>Goal Completion</strong>
 </p>

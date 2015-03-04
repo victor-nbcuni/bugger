@@ -88,6 +88,10 @@ body {
   margin-top: 20px;
 }
 
+.page-view-issue h1 {
+  margin-top: 0px;
+}
+
 .editable {
   border-bottom: dashed 1px #f56954!important;
 }

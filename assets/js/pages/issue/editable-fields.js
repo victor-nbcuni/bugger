@@ -97,7 +97,7 @@ var EditableFields = {
             },
             source: '/issues/duplicate_options/' + issueId,
             sourceCache: true,
-            emptytext: 'Not Duplicate'
+            emptytext: 'No'
         });
     }
 }

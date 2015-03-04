@@ -263,7 +263,7 @@ class Controller_Issues extends Controller_Auth_User {
             ->order_by('id', 'DESC')
             ->find_all();
 
-        $json[0] = 'Not Duplicate';
+        $json[0] = 'No';
         foreach($records as $record) {
             $json[$record->id] = $record->trackingId();
         }
