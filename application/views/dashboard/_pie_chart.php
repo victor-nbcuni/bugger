@@ -10,8 +10,8 @@ $(function() {
         series: {
             pie: {
                 show: true,
-                radius: 3/4,
-                innerRadius: .5,
+                radius: 1,
+                //innerRadius: .5,
                 label: {
                     show: true,
                     formatter: function (label, series) {
