@@ -1,8 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Utility class for issue related emails.
+ */
 class Mailer_Issue extends Mailer {
-    const FROM_EMAIL = 'victor_nbcuni@yahoo.com';
-
+    /**
+     * The issue in question.
+     *
+     * @var Model_Issue
+     */
     private $_issue = NULL;
 
     public static function factory(Model_Issue $issue)
@@ -17,8 +22,7 @@ class Mailer_Issue extends Mailer {
 
         $this->FromName = $issue->reporter->name;
 
-        //$this->_mail->addAddress('jonathan.vasquez@nbcuni.com');
-        $this->addAddress(self::FROM_EMAIL); //$issue->assigned_department->group_email);
+        $this->addAddress($issue->assigned_department->group_email);
         $this->addCC($issue->reporter->email);
 
         $this->Subject = sprintf("[%s] (%s) %s", strtoupper(APP_NAME), $issue->trackingId(), $issue->summary);

@@ -29,7 +29,7 @@ class Model_Issue_File extends Model_Abstract {
     }
 
     /**
-     * Moves an uploaded file to the right directory and saves it to database.
+     * Moves an uploaded file to its corresponding directory and records it in the DB.
      *
      * @param   array      $file         The uploaded file data
      * @param   int        $issue_id     The issue id the file belongs to
@@ -74,7 +74,7 @@ class Model_Issue_File extends Model_Abstract {
     }
 
     /**
-     * Moves a group of uploaded temp files to the right directory and saves them to database.
+     * Moves a group of uploaded temp files to their corresponding directory and records them in the DB.
      *
      * @param   string      $temp_dir     The name of the temp dir of the uploaded file
      * @param   int         $issue_id     The issue id the files belong to
@@ -106,7 +106,7 @@ class Model_Issue_File extends Model_Abstract {
     }
 
     /**
-     * Removes file from database and filesystem.
+     * Removes a file record from database and filesystem.
      *
      * @param   int         $file_id
      * @throws  Exception
@@ -123,5 +123,5 @@ class Model_Issue_File extends Model_Abstract {
 
             $file->delete();
         }
-    }  
+    }
 }

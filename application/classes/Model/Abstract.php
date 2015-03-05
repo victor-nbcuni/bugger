@@ -17,7 +17,8 @@ abstract class Model_Abstract extends ORM {
     }
 
     /**
-     * Overridden to fill the updated column (Lines 52-59)
+     * Overrides parent method to fill the updated column (Lines 53-60)
+     *
      * @param  Validation $validation Validation object
      * @throws Kohana_Exception
      * @return ORM

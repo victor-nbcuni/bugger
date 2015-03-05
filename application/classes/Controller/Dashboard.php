@@ -4,16 +4,16 @@ class Controller_Dashboard extends Controller_Auth_User {
 
     public function action_index()
     {
-        // Chart data
+        // Get chart data
         $data = Model_Issue::getStatusBreakdown();
 
-        // Pending chart
+        // Create pending chart
         $pending_chart = View::factory('dashboard/_pie_chart')
             ->set('data', json_encode($data))
             ->set('title', 'Pending Tickets')
             ->set('container_id', 'pendingChart');
 
-        // Completion graph
+        // Create completion graph
         $completion_chart = View::factory('dashboard/_completion_chart')
             ->set('data', $data)
             ->set('total', ORM::factory('Issue')->count_all());

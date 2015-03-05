@@ -1,5 +1,10 @@
+<section class="content-header">
+
+</section>
+
 <section class="content page-view-issue">
     <div class="row">
+
         <div class="col-xs-8">
             <h1>
                 <i class="fa fa-bug"></i> <span id="summary"><?php echo Text::limit_chars($issue->summary, 120); ?></span>

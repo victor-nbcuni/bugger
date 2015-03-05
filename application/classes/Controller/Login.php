@@ -1,5 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Log In and Log Out controller.
+ */
 class Controller_Login extends Controller {
     public $template = NULL;
     public $auth = NULL;
@@ -16,10 +18,13 @@ class Controller_Login extends Controller {
     {
         if ($this->request->method() == Request::POST)  {
             if ($this->auth->login($this->request->post('username'), $this->request->post('password'))) {
-                // Generate a CSRF token
+                // Generate a CSRF (Cross-Site-Request-Forgery) token
                 $this->session->makeToken();
-                // Redirect to Dashboard
+
+                // Play theme song "Eye of the Tiger"
                 $this->session->set('play_eott', TRUE);
+
+                // Redirect to Dashboard
                 return $this->redirect('dashboard');
             }
             else {

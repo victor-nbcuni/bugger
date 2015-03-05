@@ -59,13 +59,12 @@ class Model_Issue extends Model_Abstract {
     }
 
     /**
-     * Overriden method.
-     *
-     *
+     * Overrides parent method.
      */
     public function save(Validation $validation = NULL)
     {
         $this->_beforeSave();
+
         return parent::save($validation);
     }
 

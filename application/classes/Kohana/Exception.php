@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Global Exception Handler.
+ * App Exception Handler.
  */
 class Kohana_Exception extends Kohana_Kohana_Exception {
- 
+
     public static function response(Exception $e)
     {
       if (Kohana::$environment > Kohana::PRODUCTION) {
-        // Turn on errors on DEV
+        // Turn on error debugging in DEV
         return parent::response($e);
       }
 
@@ -17,5 +17,5 @@ class Kohana_Exception extends Kohana_Kohana_Exception {
       Log::instance()->add(Log::ERROR, $e->getMessage());
 
       return $response;
-    }    
+    }
 }

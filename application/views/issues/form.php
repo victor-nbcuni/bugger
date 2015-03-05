@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Type<span class="required-field">*</span></label>
                             <div class="col-sm-7">
-                                <select name="issue[type_id]" class="form-control" required>
+                                <select id="type_id" name="issue[type_id]" class="form-control" required>
                                     <option value="">&mdash; Choose Type &mdash;</option>
                                     <?php foreach(ORM::factory('Issue_Type')->find_all() as $type): ?>
                                         <option value="<?php echo $type->id; ?>" <?php echo ($issue->type_id == $type->id ? 'selected' : ''); ?>><?php echo $type->name; ?></option>
@@ -66,7 +66,7 @@
                         <div id="assignee" class="form-group">
                             <label class="col-sm-2 control-label">Assignee<span class="required-field">*</span></label>
                             <div class="col-sm-7">
-                                <select name="issue[assigned_department_id]" class="form-control" required>
+                                <select id="assigned_department_id" name="issue[assigned_department_id]" class="form-control" required>
                                     <option value="">&mdash; Choose Department &mdash;</option>
                                     <?php foreach(ORM::factory('Department')->find_all() as $department): ?>
                                         <option value="<?php echo $department->id; ?>" <?php echo ($issue->assigned_department_id == $department->id ? 'selected' : ''); ?>><?php echo $department->name; ?></option>
@@ -159,13 +159,15 @@
 
 <script>
 $(function() {
-    $('select[name="issue[type_id]"]').change(function() {
-        var self = $(this);
-        if (self.val() == '<?php echo Model_Issue_Type::SUPPORT_REQUEST; ?>') {
+    // Toggle assignee based on type selection
+    $('#type_id').change(function() {
+        if ($(this).val() == '<?php echo Model_Issue_Type::SUPPORT_REQUEST; ?>') {
             $('#assignee').hide();
+            $('#assigned_department_id').attr('required', false);
         }
         else {
             $('#assignee').show();
+            $('#assigned_department_id').attr('required', true);
         }
     });
 

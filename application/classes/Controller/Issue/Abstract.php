@@ -1,12 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Controller for abstracting common issue tasks.
+ */
 abstract class Controller_Issue_Abstract extends Controller_Auth_Admin {
 
     protected $_config = array(
         'base_url' => NULL,
         'model' => array(
-            'name' => NULL, 
-            'title' => NULL, 
+            'name' => NULL,
+            'title' => NULL,
             'title_plural' => NULL
         )
     );
@@ -44,7 +46,7 @@ abstract class Controller_Issue_Abstract extends Controller_Auth_Admin {
             $this->session->flashError('generic.read_fail');
             $this->redirect($this->_config['base_url']);
         }
-        
+
         if ($post = $this->request->post()) {
             $record->values($post)->save();
             $this->session->flashSuccess('generic.update_ok');
