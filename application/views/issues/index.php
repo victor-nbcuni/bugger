@@ -25,7 +25,7 @@
                 </div>-->
                 <div class="box-body">
                     <form id="filter-form" class="form-inline">
-                        <label> Project</label>
+                        <label>Project</label>
                         <select name="project_id[]" class="col-xs-2" multiple>
                             <?php foreach($projects as $project): ?>
                                 <option  value="<?php echo $project->id; ?>"><?php echo $project->name; ?></option>
