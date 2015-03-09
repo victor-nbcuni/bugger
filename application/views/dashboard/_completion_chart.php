@@ -1,5 +1,5 @@
 <p class="text-center">
-    <strong>Goal Completion</strong>
+    <strong>Ticket Completion</strong>
 </p>
 
 <?php foreach($data as $row): ?>
